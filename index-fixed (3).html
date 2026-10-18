@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10244a">
+<meta name="description" content="Mohsin Tools is an all-in-one workspace for students, teachers and schools: ID card designer, marks and award list, certificate maker, exam papers, timetable, study planner, quiz builder, CV maker and more. Runs in your browser, with print and PDF ready outputs.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mohsin Tools — Learn Smarter. Create Faster. Achieve More.">
+<meta property="og:description" content="Mohsin Tools is an all-in-one workspace for students, teachers and schools: ID card designer, marks and award list, certificate maker, exam papers, timetable, study planner, quiz builder, CV maker and more. Runs in your browser, with print and PDF ready outputs.">
+<title>Mohsin Tools — Learn Smarter. Create Faster. Achieve More.</title>
+<style>
+:root{--bg:#f3f7fc;--panel:#fff;--ink:#17243d;--muted:#687790;--line:#dce5f1;--nav:#10244a;--blue:#246bfe;--cyan:#1dc8e8;--soft:#eaf2ff;--shadow:0 12px 34px #10244a12}
+[data-theme="dark"]{--bg:#0b1424;--panel:#111f35;--ink:#edf4ff;--muted:#a4b4cc;--line:#263854;--nav:#071020;--soft:#152b4b;--shadow:0 12px 34px #0003}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}.sidebar{background:var(--nav);color:#eaf2ff;padding:22px 15px;position:sticky;top:0;height:100vh;overflow:auto}.brand{display:flex;align-items:center;gap:12px;padding:5px 10px 24px}.brandmark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;font-weight:900;font-size:21px;box-shadow:0 8px 22px #1dc8e855}.brand strong{font-size:18px;display:block}.brand small{color:#a9c0e4;font-size:11px}.nav-label{padding:12px 12px 5px;color:#8ea8d0;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}.nav{display:grid;gap:4px}.nav button{background:transparent;border:0;color:#c7d6ef;text-align:left;padding:11px 12px;border-radius:10px;display:flex;gap:11px;align-items:center}.nav button:hover,.nav button.active{background:#244577;color:white}.nav .ico{width:20px;text-align:center}.side-note{margin:22px 5px;padding:14px;border:1px solid #314c76;border-radius:14px;color:#b9cbe7;font-size:12px}.main{min-width:0}.topbar{display:flex;align-items:center;gap:14px;padding:18px 28px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:4}.mobile-menu{display:none}.search{flex:1;max-width:560px;position:relative}.search input{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:11px 14px 11px 38px;border-radius:12px;outline:none}.search span{position:absolute;left:13px;top:9px;color:var(--muted)}.top-actions{margin-left:auto;display:flex;gap:8px}.iconbtn,.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:9px 12px}.btn.primary{background:linear-gradient(120deg,var(--blue),#438bff);color:#fff;border-color:transparent;font-weight:700}.btn.soft{background:var(--soft);border-color:transparent;color:var(--blue)}.btn.danger{color:#c53b4c}.content{padding:28px;max-width:1500px;margin:auto}.hero{background:linear-gradient(120deg,#10244a,#174a88 65%,#087f9c);border-radius:22px;padding:30px;color:white;position:relative;overflow:hidden;box-shadow:var(--shadow)}.hero:after{content:"✦";position:absolute;right:8%;top:-65px;font-size:250px;color:#ffffff0b}.eyebrow{font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:#a9e7ff;font-weight:800}.hero h1{font-size:clamp(27px,4vw,40px);line-height:1.12;margin:10px 0}.hero p{color:#d3e6ff;max-width:650px}.hero .btn{margin-top:8px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:28px 0 14px}.section-head h2{font-size:20px;margin:0}.section-head p{margin:4px 0 0;color:var(--muted);font-size:13px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:18px}.stat,.panel,.tool-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.stat{padding:17px}.stat .s-icon{width:38px;height:38px;border-radius:12px;background:var(--soft);display:grid;place-items:center;font-size:18px}.stat strong{display:block;font-size:25px;margin-top:9px}.stat small{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.tool-card{padding:18px;transition:.2s;cursor:pointer}.tool-card:hover{transform:translateY(-3px);border-color:#91b6ff}.tool-icon{width:44px;height:44px;border-radius:13px;background:var(--soft);display:grid;place-items:center;font-size:21px;margin-bottom:13px}.tool-card h3{margin:0 0 5px;font-size:16px}.tool-card p{margin:0;color:var(--muted);font-size:13px;min-height:40px}.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:14px;color:var(--blue);font-size:12px;font-weight:800}.pill{font-size:10px;background:var(--soft);color:var(--blue);padding:4px 8px;border-radius:20px}.panel{padding:22px}.page-title{margin:0 0 5px;font-size:27px}.sub{color:var(--muted);margin:0 0 22px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:800;color:var(--muted)}.field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);outline:none}.field textarea{min-height:90px;resize:vertical}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.two-col{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.85fr);gap:18px}.preview{background:white;color:#17243d;border:1px solid #d8e0ec;border-radius:12px;padding:24px;min-height:260px;overflow:auto}.preview h2,.preview h3{color:#163c73}.preview .muted{color:#66758a}.notice{padding:12px 14px;border-radius:10px;background:#fff6dc;color:#795b14;font-size:12px;margin-bottom:16px}.result{padding:14px;background:var(--soft);border-radius:12px;margin-top:14px}.result strong{font-size:24px;display:block;color:var(--blue)}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:500px}th,td{border-bottom:1px solid var(--line);padding:11px;text-align:left}th{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)}td input,td select{width:100%;min-width:85px;padding:7px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--ink)}.empty{padding:40px;text-align:center;color:var(--muted)}.footer{padding:28px;color:var(--muted);font-size:12px;text-align:center}.hidden{display:none!important}.library-list{display:grid;gap:10px}.resource{border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;justify-content:space-between;gap:10px;align-items:center}.resource small{display:block;color:var(--muted)}.idcard{width:340px;min-height:210px;margin:auto;background:linear-gradient(140deg,#10244a,#1c6fb0);border-radius:16px;color:white;padding:18px;box-shadow:0 12px 30px #10244a30}.idcard .id-brand{font-size:11px;letter-spacing:1px;color:#b7edff}.idcard h3{color:white;margin:8px 0}.id-body{display:flex;gap:14px;align-items:center;margin-top:15px}.avatar{width:76px;height:88px;border:2px solid #8fe8ff;border-radius:9px;display:grid;place-items:center;background:#ffffff18;font-size:30px}.id-meta{font-size:12px;line-height:1.9}.logo-preview{display:grid;place-items:center;min-height:220px;background:repeating-linear-gradient(45deg,#f7f9fc,#f7f9fc 10px,#edf1f7 10px,#edf1f7 20px);border-radius:12px;color:#153b73}.logo-preview svg{max-width:90%;max-height:180px}.paper-head{text-align:center;border-bottom:2px solid #263d5e;padding-bottom:12px;margin-bottom:15px}.paper-question{margin:13px 0}.paper-question small{float:right;color:#53647b}.tag{font-size:10px;border:1px solid var(--line);padding:4px 7px;border-radius:6px;color:var(--muted)}
+@media(max-width:1000px){.app{grid-template-columns:220px 1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.content{padding:20px}.topbar{padding:14px 18px}.two-col{grid-template-columns:1fr}}
+@media(max-width:720px){.app{display:block}.sidebar{position:fixed;left:-270px;top:0;width:260px;z-index:10;transition:left .2s}.sidebar.open{left:0;box-shadow:0 0 0 999px #0007}.mobile-menu{display:inline-block}.grid{grid-template-columns:1fr}.stats{gap:9px}.stat{padding:12px}.content{padding:15px}.topbar{padding:12px}.top-actions .desktop-only{display:none}.hero{padding:22px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.panel{padding:16px}.page-title{font-size:23px}.search input{padding-left:32px}.two-col{grid-template-columns:1fr}}
+@media print{body{background:white!important;color:#111!important}.sidebar,.topbar,.no-print,.footer,.section-head,.notice{display:none!important}.app{display:block}.content{padding:0;max-width:none}.panel,.preview{box-shadow:none;border:0;padding:0;background:white;color:#111}.print-area{display:block!important}.page-title,.sub{display:none}.paper-head h2{color:#111}.paper-question{break-inside:avoid} @page{margin:0}html,body{height:auto!important}body{padding:12mm 12mm 16mm}.app,.main,.content{min-height:0!important}.print-name{display:block;position:fixed;bottom:6mm;left:0;right:0;text-align:center;font-size:11px;color:#333}}
+.print-name{display:none}
+.avatar{overflow:hidden}.ids{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}.idcap{text-align:center;font-size:12px;color:#66758a;margin-bottom:4px}.idhead{display:flex;align-items:center;gap:8px}.idlogo{width:34px;height:34px;object-fit:contain;background:#fff;border-radius:6px;padding:2px;flex:none}.idsign{margin-top:26px;border-top:1px solid #b7edff;padding-top:4px;font-size:11px;text-align:right}.idcard{-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
+input[type=color]{height:42px;padding:3px;cursor:pointer}
+
+/* ID card: CR80 / CNIC size 85.6 x 54 mm */
+.idcard{width:85.6mm;height:54mm;min-height:0;padding:3.5mm;border-radius:3.5mm;overflow:hidden;display:flex;flex-direction:column;margin:0;box-shadow:0 8px 22px #10244a30}
+.idcard h3{font-size:11px;letter-spacing:.5px;margin:3px 0 0;line-height:1.2}
+.idcard .id-brand{font-size:8.5px;line-height:1.25;letter-spacing:.6px}
+.idcard .idlogo{width:8mm;height:8mm;padding:1px;border-radius:4px}
+.idcard .id-body{flex:1;margin:0;gap:3mm;align-items:center;min-height:0}
+.idcard .avatar{width:18mm;height:22mm;font-size:22px;flex:none;border-width:1.5px;border-radius:6px}
+.idcard .id-meta{font-size:9px;line-height:1.5;min-width:0;overflow-wrap:anywhere}
+.idcard .id-meta b{font-size:10px}
+.idcard .idback{flex:1;display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:0;font-size:9px;line-height:1.45}
+.idcard .idback .id-note{font-size:7.5px;line-height:1.35;color:#d3e6ff;margin-top:2px}
+.idcard .idsign{margin-top:auto;font-size:8px;padding-top:2px}
+.ids{gap:18px}
+
+.certwrap{container-type:inline-size;max-width:900px;margin:auto}.certwrap.port{max-width:620px}
+.cert{position:relative;overflow:hidden;box-sizing:border-box;width:100%;font-size:1cqw;--ink:#17243d;--mut:#55627a;--on:#fff;color:var(--ink);background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.cert.land{aspect-ratio:297/210}.cert.port{aspect-ratio:210/297;font-size:1.45cqw}
+.cert.f-serif{font-family:Georgia,"Times New Roman",serif}.cert.f-sans{font-family:Inter,"Segoe UI",Arial,sans-serif}
+.cert .cd{position:absolute;display:none}.cert::before,.cert::after{content:"";position:absolute;pointer-events:none;display:none}
+.cert-in{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;padding:5em 8em 4.5em}
+.cert-head{display:grid;grid-template-columns:15em 1fr 15em;align-items:center;gap:2em;width:100%}.cert-hl{justify-self:start;min-height:1px}.cert-hr{justify-self:end;min-height:1px}
+.cert-logo{height:11em;max-width:15em;object-fit:contain;display:block}
+.cert-photo{width:12em;height:14.5em;object-fit:cover;display:block;border:.45em solid #fff;box-shadow:0 0 0 .2em var(--cc),0 .6em 1.6em #0003}.cert-photo.round{width:13em;height:13em;border-radius:50%}
+.cert-school{font-size:2.7em;font-weight:700;color:var(--cc);letter-spacing:.08em;text-transform:uppercase;line-height:1.25;overflow-wrap:anywhere}
+.cert-mid{display:flex;flex-direction:column;align-items:center;gap:.9em}
+.cert-title{font-size:6.6em;font-weight:800;letter-spacing:.28em;color:var(--cc);line-height:1;margin-right:-.28em}
+.cert-of{font-size:2.2em;letter-spacing:.5em;color:var(--mut);margin-right:-.5em}
+.cert-pre{font-size:1.9em;font-style:italic;color:var(--mut);margin-top:.5em}
+.cert-name{--nfn:4.6;font-size:calc(var(--nfn)*1em);border-bottom:calc(.55em/var(--nfn)) solid var(--c2);padding:0 calc(2em/var(--nfn)) calc(.2em/var(--nfn));min-width:calc(34em/var(--nfn));line-height:1.3;overflow-wrap:anywhere}
+.ns-script .cert-name{font-family:"Segoe Script","Brush Script MT","Lucida Handwriting","Apple Chancery",cursive;--nfn:4.6}
+.ns-italic .cert-name{font-family:Georgia,"Times New Roman",serif;font-style:italic;--nfn:5}
+.ns-bold .cert-name{font-family:Inter,"Segoe UI",Arial,sans-serif;font-weight:800;--nfn:4;text-transform:uppercase;letter-spacing:.05em}
+.cert-text{font-size:2em;max-width:68em;line-height:1.55;color:var(--mut);overflow-wrap:anywhere}
+.cert-high{margin-top:.3em;padding:.45em 1.6em;border-radius:3em;background:var(--cc);color:var(--on);font-weight:700;font-size:2em}
+.cert-meta{font-size:1.6em;color:var(--mut)}
+.cert-foot{display:grid;grid-template-columns:1fr 10em 1fr;gap:5em;width:100%;align-items:end}
+.sg span{display:block;border-bottom:.15em solid var(--ink);height:3.2em}.sg small{display:block;font-size:1.7em;color:var(--mut);margin-top:.4em}
+.cert-seal{font-size:4em;width:2.4em;height:2.4em;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--c2),var(--cc));box-shadow:0 0 0 .1em #fff,0 0 0 .18em var(--c2);display:grid;place-items:center;color:#fff;line-height:1;margin:0 auto}
+/* Modern Blue */
+.t-modern .cd{display:block}.t-modern .cd1{top:0;left:0;width:13em;height:13em;background:linear-gradient(135deg,var(--cc),var(--c2));clip-path:polygon(0 0,100% 0,0 100%)}
+.t-modern .cd2{right:0;bottom:0;width:13em;height:13em;background:linear-gradient(135deg,var(--c2),var(--cc));clip-path:polygon(100% 0,100% 100%,0 100%)}
+.t-modern::after{display:block;inset:2em;border:.18em solid #dbe5f3}
+/* Classic Gold */
+.t-gold{background:#fffdf5}.t-gold::before{display:block;inset:1.6em;border:.55em double var(--c2)}.t-gold::after{display:block;inset:3.6em;border:.14em solid var(--cc)}.t-gold .cert-in{padding:6.5em 9em 6em}.t-gold .cert-title{color:var(--cc)}
+/* Royal Dark */
+.t-dark{--ink:#f4f7ff;--mut:#b9c6e0;--on:#10244a;background:linear-gradient(135deg,#0b1830,#13305c)}.t-dark::after{display:block;inset:2.4em;border:.15em solid var(--c2)}.t-dark .cert-photo{border-color:#13305c}
+.t-dark .cd{display:block}.t-dark .cd1{top:-22em;right:-22em;width:62em;height:62em;border-radius:50%;background:radial-gradient(circle,#ffffff17,transparent 65%)}
+/* Emerald */
+.t-green{background:#fbfdfb}.t-green .cd{display:block;top:0;bottom:0;width:6em;background:linear-gradient(180deg,var(--cc),#0a4634)}.t-green .cd1{left:0}.t-green .cd2{right:0}.t-green::after{display:block;inset:2.2em 8em;border:.14em solid #cfe3da}.t-green .cert-in{padding:5em 11em 4.5em}
+/* Minimal */
+.t-min::after{display:block;inset:2.6em;border:.2em solid var(--ink)}.t-min .cert-title{font-weight:300;letter-spacing:.45em}.t-min .cert-in{padding:6em 9em 5.5em}.t-min .cert-high{background:transparent;color:var(--ink);border:.12em solid var(--ink)}.t-min .cert-seal{background:var(--ink);box-shadow:none}
+@media print{.certwrap{max-width:none;width:252mm}.certwrap.port{width:180mm}}
+.aw-logo{height:62px;max-width:150px;object-fit:contain;display:block;margin:0 auto 6px}
+.about-me{display:flex;gap:24px;align-items:center;flex-wrap:wrap}.about-photo{width:140px;height:140px;border-radius:50%;object-fit:cover;flex:none;border:4px solid #fff;box-shadow:0 0 0 3px #2f6fe4,0 10px 24px #10244a30}.about-initials{display:grid;place-items:center;background:linear-gradient(135deg,#2f6fe4,#12c2e9);color:#fff;font-size:44px;font-weight:800}.about-role{margin:4px 0 0;color:var(--muted,#5a6577);font-weight:600}.about-me>div{flex:1;min-width:240px}
+/* Marks & award list */
+.mk-table{min-width:760px}.mk-table td,.mk-table th{padding:6px 7px;white-space:nowrap}.mk-table td input{min-width:56px}
+.award-table{min-width:0;font-size:13px}.award-table th,.award-table td{border:1px solid #9aa7ba;padding:6px 7px;text-align:center;color:#17243d}.award-table th{background:#eef3fa;font-size:11px;letter-spacing:.3px}
+.award-sign{display:flex;justify-content:space-between;gap:20px;margin-top:46px}.award-sign span{flex:1;text-align:center;border-top:1px solid #444;padding-top:4px;font-size:12px}
+@media print{.two-col{display:block}.ids{gap:6mm}.award-table{font-size:11px}.award-table th{background:#eee!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.mk-table{display:none}.award{overflow:visible}}
+</style>
+</head>
+<body>
+<div id="printName" class="print-name"></div>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="brandmark">M</div><div><strong>Mohsin Tools</strong><small>LEARN • CREATE • ACHIEVE</small></div></div>
+  <div class="nav-label">Workspace</div><nav class="nav" id="nav">
+    <button class="active" data-page="home"><span class="ico">⌂</span>Dashboard</button>
+    <button data-page="alltools"><span class="ico">▦</span>All Tools</button>
+    <button data-page="school"><span class="ico">▤</span>School Tools</button>
+    <button data-page="student"><span class="ico">✎</span>Student Tools</button>
+    <button data-page="teacher"><span class="ico">♙</span>Teacher Tools</button>
+    <button data-page="grades"><span class="ico">🏅</span>Marks &amp; Award List</button>
+    <button data-page="library"><span class="ico">▣</span>School Library</button>
+    <button data-page="ai"><span class="ico">✧</span>AI Study Tools</button>
+  </nav>
+  <div class="nav-label">Design Studio</div><nav class="nav">
+    <button data-page="cv"><span class="ico">▧</span>CV & Resume Maker</button>
+    <button data-page="idcard"><span class="ico">▣</span>Student ID Designer</button>
+    <button data-page="timetable"><span class="ico">▦</span>Timetable Generator</button>
+    <button data-page="logo"><span class="ico">✺</span>Logo Maker</button>
+    <button data-page="paper"><span class="ico">✎</span>Exam Paper Generator</button>
+    <button data-page="quiz"><span class="ico">❓</span>Quiz &amp; MCQ Builder</button>
+    <button data-page="studyplan"><span class="ico">📆</span>Study Planner</button>
+    <button data-page="certificate"><span class="ico">🏆</span>Certificate Maker</button>
+  </nav>
+  <div class="nav-label">Account</div><nav class="nav">
+    <button data-page="saved"><span class="ico">♡</span>Saved Projects</button>
+    <button data-page="settings"><span class="ico">⚙</span>Settings</button>
+    <button data-page="about"><span class="ico">ⓘ</span>About & Contact</button>
+  </nav>
+  <div class="side-note"><b>Local prototype</b><br>Projects are saved in this browser. Secure accounts and shared cloud data require backend setup.</div>
+</aside>
+<main class="main">
+<header class="topbar">
+  <button class="iconbtn mobile-menu" id="menuBtn" aria-label="Open menu">☰</button>
+  <div class="search"><span>⌕</span><input id="globalSearch" placeholder="Search tools, calculators, generators…"></div>
+  <div class="top-actions"><button class="iconbtn desktop-only" id="themeBtn" title="Toggle theme">☾</button><button class="btn primary" data-goto="alltools">Explore tools ↗</button></div>
+</header>
+<div class="content" id="content"></div>
+<footer class="footer">© 2026 Mohsin Tools · Learn Smarter. Create Faster. Achieve More.</footer>
+</main>
+</div>
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const content=$("#content");
+const tools=[
+{id:"percentage",name:"Percentage Calculator",icon:"％",cat:"Academic",desc:"Calculate percentages, scores, and percentage change."},
+{id:"grades",name:"Marks & Grades",icon:"🏅",cat:"Academic",desc:"Enter a class's marks for all subjects, get positions, and print the Award List."},
+{id:"gpa",name:"GPA Calculator",icon:"🎓",cat:"Academic",desc:"Estimate GPA from grades and credit hours."},
+{id:"attendance",name:"Attendance Calculator",icon:"📅",cat:"Academic",desc:"Check attendance percentage and remaining classes."},
+{id:"age",name:"Age Calculator",icon:"🎂",cat:"Academic",desc:"Calculate age from a date of birth."},
+{id:"wordcount",name:"Word Counter",icon:"✍️",cat:"Student",desc:"Count words, characters, and sentences."},
+{id:"countdown",name:"Exam Countdown",icon:"⏳",cat:"Student",desc:"Count days until an exam date."},
+{id:"cv",name:"CV & Resume Maker",icon:"📄",cat:"Design",desc:"Create a clean CV and print or save as PDF."},
+{id:"idcard",name:"Student ID Card",icon:"🪪",cat:"Design",desc:"Customize an ID card and print it."},
+{id:"timetable",name:"Timetable Generator",icon:"🗓️",cat:"Teacher",desc:"Build a weekly timetable and export CSV."},
+{id:"logo",name:"Logo Maker",icon:"✺",cat:"Design",desc:"Create a simple editable vector logo."},
+{id:"paper",name:"Exam Paper Generator",icon:"📝",cat:"Teacher",desc:"Generate editable, age-appropriate sample papers."},
+{id:"library",name:"School Library",icon:"📚",cat:"School",desc:"Search and organize learning resources."},
+{id:"quiz",name:"Quiz & MCQ Builder",icon:"❓",cat:"AI & Study",desc:"Build your own MCQs, print the paper with answer key, or practise on screen."},
+{id:"studyplan",name:"Study Planner",icon:"📆",cat:"Student",desc:"Create a weekly study timetable from your subjects and daily hours."},
+{id:"certificate",name:"Certificate Maker",icon:"🏆",cat:"Teacher",desc:"Design and print a landscape certificate with logo and signatures."}
+];
+const saved=()=>{try{return JSON.parse(localStorage.getItem("mt_saved")||"[]")}catch{return[]}};
+function saveItem(type,title,data){let arr=saved();arr.unshift({id:Date.now(),type,title,data,date:new Date().toLocaleDateString()});localStorage.setItem("mt_saved",JSON.stringify(arr.slice(0,100)));toast("Saved in this browser");}
+function toast(msg){let t=$("#toast");if(!t){t=document.createElement("div");t.id="toast";t.style.cssText="position:fixed;bottom:20px;right:20px;background:#10244a;color:white;padding:12px 18px;border-radius:10px;z-index:50;box-shadow:0 8px 24px #0003";document.body.append(t)}t.textContent=msg;t.style.display="block";clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display="none",2500)}
+function btn(label,action,kind=""){return `<button class="btn ${kind}" ${action}>${label}</button>`}
+function field(label,id,placeholder="",type="text",value=""){return `<div class="field"><label for="${id}">${label}</label><input id="${id}" type="${type}" placeholder="${placeholder}" value="${value}"></div>`}
+function selectField(label,id,opts){return `<div class="field"><label for="${id}">${label}</label><select id="${id}">${opts.map(x=>`<option>${x}</option>`).join("")}</select></div>`}
+function pageHead(title,desc){return `<h1 class="page-title">${title}</h1><p class="sub">${desc}</p>`}
+function card(t){return `<article class="tool-card" tabindex="0" data-tool="${t.id}"><div class="tool-icon">${t.icon}</div><h3>${t.name}</h3><p>${t.desc}</p><div class="card-foot"><span>Open tool ↗</span><span class="pill">${t.cat}</span></div></article>`}
+function toolGrid(list){return `<div class="grid">${list.map(card).join("")}</div>`}
+function home(){return `<section class="hero"><div class="eyebrow">Your all-in-one productivity workspace</div><h1>Learn Smarter.<br>Create Faster.</h1><p>One workspace for students, teachers, schools, designers, and creators. Build useful things, organize your work, and print with confidence.</p>${btn("Explore all tools","data-goto=\"alltools\"","primary")} ${btn("Create an exam paper","data-goto=\"paper\"","soft")}</section>
+<div class="stats"><div class="stat"><div class="s-icon">🧰</div><strong>16+</strong><small>Starter tools</small></div><div class="stat"><div class="s-icon">💾</div><strong>${saved().length}</strong><small>Saved projects</small></div><div class="stat"><div class="s-icon">🖨️</div><strong>Print</strong><small>Browser-ready outputs</small></div><div class="stat"><div class="s-icon">🌐</div><strong>3</strong><small>Planned languages*</small></div></div>
+<div class="section-head"><div><h2>Popular tools</h2><p>Get started with a few clicks.</p></div>${btn("View all","data-goto=\"alltools\"")}</div>${toolGrid(tools.slice(0,6))}
+<div class="section-head"><div><h2>Built for your workflow</h2><p>School tools, study support, and design utilities in one place.</p></div></div>${toolGrid(tools.slice(6,12))}
+<div class="notice" style="margin-top:20px">*English is the current interface language. Urdu/Pashto interface translations, cloud sync, secure login, and live AI require further configuration.</div>`}
+function alltools(filter=""){let list=tools.filter(t=>(t.name+" "+t.desc+" "+t.cat).toLowerCase().includes(filter.toLowerCase()));return `${pageHead("All Tools","Find the right tool for your next task.")}<div class="section-head"><div><h2>${filter?`Results for “${escapeHtml(filter)}”`:"Tool collection"}</h2><p>${list.length} tools available in this prototype.</p></div></div>${list.length?toolGrid(list):`<div class="empty">No tools match that search. Try another word.</div>`}`}
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function calculator(id){let title=tools.find(t=>t.id===id)?.name||"Calculator",body="";
+if(id==="percentage")body=`<div class="form-grid">${field("Obtained value","obtained","e.g. 425","number")}${field("Total value","total","e.g. 500","number")}</div><div class="actions">${btn("Calculate","id=\"calcAction\"","primary")}</div><div id="calcResult"></div>`;
+if(id==="grades")body=`<div class="form-grid">${field("Obtained marks","obtained","e.g. 78","number")}${field("Total marks","total","e.g. 100","number")}</div><div class="actions">${btn("Calculate grade","id=\"calcAction\"","primary")}</div><div id="calcResult"></div>`;
+if(id==="attendance")body=`<div class="form-grid">${field("Classes attended","attended","e.g. 42","number")}${field("Total classes held","total","e.g. 50","number")}${field("Required attendance (%)","required","75","number")}</div><div class="actions">${btn("Calculate attendance","id=\"calcAction\"","primary")}</div><div id="calcResult"></div>`;
+if(id==="age")body=`<div class="form-grid">${field("Date of birth","dob","","date")}${field("Calculate as of","asof","","date",new Date().toISOString().slice(0,10))}</div><div class="actions">${btn("Calculate age","id=\"calcAction\"","primary")}</div><div id="calcResult"></div>`;
+if(id==="wordcount")body=`<div class="field"><label for="words">Paste or type your text</label><textarea id="words" placeholder="Start writing…"></textarea></div><div id="calcResult" class="result">Words: 0 · Characters: 0 · Sentences: 0</div>`;
+if(id==="countdown")body=`<div class="form-grid">${field("Exam name","examname","e.g. Biology Final")}${field("Exam date","examdate","","date")}</div><div class="actions">${btn("Calculate countdown","id=\"calcAction\"","primary")}</div><div id="calcResult"></div>`;
+if(id==="gpa")body=`<div class="notice">Enter each course's grade points and credit hours. This is a simple weighted GPA estimate.</div><div class="form-grid">${field("Grade points (0–4)","points","e.g. 3.7","number")}${field("Credit hours","credits","e.g. 3","number")}</div><div class="actions">${btn("Calculate GPA","id=\"calcAction\"","primary")}</div><div id="calcResult"></div>`;
+return `${pageHead(title,tools.find(t=>t.id===id)?.desc||"")}<div class="panel"><div class="notice">Calculations run in your browser. Check your institution's grading rules before relying on results.</div>${body}<div class="actions no-print">${btn("Print result","id=\"printBtn\"")}${btn("Back to tools","data-goto=\"alltools\"")}</div></div>`;
+}
+let idPhotoData="",idLogoData="",cvPhotoData="";
+function readImg(file,cb){if(!file)return cb("");if(!file.type.startsWith("image/")){alert("Please choose an image file (JPG, PNG or WebP).");return}if(file.size>2e6){alert("The image must be under 2 MB.");return}const r=new FileReader();r.onload=()=>cb(r.result);r.onerror=()=>alert("Could not read this image.");r.readAsDataURL(file)}
+function cvPage(){cvPhotoData="";return `${pageHead("CV & Resume Maker","Fill in your details, add a photo, preview your CV, then print or save it as PDF.")}<div class="notice">Your entries and photo stay in this browser. Use the browser's Print dialog and select “Save as PDF” to create a PDF.</div><div class="two-col"><section class="panel no-print"><h2>Personal details</h2><div class="form-grid"><div class="field full"><label for="cvPhoto">Profile photo (optional)</label><input id="cvPhoto" type="file" accept="image/*"></div>${field("Full name","cvName","Your full name")}${field("Professional title","cvTitle","e.g. Teacher / Student")}${field("Email","cvEmail","name@example.com","email")}${field("Phone","cvPhone","+92…")}${field("Location","cvLocation","City, Country")}${field("Accent color","cvColor","","color","#246bfe")}<div class="field full"><label for="cvSummary">Profile summary</label><textarea id="cvSummary" placeholder="A short professional introduction"></textarea></div><div class="field full"><label for="cvEducation">Education (one item per line)</label><textarea id="cvEducation" placeholder="Degree — Institution — Year"></textarea></div><div class="field full"><label for="cvExperience">Experience (one item per line)</label><textarea id="cvExperience" placeholder="Role — Organization — Achievement"></textarea></div><div class="field full"><label for="cvSkills">Skills (comma separated)</label><input id="cvSkills" placeholder="Communication, MS Office, Teamwork"></div></div><div class="actions">${btn("Update preview","id=\"cvUpdate\"","primary")}${btn("Save project","id=\"cvSave\"")}${btn("Print / Save PDF","id=\"printBtn\"")}</div></section><section class="panel"><h2>Live preview</h2><div id="cvPreview" class="preview"></div></section></div>`}
+function idPage(){idPhotoData="";idLogoData="";return `${pageHead("ID Card Designer","Create a printable Student or Teacher / Staff ID card with a front and a back side.")}<div class="two-col"><section class="panel no-print"><div class="form-grid">${selectField("Card type","idType",["Student ID Card","Teacher / Staff ID Card"])}${field("School / institution name","idSchool","School / College")}<div class="field"><label for="idLogo">School logo (optional)</label><input id="idLogo" type="file" accept="image/*"></div><div class="field"><label for="idPhoto">Photo (optional)</label><input id="idPhoto" type="file" accept="image/*"></div>${field("Student name","idName","Full name")}${field("Father's name","idFather","")}${field("Class","idClass","e.g. Class 8")}${field("Roll number","idRoll","e.g. 021")}${field("Session / validity","idSession","2026–2027")}${field("Back side: Blood group","idBlood","e.g. B+")}${field("Back side: Date of birth","idDob","e.g. 12-03-2012")}${field("Back side: Contact phone","idPhone","03xx xxxxxxx")}${field("Back side: Emergency / guardian phone","idEmerg","03xx xxxxxxx")}${field("Card color","idColor","","color","#1459a8")}<div class="field full"><label for="idAddr">Back side: address</label><input id="idAddr" placeholder="School address"></div><div class="field full"><label for="idBack">Back side: note</label><textarea id="idBack" placeholder="If found, please return this card to the school."></textarea></div>${field("Back side: signature title","idSign","e.g. Principal")}</div><div class="actions">${btn("Update card","id=\"idUpdate\"","primary")}${btn("Print / Save PDF","id=\"printBtn\"")}${btn("Save project","id=\"idSave\"")}</div></section><section class="panel"><h2>Card preview</h2><div id="idPreview" class="preview"></div></section></div>`}
+function cvData(){const v=id=>$("#"+id)?.value||"";return {name:v("cvName"),title:v("cvTitle"),email:v("cvEmail"),phone:v("cvPhone"),location:v("cvLocation"),summary:v("cvSummary"),education:v("cvEducation"),experience:v("cvExperience"),skills:v("cvSkills"),color:v("cvColor")}}
+function updateCV(){if(!$("#cvPreview"))return;let d=cvData();const c=/^#[0-9a-f]{6}$/i.test(d.color)?d.color:"#246bfe";$("#cvPreview").innerHTML=`<div style="display:flex;gap:16px;align-items:center;justify-content:space-between;border-bottom:3px solid ${c};padding-bottom:12px"><div><h1 style="margin:0;font-size:28px">${escapeHtml(d.name||"Your Name")}</h1><b>${escapeHtml(d.title||"Professional Title")}</b><p class="muted">${[d.email,d.phone,d.location].filter(Boolean).map(escapeHtml).join(" · ")}</p></div>${cvPhotoData?`<img alt="Profile photo" src="${cvPhotoData}" style="width:96px;height:96px;object-fit:cover;border-radius:50%;border:3px solid ${c};flex:none">`:""}</div>${d.summary?`<h3>Profile</h3><p>${escapeHtml(d.summary)}</p>`:""}${sectionCV("Education",d.education)}${sectionCV("Experience",d.experience)}${d.skills?`<h3>Skills</h3><p>${escapeHtml(d.skills)}</p>`:""}`}
+function timetablePage(){return `${pageHead("Timetable Generator","Build a weekly class timetable and export it as CSV or print it.")}<div class="panel"><div class="form-grid">${field("School / Institution","ttSchool","School name")}${field("Class / Section","ttClass","Class 8 - A")}${selectField("Days","ttDays",["Monday–Friday","Monday–Saturday","Sunday–Thursday"])}</div><div class="actions">${btn("Create timetable","id=\"ttBuild\"","primary")}${btn("Download CSV","id=\"ttCsv\"")}${btn("Print timetable","id=\"printBtn\"")}${btn("Save project","id=\"ttSave\"")}</div><div id="ttOutput" class="table-wrap" style="margin-top:20px"></div></div>`}
+function logoPage(){return `${pageHead("Logo Maker","Create a clean, editable SVG logo. This is a template-based editor; AI image generation is not configured.")}<div class="two-col"><section class="panel"><div class="form-grid">${field("Brand name","logoName","Mohsin Tools","text","Mohsin Tools")}${field("Tagline","logoTag","Learn. Create. Achieve.","text","Learn. Create. Achieve.")}${selectField("Style","logoStyle",["Modern","Education","Minimal","Geometric","Corporate"])}${field("Logo color","logoColor","","color","#246bfe")}</div><div class="actions">${btn("Generate logo","id=\"logoUpdate\"","primary")}${btn("Download SVG","id=\"logoSvg\"")}${btn("Download PNG","id=\"logoPng\"")}${btn("Print","id=\"printBtn\"")}${btn("Save project","id=\"logoSave\"")}</div></section><section class="panel"><h2>Logo preview</h2><div id="logoPreview" class="logo-preview"></div></section></div>`}
+function paperPage(){return `${pageHead("Exam Paper Generator","Generate an editable sample paper with class-appropriate question styles.")}<div class="notice">This creates a generic sample paper. It does not claim to follow a specific board, textbook, or syllabus unless you provide and verify that content.</div><div class="two-col"><section class="panel"><div class="form-grid">${field("School name","pSchool","School name")}${selectField("Class / Grade","pClass",["Nursery","KG","Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8","Class 9","Class 10","Class 11","Class 12","College","University"])}${selectField("Subject","pSubject",["Urdu","English","Mathematics","Science","General Knowledge","Islamiyat","Computer Science","Biology","Physics","Chemistry"])}${selectField("Language","pLang",["English","Urdu","Pashto"])}${selectField("Exam type","pType",["Class Test","Monthly Test","Mid-Term","Final Exam","Annual Exam"])}${field("Total marks","pMarks","50","number","50")}${field("Duration","pDuration","1 hour","text","1 hour")}${field("Chapter / topic","pTopic","Enter chapter or topic")}</div><div class="actions">${btn("Generate paper","id=\"paperGenerate\"","primary")}${btn("Print / Save PDF","id=\"printBtn\"")}${btn("Save project","id=\"paperSave\"")}</div></section><section class="panel"><h2>Paper preview</h2><div id="paperPreview" class="preview"><div class="empty">Complete the form and generate a sample paper.</div></div></section></div>`}
+const librarySeed=[
+{title:"Nursery Urdu Letter Practice",class:"Nursery",subject:"Urdu",type:"Worksheet",lang:"Urdu",desc:"Letter recognition and tracing worksheet template."},
+{title:"Basic Mathematics Practice",class:"Class 1",subject:"Mathematics",type:"Worksheet",lang:"English",desc:"Counting, addition, and subtraction practice."},
+{title:"Science Revision Notes",class:"Class 6",subject:"Science",type:"Notes",lang:"English",desc:"Editable notes template for classroom use."},
+{title:"English Grammar Practice",class:"Class 5",subject:"English",type:"Practice Exam",lang:"English",desc:"Parts of speech and sentence practice."}
+];
+function getResources(){try{return JSON.parse(localStorage.getItem("mt_library")||"null")||librarySeed}catch{return librarySeed}}
+function libraryPage(){let items=getResources();return `${pageHead("School Library","Search sample learning resources or add your own resource entries.")}<div class="panel"><div class="form-grid">${field("Search resources","libSearch","Title, subject, class…")}${selectField("Class","libClass",["All classes","Nursery","KG","Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8","Class 9","Class 10","Class 11","Class 12"])}${selectField("Resource type","libType",["All types","Notes","Worksheet","Past Paper","Practice Exam","Study Guide","Lesson Plan"])}${selectField("Language","libLang",["All languages","English","Urdu","Pashto"])}</div><div class="actions">${btn("Add resource","id=\"libAdd\"","primary")}</div><div id="libraryList" class="library-list" style="margin-top:18px">${resourceList(items)}</div><p class="sub" style="margin:15px 0 0">Only upload or share material you own, have permission to use, or that is openly licensed.</p></div>`}
+function resourceList(items){return items.length?items.map((r,i)=>`<div class="resource"><div><b>${escapeHtml(r.title)}</b><small>${escapeHtml(r.class)} · ${escapeHtml(r.subject)} · ${escapeHtml(r.type)} · ${escapeHtml(r.lang)}</small><small>${escapeHtml(r.desc)}</small></div><button class="btn" data-resource="${i}">Details</button></div>`).join(""):`<div class="empty">No resources match these filters.</div>`}
+function simplePage(id){let title=id==="ai"?"AI Study Tools":id==="school"?"School Tools":id==="student"?"Student Tools":id==="teacher"?"Teacher Tools":id==="saved"?"Saved Projects":id==="settings"?"Settings":id==="about"?"About Mohsin Tools":"Tools";if(id==="ai")return `${pageHead(title,"Study helpers with a clear demo state until a secure AI service is configured.")}<div class="notice">Live AI is not configured in this standalone prototype. The generator below creates a local prompt draft only; it does not call an AI model or invent an AI answer.</div><div class="panel"><div class="form-grid">${field("Topic","aiTopic","e.g. Photosynthesis")}${selectField("Education level","aiLevel",["Primary","Middle School","Secondary","College","University"])}${selectField("Task","aiTask",["Explain a topic","Create practice questions","Make revision notes","Create flashcards","Lesson plan outline"])}${selectField("Language","aiLang",["English","Urdu","Pashto"])}</div><div class="actions">${btn("Prepare prompt","id=\"aiGenerate\"","primary")}${btn("Copy prompt","id=\"aiCopy\"")}</div><div id="aiOutput" class="result hidden"></div></div>`;
+if(id==="saved"){let arr=saved();return `${pageHead(title,"Projects saved locally in this browser.")}${arr.length?`<div class="library-list">${arr.map(x=>`<div class="resource"><div><b>${escapeHtml(x.title)}</b><small>${escapeHtml(x.type)} · ${escapeHtml(x.date)}</small></div><button class="btn danger" data-delete="${x.id}">Delete</button></div>`).join("")}</div>`:`<div class="panel empty">No saved projects yet. Open a tool and choose “Save project”.</div>`}`}
+if(id==="settings")return `${pageHead(title,"Adjust the look of this browser-based prototype.")}<div class="panel"><h2>Appearance</h2><p class="sub">Choose the interface theme.</p>${btn("Light mode","data-theme-choice=\"light\"")} ${btn("Dark mode","data-theme-choice=\"dark\"")}<div class="notice" style="margin-top:18px">Language choices and account settings are placeholders until localization and backend authentication are implemented.</div><h2>Privacy</h2><p>Tool inputs and saved projects remain in your browser's local storage. Avoid entering sensitive personal data on a shared device.</p></div>`;
+if(id==="about")return `${pageHead("About Mohsin Tools","Learn Smarter. Create Faster. Achieve More.")}<div class="panel about-me"><img class="about-photo" src="${escapeHtml(ABOUT_ME.photo)}" alt="${escapeHtml(ABOUT_ME.name)}" onerror="this.replaceWith(aboutInitials())"><div><h2 style="margin:0">${escapeHtml(ABOUT_ME.name)}</h2><p class="about-role">${escapeHtml(ABOUT_ME.role)}</p><p style="margin:10px 0 0">${escapeHtml(ABOUT_ME.bio)}</p></div></div><div class="panel" style="margin-top:18px"><h2>An all-in-one productivity workspace</h2><p>Mohsin Tools is an all-in-one workspace for students, teachers and schools. Design student ID cards and certificates, enter class marks to get positions and a printable Award List, generate exam papers and timetables, plan your study week, build MCQ quizzes, and create a CV or logo. Everything runs in your browser, works on phone and computer, and prints cleanly or saves as PDF.</p><h3>Contact us</h3><div class="form-grid">${field("Name","contactName","Your name")}${field("Email","contactEmail","you@example.com","email")}<div class="field full"><label for="contactMessage">Message</label><textarea id="contactMessage" placeholder="How can we help?"></textarea></div></div><div class="actions">${btn("Prepare email draft","id=\"contactSend\"","primary")}</div><div id="contactOutput"></div><div class="notice" style="margin-top:18px">Contact form does not transmit messages in this prototype. Configure a secure server endpoint and spam protection before launch.</div><h3>Privacy & terms</h3><p>Use only material you have rights to use. This prototype stores local projects in your browser and does not provide cloud backup.</p></div>`;
+let subset=id==="school"?tools.filter(t=>["School","Teacher","Academic"].includes(t.cat)||["paper","idcard","timetable","library"].includes(t.id)):id==="student"?tools.filter(t=>["Student","Academic"].includes(t.cat)):id==="teacher"?tools.filter(t=>["Teacher","School"].includes(t.cat)||["paper","timetable","idcard"].includes(t.id)):tools;return `${pageHead(title,"A curated collection for your workflow.")}${toolGrid(subset)}`}
+function render(page="home"){const _pn=$("#printName");if(_pn)_pn.textContent="";window.currentPage=page;$$(".sidebar button[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));$("#sidebar").classList.remove("open");if(page==="home")content.innerHTML=home();else if(page==="alltools")content.innerHTML=alltools();else if(["percentage","gpa","attendance","age","wordcount","countdown"].includes(page))content.innerHTML=calculator(page);else if(page==="grades")content.innerHTML=marksPage();else if(page==="cv")content.innerHTML=cvPage();else if(page==="idcard")content.innerHTML=idPage();else if(page==="timetable")content.innerHTML=timetablePage();else if(page==="logo")content.innerHTML=logoPage();else if(page==="paper")content.innerHTML=paperPage();else if(page==="library")content.innerHTML=libraryPage();else if(page==="quiz")content.innerHTML=quizPage();else if(page==="studyplan")content.innerHTML=spPage();else if(page==="certificate")content.innerHTML=certPage();else content.innerHTML=simplePage(page);window.scrollTo({top:0,behavior:"smooth"});if(page==="logo")updateLogo();if(page==="timetable")buildTimetable(false);if(page==="paper"){}if(page==="cv")updateCV();if(page==="idcard")updateID();if(page==="grades")mkRenderAll();if(page==="quiz"){$("#qzList").innerHTML=qzListHtml();qzRender()}if(page==="studyplan")spBuild();if(page==="certificate")ceRender() }
+function go(page){render(page)}
+document.addEventListener("click",e=>{
+let nav=e.target.closest("[data-page]");if(nav){go(nav.dataset.page);return}
+let goto=e.target.closest("[data-goto]");if(goto){go(goto.dataset.goto);return}
+let tool=e.target.closest("[data-tool]");if(tool){go(tool.dataset.tool);return}
+let del=e.target.closest("[data-delete]");if(del){localStorage.setItem("mt_saved",JSON.stringify(saved().filter(x=>x.id!==Number(del.dataset.delete))));go("saved");toast("Project deleted");return}
+let theme=e.target.closest("[data-theme-choice]");if(theme){document.documentElement.dataset.theme=theme.dataset.themeChoice;localStorage.setItem("mt_theme",theme.dataset.themeChoice);return}
+let res=e.target.closest("[data-resource]");if(res){let r=getResources()[Number(res.dataset.resource)];alert(`${r.title}\\n\\n${r.desc}\\n\\nThis is a resource entry, not an attached downloadable file.`);return}
+});
+$("#nav").addEventListener("click",e=>{let b=e.target.closest("[data-page]");if(b)go(b.dataset.page)});
+$("#menuBtn").onclick=()=>$("#sidebar").classList.toggle("open");
+$("#themeBtn").onclick=()=>{let next=document.documentElement.dataset.theme==="dark"?"light":"dark";document.documentElement.dataset.theme=next;localStorage.setItem("mt_theme",next)};
+$("#globalSearch").addEventListener("input",e=>{let v=e.target.value.trim();if(v){go("alltools");content.innerHTML=alltools(v)}else if(window.currentPage==="alltools")content.innerHTML=alltools()});
+document.addEventListener("click",e=>{if(e.target.id==="printBtn"){window.print()}});
+function number(id){let v=Number($("#"+id)?.value);return Number.isFinite(v)?v:NaN}
+document.addEventListener("click",e=>{if(e.target.id!=="calcAction")return;let id=window.currentPage,out=$("#calcResult");if(id==="percentage"||id==="grades"){let a=number("obtained"),b=number("total");if(!Number.isFinite(a)||!Number.isFinite(b)||b<=0||a<0){out.innerHTML='<p>Please enter valid values; total must be greater than zero.</p>';return}let p=a/b*100;let grade=p>=90?"A+":p>=80?"A":p>=70?"B":p>=60?"C":p>=50?"D":"Needs improvement";out.innerHTML=`<div class="result"><strong>${p.toFixed(2)}%</strong>${id==="grades"?`Grade estimate: ${grade}`:"Percentage calculated."}</div>`}
+if(id==="attendance"){let a=number("attended"),b=number("total"),r=number("required");if(!Number.isFinite(a)||!Number.isFinite(b)||b<=0||a<0||a>b||!Number.isFinite(r)||r<0||r>100){out.innerHTML="Please check your values.";return}let p=a/b*100,need=Math.max(0,Math.ceil((r*b-a)/(1-r/100||1)));out.innerHTML=`<div class="result"><strong>${p.toFixed(2)}%</strong>${p>=r?"You currently meet the target.":`You need approximately ${Math.max(0,Math.ceil((r*b-a)/(1-r/100)))} consecutive attended classes to reach ${r}%, assuming no additional absences.`}</div>`}
+if(id==="gpa"){let p=number("points"),c=number("credits");if(!Number.isFinite(p)||!Number.isFinite(c)||p<0||p>4||c<=0){out.textContent="Enter grade points from 0 to 4 and positive credit hours.";return}out.innerHTML=`<div class="result"><strong>${p.toFixed(2)} / 4.00</strong>Estimated GPA for this course. Add all course grade points and credit hours for a semester GPA.</div>`}
+if(id==="age"){let d=new Date($("#dob").value),as=new Date($("#asof").value);if(!$("#dob").value||!$("#asof").value||isNaN(d)||d>as){out.textContent="Enter a valid birth date that is not after the selected date.";return}let y=as.getFullYear()-d.getFullYear(),m=as.getMonth()-d.getMonth(),days=as.getDate()-d.getDate();if(days<0)m--;if(m<0){y--;m+=12}out.innerHTML=`<div class="result"><strong>${y} years, ${m} months</strong>Age on selected date.</div>`}
+if(id==="countdown"){let date=$("#examdate").value;if(!date){out.textContent="Choose an exam date.";return}let days=Math.ceil((new Date(date+"T00:00:00")-new Date(new Date().toDateString()))/86400000);out.innerHTML=`<div class="result"><strong>${days<0?Math.abs(days)+" days ago":days+" days left"}</strong>${escapeHtml($("#examname").value||"Your exam")}</div>`}
+});
+document.addEventListener("input",e=>{if(e.target.id==="words"){let v=e.target.value;let words=v.trim()?v.trim().split(/\s+/).length:0;let sentences=v.trim()?v.split(/[.!?]+/).filter(x=>x.trim()).length:0;$("#calcResult").innerHTML=`<div class="result"><strong>${words} words</strong>Characters: ${v.length} · Characters (no spaces): ${v.replace(/\s/g,"").length} · Sentences: ${sentences}</div>`}});
+function sectionCV(title,val){return val?`<h3>${title}</h3><ul>${val.split("\n").filter(x=>x.trim()).map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul>`:""}
+document.addEventListener("click",e=>{if(e.target.id==="cvUpdate")updateCV();if(e.target.id==="cvSave"){let d=cvData();saveItem("CV",d.name||"My CV",d)}});
+function updateID(){if(!$("#idPreview"))return;const val=id=>($("#"+id)?.value||"").trim(),teacher=(val("idType")||"").startsWith("Teacher"),c=$("#idColor")?.value||"#1459a8";
+const L=(id,a,b)=>{const el=document.querySelector(`label[for="${id}"]`);if(el)el.textContent=teacher?b:a};L("idName","Student name","Teacher / staff name");L("idFather","Father's name","Subject / Department");L("idClass","Class","Designation");L("idRoll","Roll number","Staff number");
+const rows=(teacher?[["Subject",val("idFather")],["Designation",val("idClass")],["Staff No",val("idRoll")]]:[["Father",val("idFather")],["Class",val("idClass")],["Roll No",val("idRoll")]]).concat([["Session",val("idSession")]]).filter(r=>r[1]);
+const bg=`background:linear-gradient(140deg,#10244a,${escapeHtml(c)})`,head=`<div class="idhead">${idLogoData?`<img class="idlogo" alt="School logo" src="${idLogoData}">`:""}<div class="id-brand">${escapeHtml(val("idSchool")||"YOUR INSTITUTION")}</div></div>`;
+const front=`<div class="idcard" style="${bg}">${head}<h3>${teacher?"TEACHER / STAFF ID":"STUDENT ID"}</h3><div class="id-body"><div class="avatar">${idPhotoData?`<img alt="Photo" src="${idPhotoData}" style="width:100%;height:100%;object-fit:cover">`:"👤"}</div><div class="id-meta"><b>${escapeHtml(val("idName")||(teacher?"Teacher Name":"Student Name"))}</b><br>${rows.map(r=>`${r[0]}: ${escapeHtml(r[1])}`).join("<br>")}</div></div></div>`;
+const info=[["Blood Group",val("idBlood")],["Date of Birth",val("idDob")],["Phone",val("idPhone")],["Emergency",val("idEmerg")]].filter(r=>r[1]);
+const back=`<div class="idcard" style="${bg}">${head}<h3>BACK SIDE</h3><div class="idback">${info.map(r=>`<div>${r[0]}: <b>${escapeHtml(r[1])}</b></div>`).join("")}${val("idAddr")?`<div>Address: <b>${escapeHtml(val("idAddr"))}</b></div>`:""}<div class="id-note">${escapeHtml(val("idBack")||"This card is the property of the institution. If found, please return it to the address above.")}</div></div><div class="idsign">${escapeHtml(val("idSign")||"Authorized signature")}</div></div>`;
+$("#idPreview").innerHTML=`<div class="ids"><div><div class="idcap">Front</div>${front}</div><div><div class="idcap">Back</div>${back}</div></div><p class="muted no-print" style="font-size:13px">Card size: 85.6 × 54 mm (same as a CNIC / ATM card). Print at 100% / “Actual size” (not “Fit to page”), then cut out. For a two-sided card, glue the front and back together or print on both sides.</p>`}
+document.addEventListener("change",e=>{const id=e.target.id,f=e.target.files&&e.target.files[0];if(id==="idPhoto")readImg(f,d=>{idPhotoData=d;updateID()});if(id==="idLogo")readImg(f,d=>{idLogoData=d;updateID()});if(id==="cvPhoto")readImg(f,d=>{cvPhotoData=d;updateCV()});if(id==="idType")updateID()});
+document.addEventListener("input",e=>{const id=e.target.id||"";if(/^cv/.test(id)&&id!=="cvPhoto")updateCV();if(/^id/.test(id)&&id!=="idPhoto"&&id!=="idLogo")updateID()});
+document.addEventListener("click",e=>{if(e.target.id==="idUpdate")updateID();if(e.target.id==="idSave"){updateID();const v=id=>$("#"+id)?.value||"";saveItem("ID Card",v("idName")||"ID Card",{type:v("idType"),school:v("idSchool"),name:v("idName"),a:v("idFather"),b:v("idClass"),c:v("idRoll"),session:v("idSession")})}});
+function buildTimetable(make=true){let days=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];let periods=["08:00–08:40","08:40–09:20","09:20–10:00","10:20–11:00","11:00–11:40","11:40–12:20"];if($("#ttDays")?.value==="Monday–Friday")days=days.slice(0,5);if($("#ttDays")?.value==="Sunday–Thursday")days=["Sunday","Monday","Tuesday","Wednesday","Thursday"];let out=$("#ttOutput");if(!out)return;out.innerHTML=`<h2>${escapeHtml($("#ttSchool")?.value||"School timetable")} · ${escapeHtml($("#ttClass")?.value||"Class")}</h2><table id="ttTable"><thead><tr><th>Period</th>${days.map(d=>`<th>${d}</th>`).join("")}</tr></thead><tbody>${periods.map((p,i)=>`<tr><th>${p}</th>${days.map(d=>`<td><input aria-label="${d} ${p}" placeholder="Subject / teacher"></td>`).join("")}</tr>`).join("")}</tbody></table>`}
+function csvDownload(filename,rows){let csv=rows.map(r=>r.map(v=>`"${String(v??"").replace(/"/g,'""')}"`).join(",")).join("\r\n");let a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));a.download=filename;a.click();URL.revokeObjectURL(a.href)}
+document.addEventListener("click",e=>{if(e.target.id==="ttBuild")buildTimetable();if(e.target.id==="ttCsv"){let t=$("#ttTable");if(!t){buildTimetable();t=$("#ttTable")}csvDownload("Mohsin-Tools-Timetable.csv",$$("tr",t).map(tr=>$$("th,td",tr).map(c=>c.querySelector("input")?c.querySelector("input").value:c.textContent.trim())))}if(e.target.id==="ttSave"){let t=$("#ttTable");saveItem("Timetable",$("#ttClass").value||"Class timetable",t?$$("tr",t).map(tr=>$$("th,td",tr).map(c=>c.querySelector("input")?c.querySelector("input").value:c.textContent.trim())):[])}});
+function updateLogo(){if(!$("#logoPreview"))return;let name=$("#logoName")?.value||"Mohsin Tools",tag=$("#logoTag")?.value||"",color=$("#logoColor")?.value||"#246bfe",style=$("#logoStyle")?.value||"Modern";let symbol=style==="Education"?"✦":style==="Geometric"?"◆":style==="Corporate"?"M":"✧";let svg=`<svg xmlns="http://www.w3.org/2000/svg" width="700" height="250" viewBox="0 0 700 250"><rect width="700" height="250" rx="28" fill="#ffffff"/><rect x="38" y="60" width="130" height="130" rx="32" fill="${color}"/><text x="103" y="147" text-anchor="middle" font-family="Arial,sans-serif" font-size="75" font-weight="700" fill="white">${symbol}</text><text x="195" y="118" font-family="Arial,sans-serif" font-size="43" font-weight="700" fill="#17243d">${escapeHtml(name)}</text><text x="198" y="158" font-family="Arial,sans-serif" font-size="19" fill="#687790">${escapeHtml(tag)}</text></svg>`;$("#logoPreview").innerHTML=svg;window.logoSvgText=svg}
+document.addEventListener("input",e=>{if(["logoName","logoTag","logoColor","logoStyle"].includes(e.target.id))updateLogo()});
+document.addEventListener("click",e=>{if(e.target.id==="logoUpdate")updateLogo();if(e.target.id==="logoSvg"){updateLogo();downloadBlob(window.logoSvgText,"mohsin-tools-logo.svg","image/svg+xml");}if(e.target.id==="logoPng"){updateLogo();let img=new Image();img.onload=()=>{let c=document.createElement("canvas");c.width=700;c.height=250;c.getContext("2d").drawImage(img,0,0);c.toBlob(b=>downloadBlob(b,"mohsin-tools-logo.png","image/png"))};img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(window.logoSvgText)}if(e.target.id==="logoSave")saveItem("Logo",$("#logoName").value||"My logo",{svg:window.logoSvgText})});
+function downloadBlob(data,name,type){let blob=data instanceof Blob?data:new Blob([data],{type});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+const urduLetters=["ا","ب","پ","ت","ٹ","ث","ج","چ","ح","خ"];
+function paperData(){return {school:$("#pSchool").value,cls:$("#pClass").value,subject:$("#pSubject").value,lang:$("#pLang").value,type:$("#pType").value,marks:Math.max(1,Number($("#pMarks").value)||50),duration:$("#pDuration").value,topic:$("#pTopic").value}}
+function generatePaper(){let d=paperData(),q=[];if(d.cls==="Nursery"||d.cls==="KG"){if(d.subject==="Urdu"){q=[`پہچانیں اور بولیں: ${urduLetters.slice(0,5).join("   ")}`,`خالی جگہ پُر کریں: ا، ___، پ، ___، ٹ`,`درست حرف پر دائرہ لگائیں: ب   ت   پ`,`حروف کو ٹریس کریں: ا ـــــــ ب ـــــــ پ ـــــــ`]}else if(d.subject==="Mathematics"){q=["Count the objects: ○ ○ ○ ○","Trace the numbers: 1 ـــــ 2 ـــــ 3 ـــــ","Circle the bigger number: 2   5","Match each number to a group of dots."]}else q=["Identify the picture or object shown by your teacher.","Match the same letters or shapes.","Trace the given letters or shapes.","Circle the correct answer."]}else if(["Mathematics","Physics","Chemistry"].includes(d.subject)){q=[`Define or explain one key idea from ${d.topic||"the selected topic"}.`,`Solve a basic problem related to ${d.topic||d.subject}.`,`Write two important formulas or facts from the chapter.`,`Attempt one application-based question from the selected topic.`]}else if(d.subject==="Urdu"){q=["درج ذیل الفاظ کے معنی لکھیں۔","کسی ایک موضوع پر پانچ جملے لکھیں۔","واحد جمع لکھیں: کتاب، بچہ، پھول","درج ذیل عبارت پڑھ کر سوالات کے جواب دیں۔"]}else{q=[`Define the main concept of ${d.topic||d.subject}.`,`Write short notes on any two important points.`,`Answer a short question related to ${d.topic||"the selected chapter"}.`,`Read the passage or statement and answer the questions.`,`Write a paragraph explaining the main idea in your own words.`]}let marksEach=Math.max(1,Math.floor(d.marks/q.length));$("#paperPreview").innerHTML=`<div class="paper-head"><h2>${escapeHtml(d.school||"School / Institution")}</h2><h3>${escapeHtml(d.type)} · ${escapeHtml(d.subject)}</h3><p>Class: ${escapeHtml(d.cls)} · Time: ${escapeHtml(d.duration||"—")} · Total Marks: ${d.marks}</p><p>Name: ____________________ &nbsp; Roll No: __________ &nbsp; Date: __________</p></div>${d.topic?`<p><b>Topic / Chapter:</b> ${escapeHtml(d.topic)}</p>`:""}${q.map((x,i)=>`<div class="paper-question"><b>${i+1}. ${escapeHtml(x)}</b> <small>[${i===q.length-1?d.marks-marksEach*(q.length-1):marksEach} marks]</small><div style="height:${d.cls==="Nursery"||d.cls==="KG"?25:42}px;border-bottom:1px dotted #d4dce8"></div></div>`).join("")}<p style="text-align:center;margin-top:24px"><b>— Best of Luck —</b></p>`}
+document.addEventListener("click",e=>{if(e.target.id==="paperGenerate")generatePaper();if(e.target.id==="paperSave"){if(!$("#paperPreview").textContent.trim()||$("#paperPreview").textContent.includes("Complete the form"))generatePaper();saveItem("Exam Paper",`${$("#pClass").value} ${$("#pSubject").value}`,{data:paperData(),html:$("#paperPreview").innerHTML})}});
+document.addEventListener("click",e=>{if(e.target.id==="libAdd"){let title=prompt("Resource title:");if(!title)return;let subject=prompt("Subject:","General")||"General",cls=prompt("Class:","Class 1")||"Class 1",desc=prompt("Short description:","")||"";let arr=getResources();arr.unshift({title,subject,class:cls,type:"Notes",lang:"English",desc});localStorage.setItem("mt_library",JSON.stringify(arr));go("library");toast("Resource entry added") }});
+document.addEventListener("input",e=>{if(["libSearch","libClass","libType","libLang"].includes(e.target.id)){let list=getResources(),q=($("#libSearch")?.value||"").toLowerCase(),cl=$("#libClass")?.value||"All classes",ty=$("#libType")?.value||"All types",la=$("#libLang")?.value||"All languages";list=list.filter(r=>(r.title+" "+r.subject+" "+r.desc).toLowerCase().includes(q)&&(cl==="All classes"||r.class===cl)&&(ty==="All types"||r.type===ty)&&(la==="All languages"||r.lang===la));$("#libraryList").innerHTML=resourceList(list)}});
+document.addEventListener("click",e=>{if(e.target.id==="aiGenerate"){let text=`Act as a helpful tutor. Education level: ${$("#aiLevel").value}. Language: ${$("#aiLang").value}. Task: ${$("#aiTask").value}. Topic: ${$("#aiTopic").value||"[enter topic]"}. Explain clearly, adapt to the learner's level, and provide accurate, age-appropriate guidance.`;$("#aiOutput").classList.remove("hidden");$("#aiOutput").innerHTML=`<b>Prompt draft — not an AI-generated answer</b><p id="promptText">${escapeHtml(text)}</p>`;window.aiPrompt=text}if(e.target.id==="aiCopy"&&window.aiPrompt){navigator.clipboard?.writeText(window.aiPrompt).then(()=>toast("Prompt copied")).catch(()=>toast("Copy not supported in this browser"))}if(e.target.id==="contactSend"){let name=$("#contactName").value,email=$("#contactEmail").value,msg=$("#contactMessage").value;if(!name||!email||!msg){$("#contactOutput").innerHTML='<p>Please complete all fields.</p>';return}let body=`Name: ${name}\\nEmail: ${email}\\n\\n${msg}`;$("#contactOutput").innerHTML=`<div class="result"><b>Draft prepared.</b><p>Copy this message into your email app; it has not been sent.</p><textarea id="contactDraft">${escapeHtml(body)}</textarea><button class="btn" id="contactCopy">Copy message</button></div>`}if(e.target.id==="contactCopy"){navigator.clipboard?.writeText($("#contactDraft").value).then(()=>toast("Message copied")).catch(()=>toast("Copy not supported"))}});
+/* ===== Marks, Positions & Award List ===== */
+const MK_KEY="mt_marks";
+const MK_CLASSES=["Nursery","KG","Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8","Class 9","Class 10","Class 11","Class 12"];
+let mkStore=null,mkCls="Class 8";
+function mkRead(){try{const s=JSON.parse(localStorage.getItem(MK_KEY)||"null");if(s&&s.classes&&s.meta)return s}catch{}return {meta:{school:"",exam:"Annual Exam",pass:33,sort:"Position",cls:"Class 8"},classes:{}}}
+function mkWrite(){try{mkStore.meta.cls=mkCls;localStorage.setItem(MK_KEY,JSON.stringify(mkStore))}catch{toast("Could not save in this browser")}}
+function mkBlank(d){return {r:"",n:"",m:d.subjects.map(()=>"")}}
+function mkData(){if(!mkStore.classes[mkCls]){const d={subjects:["Urdu","English","Mathematics","Science","Islamiyat"].map(n=>({n,t:100})),students:[]};for(let i=0;i<5;i++)d.students.push(mkBlank(d));mkStore.classes[mkCls]=d}return mkStore.classes[mkCls]}
+function mkGrade(p,pass){return p<pass?"F":p>=80?"A+":p>=70?"A":p>=60?"B":p>=50?"C":p>=40?"D":"E"}
+function mkCompute(){
+ const d=mkData(),pass=Number(mkStore.meta.pass)||33,grand=d.subjects.reduce((a,s)=>a+(Number(s.t)||0),0);
+ const rows=d.students.map((s,i)=>{
+  let total=0,fail=false,bad=false,any=false;
+  const cells=d.subjects.map((sub,j)=>{const raw=String(s.m[j]??"").trim(),t=Number(sub.t)||0;
+   if(raw==="")return {raw,v:0};
+   const v=Number(raw);if(!Number.isFinite(v)||v<0||v>t){bad=true;return {raw,v:0,bad:true}}
+   any=true;return {raw,v}});
+  cells.forEach((x,j)=>{total+=x.v;const t=Number(d.subjects[j].t)||0;if(t>0&&x.v/t*100<pass)fail=true});
+  const pct=grand>0?total/grand*100:0,active=!!(s.n.trim()||s.r.trim()||any);
+  return {i,s,cells,total,pct,bad,active,grade:mkGrade(pct,pass),result:bad?"Check marks":(fail||pct<pass)?"Fail":"Pass"};
+ });
+ const act=rows.filter(r=>r.active);
+ rows.forEach(r=>{r.pos=r.active?1+act.filter(o=>o.total>r.total).length:""});
+ return {d,rows,act,grand,pass};
+}
+function mkMarkup(){
+ const cls=MK_CLASSES.map(c=>`<option${c===mkCls?" selected":""}>${c}</option>`).join("");
+ return `${pageHead("Marks & Grades","Enter every student's marks for a class, get totals, grades and positions, then print the Award List.")}
+<div class="notice no-print">Everything is saved automatically in this browser, separately for each class. Positions are calculated from total marks (equal totals share the same position). Check your institution's grading rules before relying on results.</div>
+<section class="panel no-print">
+<div class="form-grid">
+<div class="field"><label for="mkSchool">School / institution name</label><input id="mkSchool" data-mk="school" placeholder="School name" value="${escapeHtml(mkStore.meta.school)}"></div>
+<div class="field"><label for="mkExam">Exam name</label><input id="mkExam" data-mk="exam" placeholder="e.g. Annual Exam 2026" value="${escapeHtml(mkStore.meta.exam)}"></div>
+<div class="field"><label for="mkClass">Class</label><select id="mkClass">${cls}</select></div>
+<div class="field"><label for="mkMyName">Your name (printed at the bottom of the page)</label><input id="mkMyName" data-mk="myname" placeholder="Your name" value="${escapeHtml(mkStore.meta.myname??"Mohsin")}"></div>
+<div class="field"><label for="mkLogo">School logo (shown on the Award List)</label><input id="mkLogo" type="file" accept="image/*"><div id="mkLogoBox" style="margin-top:6px"></div></div>
+<div class="field"><label>Student photos</label><label style="font-size:14px;font-weight:600;color:var(--ink);padding:10px 0"><input type="checkbox" id="mkShowPh"${mkStore.meta.showPh?" checked":""}> Show photos in the Award List</label></div>
+<div class="field"><label for="mkPass">Pass mark (% of each subject)</label><input id="mkPass" data-mk="pass" type="number" min="0" max="100" value="${escapeHtml(mkStore.meta.pass)}"></div>
+</div>
+<h2 style="margin-top:22px">Subjects</h2>
+<div id="mkSubjects"></div>
+<div class="actions">${btn("+ Add subject",'id="mkAddSubject"',"soft")}</div>
+<h2 style="margin-top:22px">Students &amp; marks</h2>
+<div id="mkWarn"></div>
+<div id="mkTable" class="table-wrap"></div>
+<div class="actions">${btn("+ Add student",'id="mkAddStudent"',"primary")}${btn("+ Add 5 rows",'id="mkAdd5"')}${btn("Download CSV",'id="mkCsv"')}${btn("Clear this class",'id="mkClear"',"danger")}</div>
+</section>
+<section class="panel" style="margin-top:18px">
+<div class="no-print" style="display:flex;flex-wrap:wrap;gap:12px;align-items:end;justify-content:space-between;margin-bottom:14px"><h2 style="margin:0">Award List</h2>
+<div style="display:flex;gap:10px;align-items:end;flex-wrap:wrap"><div class="field"><label for="mkSort">Sort by</label><select id="mkSort"><option${mkStore.meta.sort==="Position"?" selected":""}>Position</option><option${mkStore.meta.sort==="Roll number"?" selected":""}>Roll number</option></select></div>${btn("Print Award List",'id="mkAwardPrint"',"primary")}</div></div>
+<div id="mkAward" class="preview award"></div></section>
+<section class="panel no-print" style="margin-top:18px"><h2>Quick grade check</h2><p class="sub" style="margin-bottom:14px">For a single student's result without saving anything.</p><div class="form-grid">${field("Obtained marks","obtained","e.g. 78","number")}${field("Total marks","total","e.g. 100","number")}</div><div class="actions">${btn("Calculate grade",'id="calcAction"',"primary")}</div><div id="calcResult"></div></section>`;
+}
+function mkSubjectsHtml(){const d=mkData();return `<div class="table-wrap"><table style="min-width:380px"><thead><tr><th>#</th><th>Subject name</th><th>Total marks</th><th></th></tr></thead><tbody>${d.subjects.map((s,j)=>`<tr><td>${j+1}</td><td><input data-mk="sname" data-i="${j}" aria-label="Subject ${j+1} name" placeholder="Subject" value="${escapeHtml(s.n)}"></td><td><input data-mk="stotal" data-i="${j}" aria-label="Subject ${j+1} total marks" type="number" min="1" value="${escapeHtml(s.t)}" style="max-width:110px"></td><td><button class="btn danger" data-mkdelsub="${j}" aria-label="Remove subject ${j+1}">✕</button></td></tr>`).join("")}</tbody></table></div>`}
+function mkSubHead(s,j){return escapeHtml(s.n||("Subject "+(j+1)))+" / "+escapeHtml(s.t)}
+function mkTableHtml(){const d=mkData();return `<table class="mk-table"><thead><tr><th>#</th><th>Roll No</th><th>Student name</th><th>Photo</th>${d.subjects.map((s,j)=>`<th><span data-hsub="${j}">${mkSubHead(s,j)}</span></th>`).join("")}<th>Total</th><th>%</th><th>Grade</th><th>Position</th><th></th></tr></thead><tbody>${d.students.map((s,i)=>`<tr><td>${i+1}</td><td><input data-mk="roll" data-i="${i}" aria-label="Roll number ${i+1}" value="${escapeHtml(s.r)}" style="min-width:64px"></td><td><input data-mk="name" data-i="${i}" aria-label="Student name ${i+1}" value="${escapeHtml(s.n)}" style="min-width:160px"></td><td style="white-space:nowrap">${s.p?`<img src="${s.p}" alt="" style="width:26px;height:32px;object-fit:cover;border-radius:4px;vertical-align:middle"> `:""}<label class="btn" style="padding:3px 8px;font-size:12px;cursor:pointer" title="Add photo">📷<input type="file" accept="image/*" data-mkphoto="${i}" hidden></label>${s.p?` <button class="btn danger" style="padding:3px 7px" data-mkrmphoto="${i}" aria-label="Remove photo ${i+1}">✕</button>`:""}</td>${d.subjects.map((_,j)=>`<td><input data-mk="mark" data-i="${i}" data-j="${j}" aria-label="${escapeHtml(d.subjects[j].n||"Subject")} marks, student ${i+1}" inputmode="decimal" value="${escapeHtml(s.m[j]??"")}" style="min-width:58px"></td>`).join("")}<td id="mkT${i}"></td><td id="mkP${i}"></td><td id="mkG${i}"></td><td id="mkR${i}"></td><td><button class="btn danger" data-mkdel="${i}" aria-label="Remove student ${i+1}">✕</button></td></tr>`).join("")}</tbody></table>`}
+function mkAwardHtml(c){
+ const {d,act,grand,pass}=c,sortRoll=mkStore.meta.sort==="Roll number";
+ let list=act.slice();
+ const cmpRoll=(a,b)=>String(a.s.r).localeCompare(String(b.s.r),undefined,{numeric:true});
+ list.sort(sortRoll?(a,b)=>cmpRoll(a,b)||a.pos-b.pos:(a,b)=>a.pos-b.pos||cmpRoll(a,b));
+ const ph=!!mkStore.meta.showPh,head=`<div class="paper-head">${mkStore.meta.logo?`<img class="aw-logo" alt="Logo" src="${mkStore.meta.logo}">`:""}<h2 style="margin:0">${escapeHtml(mkStore.meta.school||"School / Institution")}</h2><h3 style="margin:4px 0">AWARD LIST</h3><p style="margin:0">${escapeHtml(mkStore.meta.exam||"Exam")} · ${escapeHtml(mkCls)} · Total marks: ${grand} · Pass mark: ${pass}%</p></div>`;
+ if(!list.length)return head+`<div class="empty">Add students and marks above — the Award List appears here.</div>`;
+ const pass_n=list.filter(r=>r.result==="Pass").length;
+ return `${head}<div class="table-wrap"><table class="award-table"><thead><tr><th>Position</th><th>Roll No</th><th>Student name</th>${ph?"<th>Photo</th>":""}${d.subjects.map((s,j)=>`<th>${mkSubHead(s,j)}</th>`).join("")}<th>Total / ${grand}</th><th>%</th><th>Grade</th><th>Result</th></tr></thead><tbody>${list.map(r=>`<tr><td><b>${r.pos}</b></td><td>${escapeHtml(r.s.r)}</td><td style="text-align:left">${escapeHtml(r.s.n)}</td>${ph?`<td>${r.s.p?`<img src="${r.s.p}" alt="" style="width:30px;height:38px;object-fit:cover;border-radius:3px;vertical-align:middle">`:""}</td>`:""}${r.cells.map(x=>`<td>${x.bad?"?":escapeHtml(x.raw===""?"—":x.raw)}</td>`).join("")}<td><b>${+r.total.toFixed(2)}</b></td><td>${r.pct.toFixed(1)}</td><td>${r.grade}</td><td>${r.result}</td></tr>`).join("")}</tbody></table></div><p style="margin:10px 0 0;font-size:12px">Students: ${list.length} · Passed: ${pass_n} · Failed / to check: ${list.length-pass_n} · Date: ${new Date().toLocaleDateString()}</p><div class="award-sign"><span>Class Teacher</span><span>Examination In-charge</span><span>Principal</span></div>`;
+}
+function mkRefresh(){
+ if(!$("#mkTable"))return;
+ const c=mkCompute();let badCount=0;
+ c.rows.forEach(r=>{
+  const set=(id,v)=>{const el=$("#"+id+r.i);if(el)el.textContent=v};
+  set("mkT",r.active?+r.total.toFixed(2):"");set("mkP",r.active?r.pct.toFixed(1):"");set("mkG",r.active?r.grade:"");set("mkR",r.pos===""?"":r.pos);
+  if(r.bad)badCount++;
+  r.cells.forEach((x,j)=>{const el=$(`input[data-mk="mark"][data-i="${r.i}"][data-j="${j}"]`);if(el){el.style.borderColor=x.bad?"#c53b4c":"";el.title=x.bad?`Enter a number from 0 to ${c.d.subjects[j].t}`:""}});
+ });
+ $("#mkWarn").innerHTML=badCount?`<div class="notice" style="background:#fde8ea;color:#8f2433">Some marks are invalid (not a number, negative, or above the subject total). They are counted as 0 and marked “?” until fixed.</div>`:"";
+ $("#mkAward").innerHTML=mkAwardHtml(c);
+ const pn=$("#printName");if(pn)pn.textContent=mkStore.meta.myname??"Mohsin";
+}
+function mkRenderAll(){if(!$("#mkTable"))return;mkLogoBox();$("#mkSubjects").innerHTML=mkSubjectsHtml();$("#mkTable").innerHTML=mkTableHtml();mkRefresh()}
+function marksPage(){mkStore=mkRead();mkCls=MK_CLASSES.includes(mkStore.meta.cls)?mkStore.meta.cls:"Class 8";return mkMarkup()}
+document.addEventListener("input",e=>{
+ const t=e.target,k=t.dataset&&t.dataset.mk;if(!k||!$("#mkTable"))return;
+ const i=Number(t.dataset.i),j=Number(t.dataset.j),d=mkData();
+ if(k==="school")mkStore.meta.school=t.value;
+ else if(k==="exam")mkStore.meta.exam=t.value;
+ else if(k==="pass")mkStore.meta.pass=t.value;
+ else if(k==="myname")mkStore.meta.myname=t.value;
+ else if(k==="sname"||k==="stotal"){d.subjects[i][k==="sname"?"n":"t"]=t.value;const h=$(`[data-hsub="${i}"]`);if(h)h.innerHTML=mkSubHead(d.subjects[i],i)}
+ else if(k==="roll")d.students[i].r=t.value;
+ else if(k==="name")d.students[i].n=t.value;
+ else if(k==="mark")d.students[i].m[j]=t.value;
+ mkWrite();mkRefresh();
+});
+document.addEventListener("change",e=>{
+ if(!$("#mkTable"))return;
+ if(e.target.id==="mkClass"){mkWrite();mkCls=e.target.value;mkWrite();mkRenderAll()}
+ if(e.target.id==="mkSort"){mkStore.meta.sort=e.target.value;mkWrite();mkRefresh()}
+});
+document.addEventListener("click",e=>{
+ if(!$("#mkTable"))return;
+ const el=e.target.closest("button");if(!el)return;const d=mkData();
+ if(el.id==="mkAddSubject"){d.subjects.push({n:"",t:100});d.students.forEach(s=>s.m.push(""));mkWrite();mkRenderAll();const ins=$$('input[data-mk="sname"]');ins[ins.length-1]?.focus()}
+ else if(el.dataset.mkdelsub!==undefined){const j=Number(el.dataset.mkdelsub);if(d.subjects.length<2){toast("Keep at least one subject");return}if(!confirm(`Remove subject "${d.subjects[j].n||j+1}" and its marks?`))return;d.subjects.splice(j,1);d.students.forEach(s=>s.m.splice(j,1));mkWrite();mkRenderAll()}
+ else if(el.id==="mkAddStudent"||el.id==="mkAdd5"){const n=el.id==="mkAdd5"?5:1;for(let x=0;x<n;x++)d.students.push(mkBlank(d));mkWrite();mkRenderAll();if(n===1){const ins=$$('input[data-mk="roll"]');ins[ins.length-1]?.focus()}}
+ else if(el.dataset.mkdel!==undefined){const i=Number(el.dataset.mkdel),s=d.students[i];if((s.n||s.r||s.m.some(x=>String(x).trim()))&&!confirm("Remove this student?"))return;d.students.splice(i,1);if(!d.students.length)d.students.push(mkBlank(d));mkWrite();mkRenderAll()}
+ else if(el.id==="mkClear"){if(!confirm(`Delete all subjects, students and marks for ${mkCls}?`))return;delete mkStore.classes[mkCls];mkWrite();mkRenderAll()}
+ else if(el.id==="mkCsv"){const c=mkCompute(),sortRoll=mkStore.meta.sort==="Roll number",list=c.act.slice().sort(sortRoll?(a,b)=>String(a.s.r).localeCompare(String(b.s.r),undefined,{numeric:true}):(a,b)=>a.pos-b.pos);if(!list.length){toast("No students to export yet");return}csvDownload(`Award-List-${mkCls.replace(/\s+/g,"-")}.csv`,[["Position","Roll No","Student name",...c.d.subjects.map(s=>`${s.n} (${s.t})`),`Total (${c.grand})`,"Percentage","Grade","Result"],...list.map(r=>[r.pos,r.s.r,r.s.n,...r.cells.map(x=>x.raw),+r.total.toFixed(2),r.pct.toFixed(2),r.grade,r.result])])}
+ else if(el.id==="mkAwardPrint"){let st=$("#mkPageStyle");if(!st){st=document.createElement("style");st.id="mkPageStyle";document.head.append(st)}st.textContent="@media print{@page{size:A4 landscape;margin:0}}";window.print()}
+});
+window.addEventListener("afterprint",()=>{$("#mkPageStyle")?.remove()});
+/* ===== Quiz & MCQ Builder ===== */
+let qz={school:"",title:"",cls:"",time:"",qs:[]},qzShowKey=false,qzPractice=false,qzAns=[],qzChecked=false;
+const QZL=["A","B","C","D"];
+function qzBlank(){return {q:"",o:["","","",""],a:0}}
+function qzLoad(){qz={school:"",title:"",cls:"",time:"",qs:[qzBlank(),qzBlank(),qzBlank()]};try{const s=JSON.parse(localStorage.getItem("mt_quiz")||"null");if(s&&Array.isArray(s.qs)&&s.qs.length){qz=Object.assign(qz,s);qz.qs=qz.qs.map(x=>({q:String(x.q||""),o:[0,1,2,3].map(j=>String((x.o||[])[j]||"")),a:[0,1,2,3].includes(x.a)?x.a:0}))}}catch{}qzShowKey=false;qzPractice=false;qzAns=[];qzChecked=false}
+function qzSave(){try{localStorage.setItem("mt_quiz",JSON.stringify(qz))}catch{}}
+function quizPage(){qzLoad();return `${pageHead("Quiz & MCQ Builder","Type your own multiple-choice questions, print the paper with an answer key, or practise on screen.")}
+<div class="two-col"><section class="panel no-print"><div class="form-grid">
+<div class="field"><label for="qzSchool">School / institution</label><input id="qzSchool" data-qz="school" placeholder="School name" value="${escapeHtml(qz.school)}"></div>
+<div class="field"><label for="qzTitle">Test title</label><input id="qzTitle" data-qz="title" placeholder="e.g. Science MCQ Test" value="${escapeHtml(qz.title)}"></div>
+<div class="field"><label for="qzCls">Class</label><input id="qzCls" data-qz="cls" placeholder="e.g. Class 8" value="${escapeHtml(qz.cls)}"></div>
+<div class="field"><label for="qzTime">Time allowed</label><input id="qzTime" data-qz="time" placeholder="e.g. 20 minutes" value="${escapeHtml(qz.time)}"></div></div>
+<div id="qzList"></div>
+<div class="actions">${btn("+ Add question",'id="qzAdd"',"primary")}${btn("Save project",'id="qzSaveBtn"')}${btn("Clear all",'id="qzClear"',"danger")}</div></section>
+<section class="panel"><div class="no-print" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px"><h2 style="margin:0">Paper preview</h2><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><label style="font-size:13px"><input type="checkbox" id="qzKey"> Show answer key</label>${btn("Practice on screen",'id="qzPracticeBtn"',"soft")}${btn("Print / Save PDF",'id="printBtn"')}</div></div><div id="qzPreview" class="preview"></div></section></div>`}
+function qzListHtml(){return qz.qs.map((x,i)=>`<div class="resource" style="display:block;margin-top:12px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b>Question ${i+1}</b><button class="btn danger" data-qzdel="${i}" aria-label="Remove question ${i+1}">✕</button></div><div class="field"><textarea data-qz="q" data-i="${i}" aria-label="Question ${i+1}" placeholder="Type the question" style="min-height:60px">${escapeHtml(x.q)}</textarea></div><div class="form-grid" style="margin-top:8px">${QZL.map((L,j)=>`<div class="field"><label>Option ${L}</label><input data-qz="o" data-i="${i}" data-j="${j}" value="${escapeHtml(x.o[j])}"></div>`).join("")}<div class="field"><label>Correct answer</label><select data-qz="a" data-i="${i}">${QZL.map((L,j)=>`<option value="${j}"${x.a===j?" selected":""}>${L}</option>`).join("")}</select></div></div></div>`).join("")}
+function qzRender(){
+ const el=$("#qzPreview");if(!el)return;
+ const list=qz.qs.filter(x=>x.q.trim());
+ const head=`<div class="paper-head"><h2 style="margin:0">${escapeHtml(qz.school||"School / Institution")}</h2><h3 style="margin:4px 0">${escapeHtml(qz.title||"MCQ Test")}</h3><p style="margin:0">${qz.cls?"Class: "+escapeHtml(qz.cls)+" · ":""}${qz.time?"Time: "+escapeHtml(qz.time)+" · ":""}Total Marks: ${list.length}</p>${qzPractice?"":`<p style="margin:8px 0 0">Name: ____________________ &nbsp; Roll No: __________ &nbsp; Date: __________</p>`}</div>`;
+ if(!list.length){el.innerHTML=head+`<div class="empty">Add at least one question to see the paper.</div>`;return}
+ let score=0;
+ const body=list.map((x,n)=>{
+  const opts=QZL.map((Lt,j)=>({Lt,j,t:x.o[j].trim()})).filter(p=>p.t);
+  if(qzPractice){
+   if(qzChecked&&qzAns[n]===x.a)score++;
+   return `<div class="paper-question" style="break-inside:avoid"><b>${n+1}. ${escapeHtml(x.q)}</b>${opts.map(p=>{const right=qzChecked&&p.j===x.a,wrong=qzChecked&&qzAns[n]===p.j&&p.j!==x.a;return `<label style="display:block;margin:4px 0;${right?"color:#14803c;font-weight:700":""}${wrong?"color:#c53b4c;text-decoration:line-through":""}"><input type="radio" name="qzr${n}" data-qzr="${n}" value="${p.j}"${qzAns[n]===p.j?" checked":""}${qzChecked?" disabled":""}> (${p.Lt}) ${escapeHtml(p.t)}${right?" ✓":""}</label>`}).join("")}</div>`}
+  return `<div class="paper-question" style="break-inside:avoid"><b>${n+1}. ${escapeHtml(x.q)}</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:3px 18px;margin-top:6px">${opts.map(p=>`<div>(${p.Lt}) ${escapeHtml(p.t)}</div>`).join("")}</div></div>`}).join("");
+ let extra="";
+ if(qzPractice)extra=qzChecked?`<div class="result"><strong>${score} / ${list.length}</strong>${Math.round(score/list.length*100)}% correct. Correct answers are in green.</div><div class="actions no-print">${btn("Try again",'id="qzRetry"',"primary")}</div>`:`<div class="actions no-print">${btn("Check answers",'id="qzCheck"',"primary")}</div>`;
+ else if(qzShowKey)extra=`<div style="margin-top:18px;border-top:2px solid #263d5e;padding-top:10px;break-inside:avoid"><b>Answer key</b><div style="display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:6px">${list.map((x,n)=>`<span>${n+1}. ${x.o[x.a].trim()?QZL[x.a]:"?"}</span>`).join("")}</div></div>`;
+ el.innerHTML=head+body+extra;
+}
+document.addEventListener("input",e=>{
+ const t=e.target,k=t.dataset&&t.dataset.qz;if(!k||!$("#qzPreview"))return;
+ const i=Number(t.dataset.i),j=Number(t.dataset.j);
+ if(["school","title","cls","time"].includes(k))qz[k]=t.value;
+ else if(k==="q")qz.qs[i].q=t.value;
+ else if(k==="o")qz.qs[i].o[j]=t.value;
+ qzSave();qzRender();
+});
+document.addEventListener("change",e=>{
+ const t=e.target;if(!$("#qzPreview"))return;
+ if(t.dataset&&t.dataset.qz==="a"){qz.qs[Number(t.dataset.i)].a=Number(t.value);qzSave();qzRender()}
+ if(t.id==="qzKey"){qzShowKey=t.checked;qzRender()}
+ if(t.dataset&&t.dataset.qzr!==undefined){qzAns[Number(t.dataset.qzr)]=Number(t.value)}
+});
+document.addEventListener("click",e=>{
+ if(!$("#qzPreview"))return;
+ const b=e.target.closest("button");if(!b)return;
+ if(b.id==="qzAdd"){qz.qs.push(qzBlank());qzSave();$("#qzList").innerHTML=qzListHtml();qzRender();const ta=$$('textarea[data-qz="q"]');ta[ta.length-1]?.focus()}
+ else if(b.dataset.qzdel!==undefined){const i=Number(b.dataset.qzdel);if(qz.qs[i].q.trim()&&!confirm("Remove this question?"))return;qz.qs.splice(i,1);if(!qz.qs.length)qz.qs.push(qzBlank());qzSave();$("#qzList").innerHTML=qzListHtml();qzRender()}
+ else if(b.id==="qzClear"){if(!confirm("Delete all questions?"))return;qz.qs=[qzBlank(),qzBlank(),qzBlank()];qzSave();$("#qzList").innerHTML=qzListHtml();qzRender()}
+ else if(b.id==="qzSaveBtn"){qzSave();saveItem("Quiz",qz.title||"MCQ quiz",JSON.parse(JSON.stringify(qz)))}
+ else if(b.id==="qzPracticeBtn"){qzPractice=!qzPractice;qzChecked=false;qzAns=[];b.textContent=qzPractice?"Back to paper":"Practice on screen";qzRender()}
+ else if(b.id==="qzCheck"){qzChecked=true;qzRender()}
+ else if(b.id==="qzRetry"){qzChecked=false;qzAns=[];qzRender()}
+});
+
+/* ===== Study Planner ===== */
+function spPage(){return `${pageHead("Study Planner","Create a weekly study plan from your subjects and daily study hours, edit any slot, then print it.")}<div class="panel"><div class="form-grid">${field("Student name","spName","Your name")}${field("Goal / exam","spGoal","e.g. Final Exam 2026")}<div class="field full"><label for="spSubjects">Subjects (comma separated)</label><input id="spSubjects" value="Urdu, English, Mathematics, Science, Islamiyat"></div>${field("Study hours per day","spHours","3","number","3")}${selectField("Session length","spLen",["60 minutes","45 minutes","30 minutes"])}${field("Start time","spStart","","time","16:00")}${selectField("Study days","spDays",["Monday–Friday","Monday–Saturday","All 7 days"])}</div><div class="actions no-print">${btn("Create plan",'id="spBuild"',"primary")}${btn("Download CSV",'id="spCsv"')}${btn("Print / Save PDF",'id="printBtn"')}${btn("Save project",'id="spSave"')}</div><div id="spOut" class="table-wrap" style="margin-top:20px"></div></div>`}
+function spBuild(){
+ const out=$("#spOut");if(!out)return;
+ const subs=($("#spSubjects").value||"").split(/[,،]/).map(s=>s.trim()).filter(Boolean),hours=Number($("#spHours").value),len=parseInt($("#spLen").value)||60,st=$("#spStart").value||"16:00";
+ if(!subs.length||!(hours>=0.5)||hours>12){out.innerHTML='<div class="notice">Enter at least one subject and study hours between 0.5 and 12.</div>';return}
+ const per=Math.min(24,Math.max(1,Math.floor(hours*60/len))),dv=$("#spDays").value;
+ const days=["Monday","Tuesday","Wednesday","Thursday","Friday"];if(dv==="Monday–Saturday")days.push("Saturday");if(dv==="All 7 days")days.push("Saturday","Sunday");
+ const [h0,m0]=st.split(":").map(Number),fmt=m=>{m=m%1440;return String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0")};
+ const rows=[];for(let s=0;s<per;s++)rows.push({time:`${fmt(h0*60+m0+s*len)}–${fmt(h0*60+m0+(s+1)*len)}`,cells:[]});
+ let k=0;days.forEach(()=>rows.forEach(r=>r.cells.push(subs[k++%subs.length])));
+ const title=[$("#spName").value.trim(),$("#spGoal").value.trim()].filter(Boolean).join(" · ")||"Weekly study plan";
+ out.innerHTML=`<h2>${escapeHtml(title)}</h2><p class="sub" style="margin-bottom:12px">${per} session${per>1?"s":""} of ${len} minutes per day. Subjects rotate so each gets equal time. Click any cell to change it.</p><table id="spTable"><thead><tr><th>Time</th>${days.map(d=>`<th>${d}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr><th>${r.time}</th>${r.cells.map((c,i)=>`<td><input aria-label="${days[i]} ${r.time}" value="${escapeHtml(c)}"></td>`).join("")}</tr>`).join("")}</tbody></table>`;
+}
+function spRows(){const t=$("#spTable");return t?$$("tr",t).map(tr=>$$("th,td",tr).map(c=>c.querySelector("input")?c.querySelector("input").value:c.textContent.trim())):[]}
+document.addEventListener("click",e=>{
+ if(!$("#spOut"))return;
+ if(e.target.id==="spBuild")spBuild();
+ if(e.target.id==="spCsv"){if(!$("#spTable"))spBuild();const r=spRows();if(r.length)csvDownload("Mohsin-Tools-Study-Plan.csv",r)}
+ if(e.target.id==="spSave"){if(!$("#spTable"))spBuild();saveItem("Study Plan",$("#spGoal").value||$("#spName").value||"Study plan",spRows())}
+});
+
+/* ===== Image helper ===== */
+function imgShrink(file,max,cb){if(!file)return;if(!file.type.startsWith("image/")){alert("Please choose an image file (JPG, PNG or WebP).");return}const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.max(1,Math.round(im.width*k));c.height=Math.max(1,Math.round(im.height*k));c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(c.toDataURL(file.type==="image/png"?"image/png":"image/jpeg",.88))};im.onerror=()=>alert("Could not read this image.");im.src=r.result};r.onerror=()=>alert("Could not read this image.");r.readAsDataURL(file)}
+function mkLogoBox(){const b=$("#mkLogoBox");if(!b)return;b.innerHTML=mkStore.meta.logo?`<img src="${mkStore.meta.logo}" alt="Logo" style="height:42px;max-width:120px;object-fit:contain;vertical-align:middle"> <button class="btn danger" id="mkRmLogo" style="padding:4px 9px">Remove logo</button>`:""}
+document.addEventListener("change",e=>{
+ const t=e.target;if(!$("#mkTable"))return;
+ if(t.id==="mkShowPh"){mkStore.meta.showPh=t.checked;mkWrite();mkRefresh()}
+ if(t.id==="mkLogo")imgShrink(t.files&&t.files[0],300,u=>{mkStore.meta.logo=u;mkWrite();mkLogoBox();mkRefresh()});
+ if(t.dataset&&t.dataset.mkphoto!==undefined)imgShrink(t.files&&t.files[0],150,u=>{mkData().students[Number(t.dataset.mkphoto)].p=u;mkWrite();mkRenderAll()});
+});
+document.addEventListener("click",e=>{
+ if(!$("#mkTable"))return;const b=e.target.closest("button");if(!b)return;
+ if(b.id==="mkRmLogo"){delete mkStore.meta.logo;mkWrite();mkLogoBox();mkRefresh()}
+ if(b.dataset.mkrmphoto!==undefined){delete mkData().students[Number(b.dataset.mkrmphoto)].p;mkWrite();mkRenderAll()}
+});
+
+/* ===== Certificate Maker ===== */
+let ceLogoData="",cePhotoData="";
+const CE_TYPES=["Achievement","Appreciation","Completion","Participation","Excellence","Good Conduct","Best Performance","Position Holder"];
+const CE_TPL={"Modern Blue":{cc:"#1459a8",c2:"#1dc8e8",cls:"t-modern"},"Classic Gold":{cc:"#7a5a12",c2:"#c9a227",cls:"t-gold"},"Royal Dark":{cc:"#d4af37",c2:"#d4af37",cls:"t-dark"},"Emerald Green":{cc:"#0f6b4f",c2:"#c9a227",cls:"t-green"},"Minimal":{cc:"#17243d",c2:"#17243d",cls:"t-min"}};
+function certPage(){ceLogoData="";cePhotoData="";const opt=a=>a;return `${pageHead("Certificate Maker","Choose a design, add your school logo and the recipient's photo, adjust every option, then print or save as PDF.")}<div class="two-col"><section class="panel no-print"><div class="form-grid">
+${selectField("Design","ceTpl",Object.keys(CE_TPL))}${selectField("Orientation","ceOrient",["Landscape","Portrait"])}
+${field("School / organization","ceSchool","School name")}${selectField("Certificate of","ceType",CE_TYPES)}
+${field("Recipient name","ceName","Full name")}${field("Highlight line (optional)","ceHigh","e.g. Position: 1st · Grade A+")}
+<div class="field full"><label for="ceText">Message</label><textarea id="ceText">in recognition of outstanding performance, hard work and dedication.</textarea></div>
+${field("Date","ceDate","","date",new Date().toISOString().slice(0,10))}${field("Certificate number (optional)","ceNo","e.g. 2026-014")}
+${field("Left signature title","ceSign1","e.g. Class Teacher")}${field("Right signature title","ceSign2","e.g. Principal")}
+<div class="field"><label for="ceLogo">School logo</label><input id="ceLogo" type="file" accept="image/*"></div>
+<div class="field"><label for="cePhoto">Recipient photo</label><input id="cePhoto" type="file" accept="image/*"></div>
+${selectField("Photo shape","cePhotoShape",["Round","Square"])}${selectField("Seal","ceSeal",["Show seal","Hide seal"])}
+${selectField("Font","ceFont",["Serif","Sans-serif"])}${selectField("Name style","ceNameStyle",["Script","Italic serif","Bold sans"])}
+${field("Accent color","ceColor","","color","#1459a8")}</div>
+<div class="actions">${btn("Print / Save PDF",'id="cePrint"',"primary")}${btn("Remove logo",'id="ceRmLogo"')}${btn("Remove photo",'id="ceRmPhoto"')}${btn("Save project",'id="ceSave"')}</div></section>
+<section class="panel"><h2 class="no-print">Preview</h2><div id="cePreview"></div></section></div>`}
+function ceRender(){
+ const el=$("#cePreview");if(!el)return;
+ const v=id=>($("#"+id)?.value||"").trim(),T=CE_TPL[v("ceTpl")]||CE_TPL["Modern Blue"],c=/^#[0-9a-f]{6}$/i.test(v("ceColor"))?v("ceColor"):T.cc;
+ const port=v("ceOrient")==="Portrait",font=v("ceFont")==="Sans-serif"?"f-sans":"f-serif",ns={"Script":"ns-script","Italic serif":"ns-italic","Bold sans":"ns-bold"}[v("ceNameStyle")]||"ns-script";
+ let ds=v("ceDate");try{if(ds)ds=new Date(ds+"T00:00:00").toLocaleDateString(undefined,{day:"numeric",month:"long",year:"numeric"})}catch{}
+ const meta=[ds&&"Date: "+ds,v("ceNo")&&"Certificate No: "+v("ceNo")].filter(Boolean).map(escapeHtml).join("&nbsp;&nbsp;·&nbsp;&nbsp;"),high=v("ceHigh"),seal=v("ceSeal")!=="Hide seal";
+ el.innerHTML=`<div class="certwrap${port?" port":""}"><div class="cert ${T.cls} ${port?"port":"land"} ${font} ${ns}" style="--cc:${c};--c2:${T.c2}"><i class="cd cd1"></i><i class="cd cd2"></i><div class="cert-in">
+<div class="cert-head"><div class="cert-hl">${ceLogoData?`<img alt="Logo" src="${ceLogoData}" class="cert-logo">`:""}</div><div class="cert-school">${escapeHtml(v("ceSchool")||"School / Organization")}</div><div class="cert-hr">${cePhotoData?`<img alt="Photo" src="${cePhotoData}" class="cert-photo${v("cePhotoShape")==="Square"?"":" round"}">`:""}</div></div>
+<div class="cert-mid"><div class="cert-title">CERTIFICATE</div><div class="cert-of">OF ${escapeHtml((v("ceType")||"Achievement").toUpperCase())}</div><div class="cert-pre">This certificate is proudly presented to</div><div class="cert-name">${escapeHtml(v("ceName")||"Recipient Name")}</div><div class="cert-text">${escapeHtml(v("ceText"))}</div>${high?`<div class="cert-high">${escapeHtml(high)}</div>`:""}</div>
+<div class="cert-meta">${meta}</div>
+<div class="cert-foot"><div class="sg"><span></span><small>${escapeHtml(v("ceSign1")||"Signature")}</small></div>${seal?`<div class="cert-seal">★</div>`:`<div></div>`}<div class="sg"><span></span><small>${escapeHtml(v("ceSign2")||"Signature")}</small></div></div></div></div></div>`;
+}
+document.addEventListener("input",e=>{const id=e.target.id||"";if(/^ce[A-Z]/.test(id)&&id!=="ceLogo"&&id!=="cePhoto")ceRender()});
+document.addEventListener("change",e=>{const id=e.target.id||"";if(!$("#cePreview"))return;
+ if(id==="ceLogo")imgShrink(e.target.files&&e.target.files[0],400,d=>{ceLogoData=d;ceRender()});
+ else if(id==="cePhoto")imgShrink(e.target.files&&e.target.files[0],600,d=>{cePhotoData=d;ceRender()});
+ else if(/^ce[A-Z]/.test(id)){if(id==="ceTpl"&&$("#ceColor"))$("#ceColor").value=(CE_TPL[e.target.value]||CE_TPL["Modern Blue"]).cc;ceRender()}});
+document.addEventListener("click",e=>{
+ if(!$("#cePreview"))return;
+ if(e.target.id==="ceRmLogo"){ceLogoData="";if($("#ceLogo"))$("#ceLogo").value="";ceRender()}
+ if(e.target.id==="ceRmPhoto"){cePhotoData="";if($("#cePhoto"))$("#cePhoto").value="";ceRender()}
+ if(e.target.id==="cePrint"){let st=$("#mkPageStyle");if(!st){st=document.createElement("style");st.id="mkPageStyle";document.head.append(st)}st.textContent=`@media print{@page{size:A4 ${$("#ceOrient").value==="Portrait"?"portrait":"landscape"};margin:0}}`;window.print()}
+ if(e.target.id==="ceSave"){const v=id=>$("#"+id)?.value||"";saveItem("Certificate",v("ceName")||"Certificate",{design:v("ceTpl"),school:v("ceSchool"),type:v("ceType"),name:v("ceName"),text:v("ceText"),date:v("ceDate")})}
+});
+
+/* ===== About me: edit these lines. Put your picture next to index.html as mohsin.jpg (or paste a data: URL). ===== */
+const ABOUT_ME={name:"Muhammad Mohsin Mushtaq",role:"Creator of Mohsin Tools",photo:"mohsin.jpg",bio:"Hi, I'm Mohsin, the creator of Mohsin Tools. I built this website to make everyday school and study work faster: ID cards, results and award lists, certificates, exam papers, timetables and more, all in one place. Learn smarter. Create faster. Achieve more."};
+function aboutInitials(){const s=document.createElement("span");s.className="about-photo about-initials";s.textContent=ABOUT_ME.name.split(/\s+/).slice(0,2).map(w=>w[0]).join("").toUpperCase();s.setAttribute("role","img");s.setAttribute("aria-label",ABOUT_ME.name);return s}
+const theme=localStorage.getItem("mt_theme");if(theme)document.documentElement.dataset.theme=theme;
+render("home");
+</script>
+</body></html>
