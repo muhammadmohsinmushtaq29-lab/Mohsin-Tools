@@ -226,6 +226,57 @@ body{background:transparent}
  .btn,.iconbtn{box-shadow:none!important;transform:none!important}
 }
 </style>
+<style id="wd-css">
+/* World Language Dictionary */
+#wd{--g:rgba(255,255,255,.72);--gb:rgba(255,255,255,.65)}
+[data-theme="dark"] #wd{--g:rgba(17,31,53,.62);--gb:rgba(120,180,255,.18)}
+#wd .wd-hero{text-align:center;padding:26px 14px 6px}
+#wd .wd-hero h1{margin:0;font-size:clamp(26px,5vw,42px);background:linear-gradient(90deg,var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+#wd .wd-hero p{margin:8px 0 0;color:var(--muted);font-weight:600}
+#wd .wd-box,#wd .wd-card{background:var(--g);border:1px solid var(--gb);border-radius:18px;padding:18px;margin-top:16px;box-shadow:var(--shadow);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+#wd h3{margin:16px 0 8px;font-size:15px}#wd h3 small{font-weight:500;color:var(--muted)}
+#wd .wd-sr{display:flex;gap:10px;flex-wrap:wrap}
+#wd .wd-sr input{flex:1 1 220px;padding:13px 16px;border-radius:14px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:16px}
+#wd select{padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);max-width:100%}
+#wd .wd-ctl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+#wd .wd-ctl label{font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+#wd .wd-btn{border:0;border-radius:12px;padding:10px 15px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan))}
+#wd .wd-btn.s{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+#wd .wd-btn[aria-pressed=true]{outline:2px solid var(--cyan)}
+#wd .wd-ib{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--soft);color:var(--ink);font-size:16px;flex:none}
+#wd .wd-ib.na{opacity:.4;text-decoration:line-through}
+#wd button:focus-visible,#wd input:focus-visible,#wd select:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+#wd .wd-b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;color:#fff;font:800 11px/1 sans-serif;flex:none;box-shadow:0 3px 10px #0003}
+#wd .wd-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+#wd .wd-chips[hidden]{display:none}
+#wd .wd-c{display:inline-flex;gap:6px;align-items:center;padding:4px 10px 4px 4px;border-radius:99px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:13px}
+#wd .wd-c .wd-b{width:24px;height:24px;font-size:9px}
+#wd .wd-c[aria-pressed=true]{border-color:var(--cyan);background:var(--soft);font-weight:700}
+#wd .wd-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+#wd .wd-word{margin:0;font-size:clamp(24px,4vw,34px);overflow-wrap:anywhere}
+#wd .wd-meta{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:13px;margin-top:6px}
+#wd .wd-acts{display:flex;gap:8px}
+#wd .wd-rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+#wd .wd-row{display:flex;gap:10px;align-items:center;padding:10px;border-radius:14px;background:var(--panel);border:1px solid var(--line)}
+#wd .wd-row>div{flex:1;min-width:0}#wd .wd-row b{display:block;font-size:11px;color:var(--muted);font-weight:600}
+#wd .wd-t{font-size:20px;font-weight:700;overflow-wrap:anywhere;display:block}
+#wd .wd-q{font-size:11px;color:var(--muted)}#wd .wd-q.low{color:#d97706}
+#wd .wd-ipa{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:18px}
+#wd .wd-chip{display:inline-block;padding:2px 10px;border-radius:99px;background:var(--blue);color:#fff;font-size:12px;font-weight:700}
+#wd .wd-pos{margin-top:14px}#wd .wd-pos p{margin:6px 0}
+#wd .wd-ex{color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#wd .wd-ex .wd-ib{width:30px;height:30px;font-size:13px}
+#wd .wd-ex .wd-btn{padding:3px 10px;font-size:12px}
+#wd .wd-exo{display:block;width:100%;color:var(--ink);font-weight:600}
+#wd .wd-sy{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:13px;margin-top:6px}
+#wd .wd-sy button{border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:99px;padding:2px 10px}
+#wd .wd-note,#wd .wd-msg{color:var(--muted)}#wd .wd-msg{padding:14px;border-radius:14px;background:var(--soft);margin-top:16px}
+#wd .wd-msg.err{border-left:4px solid #ef4444}#wd .wd-msg.warn{border-left:4px solid #f59e0b}
+#wd .wd-load{padding:16px;color:var(--muted);animation:wdp 1s infinite alternate}
+@keyframes wdp{to{opacity:.4}}
+@media(max-width:600px){#wd .wd-rows{grid-template-columns:1fr}#wd .wd-card,#wd .wd-box{padding:14px}}
+@media print{#wd{display:none}}
+</style>
 </head>
 <body>
 <div class="bg3d" aria-hidden="true"><div class="wave w1"></div><div class="wave w2"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="shape s1"><div class="cube"><b></b><b></b><b></b><b></b><b></b><b></b></div></div><div class="shape s2"><div class="ring"></div></div><div class="shape s3"><div class="dia"></div></div><div class="shape s4"><div class="cube"><b></b><b></b><b></b><b></b><b></b><b></b></div></div><span class="ptc" style="left:32%;--d:20s;--dl:-3s"></span><span class="ptc" style="left:94%;--d:22s;--dl:-15s"></span><span class="ptc" style="left:21%;--d:17s;--dl:-2s"></span><span class="ptc" style="left:4%;--d:22s;--dl:-17s"></span><span class="ptc" style="left:39%;--d:28s;--dl:-24s"></span><span class="ptc" style="left:9%;--d:19s;--dl:-16s"></span><span class="ptc" style="left:70%;--d:21s;--dl:-8s"></span><span class="ptc" style="left:24%;--d:29s;--dl:-3s"></span><span class="ptc" style="left:35%;--d:19s;--dl:-0s"></span><span class="ptc" style="left:84%;--d:28s;--dl:-8s"></span><span class="ptc" style="left:36%;--d:19s;--dl:-5s"></span><span class="ptc" style="left:41%;--d:20s;--dl:-20s"></span><span class="ptc" style="left:95%;--d:29s;--dl:-11s"></span><span class="ptc" style="left:13%;--d:29s;--dl:-19s"></span><span class="ptc" style="left:45%;--d:26s;--dl:-12s"></span><span class="ptc" style="left:66%;--d:19s;--dl:-5s"></span></div>
@@ -253,6 +304,9 @@ body{background:transparent}
     <button data-page="studyplan"><span class="ico">📆</span>Study Planner</button>
     <button data-page="certificate"><span class="ico">🏆</span>Certificate Maker</button>
     <button data-page="passport"><span class="ico">🖼️</span>Passport Photo Maker</button>
+  </nav>
+  <div class="nav-label">Language Lab</div><nav class="nav">
+    <button data-page="dictionary"><span class="ico">🌍</span>World Language Dictionary</button>
   </nav>
   <div class="nav-label">Science Lab</div><nav class="nav">
     <button data-page="periodic"><span class="ico">⚛️</span>Periodic Table</button>
@@ -895,11 +949,12 @@ periodic:'<circle cx="12" cy="12" r="1.5"/><ellipse cx="12" cy="12" rx="10" ry="
 scigallery:"M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3M8 15h8",
 heart:"M12 21s-8-5-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 6-8 11-8 11z",
 digestive:"M7 3v8M5 3v5a2 2 0 004 0V3M7 11v10M17 3c-2 2-3 5-3 8h3v10M17 3v18",
+dictionary:"M12 21a9 9 0 100-18 9 9 0 000 18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18",
 saved:"M6 3h12v18l-6-4-6 4z",
 settings:"M4 7h10M18 7h2M4 17h2M10 17h10M16 4v6M8 14v6",
 about:"M12 21a9 9 0 100-18 9 9 0 000 18zM12 11v6M12 7.5h.01",
 menu:"M4 6h16M4 12h16M4 18h16"};
-const SH={home:"Home",alltools:"Tools",school:"School",student:"Student",teacher:"Teacher",grades:"Marks",library:"Library",ai:"AI Study",cv:"CV",idcard:"ID Card",timetable:"Timetable",logo:"Logo",paper:"Exam Paper",quiz:"Quiz",studyplan:"Planner",certificate:"Certificate",passport:"Passport",periodic:"Periodic",scigallery:"Diagrams",heart:"Heart",digestive:"Digestive",saved:"Saved",settings:"Settings",about:"About"};
+const SH={home:"Home",alltools:"Tools",school:"School",student:"Student",teacher:"Teacher",grades:"Marks",library:"Library",ai:"AI Study",cv:"CV",idcard:"ID Card",timetable:"Timetable",logo:"Logo",paper:"Exam Paper",quiz:"Quiz",studyplan:"Planner",certificate:"Certificate",passport:"Passport",periodic:"Periodic",scigallery:"Diagrams",heart:"Heart",digestive:"Digestive",dictionary:"Dictionary",saved:"Saved",settings:"Settings",about:"About"};
 const svg=k=>{const v=IC[k]||IC.alltools;return `<svg viewBox="0 0 24 24" aria-hidden="true">${v[0]==="<"?v:`<path d="${v}"/>`}</svg>`};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
@@ -974,6 +1029,112 @@ D.addEventListener("pointermove",e=>{
   if(bg){bg.style.setProperty("--px",(e.clientX/innerWidth-.5).toFixed(3));bg.style.setProperty("--py",(e.clientY/innerHeight-.5).toFixed(3))}})}
 },{passive:true});
 R.addEventListener("mouseleave",()=>{if(cur){rst(cur);cur=null}});
+})();
+</script>
+<script id="wd-js">
+/* World Language Dictionary — free no-key APIs: MyMemory (translation, language detection), dictionaryapi.dev (English entries, IPA, recordings). No private keys in this file. */
+(()=>{
+const $=(s,r=document)=>r.querySelector(s);
+const L=[["en","English","EN","#3b82f6","en-US"],["ur","Urdu","UR","#10b981","ur-PK"],["ps","Pashto","PS","#f59e0b","ps-AF"],["ar","Arabic","AR","#14b8a6","ar-SA"],["hi","Hindi","HI","#f97316","hi-IN"],["bn","Bengali","BN","#22c55e","bn-BD"],["fa","Persian","FA","#a855f7","fa-IR"],["es","Spanish","ES","#ef4444","es-ES"],["fr","French","FR","#6366f1","fr-FR"],["de","German","DE","#ca8a04","de-DE"],["it","Italian","IT","#16a34a","it-IT"],["pt","Portuguese","PT","#0ea5e9","pt-PT"],["ru","Russian","RU","#8b5cf6","ru-RU"],["tr","Turkish","TR","#e11d48","tr-TR"],["zh-CN","Chinese","ZH","#dc2626","zh-CN"],["ja","Japanese","JA","#ec4899","ja-JP"],["ko","Korean","KO","#0891b2","ko-KR"],["id","Indonesian","ID","#f43f5e","id-ID"],["nl","Dutch","NL","#ea580c","nl-NL"],["pl","Polish","PL","#65a30d","pl-PL"],["th","Thai","TH","#0d9488","th-TH"],["vi","Vietnamese","VI","#d97706","vi-VN"]];
+const M=Object.fromEntries(L.map(l=>[l[0],l])),RTL=["ur","ps","ar","fa"];
+const h=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
+const S={src:"auto",to:ld("mt_wd_to","ur"),all:false,set:new Set(ld("mt_wd_set",["ur","ps","ar","hi"]))};
+const C={};let R=null,V=[],last=null;
+const badge=c=>`<span class="wd-b" style="background:${M[c][3]}" aria-hidden="true">${M[c][2]}</span>`;
+const dec=t=>{const x=document.createElement("textarea");x.innerHTML=t;return x.value};
+const spk=(t,c)=>`<button type="button" class="wd-ib wd-spk" data-a="say" data-t="${h(t)}" data-l="${c}" aria-label="Listen in ${M[c][1]}">🔊</button>`;
+const msg=(t,k)=>`<div class="wd-msg ${k||""}" role="alert">${t}</div>`;
+const detect=q=>/[ښډړټځڅږڼ]/.test(q)?"ps":/[ٹڈڑںےھ]/.test(q)?"ur":/[\u0600-\u06FF]/.test(q)?"ar":/[\u0900-\u097F]/.test(q)?"hi":/[\u0980-\u09FF]/.test(q)?"bn":/[\u0E00-\u0E7F]/.test(q)?"th":/[\uAC00-\uD7AF]/.test(q)?"ko":/[\u3040-\u30FF]/.test(q)?"ja":/[\u4E00-\u9FFF]/.test(q)?"zh-CN":/[\u0400-\u04FF]/.test(q)?"ru":null;
+const fromCode=d=>{if(!d)return null;const b=String(d).toLowerCase().split("-")[0];return M[d]?d:M[b]?b:b==="zh"?"zh-CN":null};
+
+async function tr(q,from,to){const k=from+"|"+to+"|"+q;if(C[k])return C[k];
+ const r=await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(q)}&langpair=${from}|${to}`);
+ if(!r.ok)throw Error("service error "+r.status);const j=await r.json(),t=j.responseData&&j.responseData.translatedText;
+ if(+j.responseStatus!==200||!t||/MYMEMORY WARNING|INVALID|PLEASE SELECT/i.test(t))throw Error(+j.responseStatus===429?"daily free limit reached":"no translation available");
+ return C[k]={t:dec(t),m:j.responseData.match,d:j.responseData.detectedLanguage}}
+async function dict(w){const k="d|"+w.toLowerCase();if(C[k])return C[k];const r=await fetch("https://api.dictionaryapi.dev/api/v2/entries/en/"+encodeURIComponent(w));
+ if(r.status===404)throw Error("none");if(!r.ok)throw Error("service error");return C[k]=await r.json()}
+
+/* ---- audio ---- */
+const SS="speechSynthesis"in window,lv=()=>{V=speechSynthesis.getVoices();mark()};
+if(SS){speechSynthesis.addEventListener("voiceschanged",lv)}
+const voice=c=>{const l=M[c][4].toLowerCase(),b=c.split("-")[0].toLowerCase(),n=v=>v.lang.toLowerCase().replace("_","-");return V.find(v=>n(v)===l)||V.find(v=>n(v).split("-")[0]===b)};
+function say(t,c){if(!SS)return toast("Audio is not supported in this browser.");if(!V.length)V=speechSynthesis.getVoices();const v=voice(c);
+ if(!v)return toast(`Audio unavailable: no ${M[c][1]} voice is installed in this browser/device.`);
+ speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.voice=v;u.lang=v.lang;u.rate=+($("#wdRate")||{value:1}).value;u.onerror=e=>{if(e.error!=="canceled"&&e.error!=="interrupted")toast("Audio could not be played.")};last=[t,c];speechSynthesis.speak(u)}
+function mark(){document.querySelectorAll("#wd .wd-spk").forEach(b=>{const no=!SS||(V.length&&!voice(b.dataset.l));b.classList.toggle("na",!!no);b.title=no?`Audio unavailable: no ${M[b.dataset.l][1]} voice on this device`:"Listen"})}
+
+/* ---- history / favorites ---- */
+const hist=q=>{let a=ld("mt_wd_hist",[]).filter(x=>x!==q);a.unshift(q);sv("mt_wd_hist",a.slice(0,20));lists()};
+const isFav=q=>ld("mt_wd_fav",[]).includes(q);
+function lists(){const f=(a,e)=>a.length?a.map(w=>`<button type="button" class="wd-c" data-a="go" data-w="${h(w)}">${h(w)}</button>`).join(""):`<span class="wd-note">${e}</span>`;
+ const H=$("#wdHist"),F=$("#wdFav");if(H)H.innerHTML=f(ld("mt_wd_hist",[]),"No searches yet.");if(F)F.innerHTML=f(ld("mt_wd_fav",[]),"Tap ☆ on a result to save it here.")}
+
+/* ---- search ---- */
+async function search(q){q=q.trim().replace(/\s+/g," ");const out=$("#wdOut");
+ if(!q)return out.innerHTML=msg("Please type a word or phrase to search.","warn");
+ if(q.length>200)return out.innerHTML=msg("Please keep your text under 200 characters.","warn");
+ if(!navigator.onLine)return out.innerHTML=msg("You appear to be offline. Translations and dictionary entries need an internet connection.","err");
+ out.innerHTML=`<div class="wd-load">Searching…</div>`;
+ let src=S.src,note="Language selected by you";
+ if(src==="auto"){src=detect(q);note="Language detected from the writing script";
+  if(!src){try{const r=await tr(q,"Autodetect","en");src=fromCode(r.d);note="Language auto-detected"}catch{}
+   if(!src){src="en";note="Could not detect the language — assuming English. Pick it manually if wrong."}}}
+ const me=R={q,src,note,rows:(S.all?[...S.set]:[S.to]).filter(c=>c!==src).map(c=>({c})),dict:null};
+ hist(q);draw();
+ const todo=[...me.rows],work=async()=>{for(let r;(r=todo.shift());){try{Object.assign(r,await tr(q,src,r.c))}catch(e){r.err=e.message}if(R===me)rows()}};
+ await Promise.all([work(),work(),work(),work(),(async()=>{let en=src==="en"?q:null;if(!en){try{en=(await tr(q,src,"en")).t}catch{}}me.en=en;
+  if(en&&!/\s/.test(en)){try{me.dict=await dict(en)}catch(e){me.derr=e.message}}else me.derr=en?"phrase":"noen";if(R===me)drawDict()})()]);
+ if(!me.rows.length&&R===me)rows()}
+function draw(){const r=R;$("#wdOut").innerHTML=`<article class="wd-card" aria-live="polite"><div class="wd-top"><div><h2 class="wd-word" dir="auto">${h(r.q)}</h2><div class="wd-meta">${badge(r.src)}<b>${M[r.src][1]}</b><small>${h(r.note)}</small></div></div><div class="wd-acts">${spk(r.q,r.src)}<button type="button" class="wd-ib" data-a="fav" aria-label="Favorite" aria-pressed="${isFav(r.q)}">${isFav(r.q)?"★":"☆"}</button><button type="button" class="wd-ib" data-a="copy" aria-label="Copy" title="Copy">⧉</button><button type="button" class="wd-ib" data-a="share" aria-label="Share" title="Share">⤴</button></div></div><h3>Translations</h3><div id="wdRows" class="wd-rows"></div></article><article class="wd-card" id="wdDict"><div class="wd-load">Loading dictionary entry…</div></article>`;rows();mark()}
+function rows(){const el=$("#wdRows");if(!el)return;
+ el.innerHTML=R.rows.length?R.rows.map(r=>{const n=M[r.c];if(r.err)return `<div class="wd-row">${badge(r.c)}<div><b>${n[1]}</b><span class="wd-q low">Translation unavailable: ${h(r.err)}</span></div></div>`;
+  if(!r.t)return `<div class="wd-row">${badge(r.c)}<div><b>${n[1]}</b><span class="wd-q">Translating…</span></div></div>`;
+  const lo=r.m!=null&&r.m<.5;return `<div class="wd-row">${badge(r.c)}<div><b>${n[1]}</b><span class="wd-t" dir="${RTL.includes(r.c)?"rtl":"ltr"}" lang="${r.c}">${h(r.t)}</span>${r.m!=null?`<span class="wd-q ${lo?"low":""}">Match ${Math.round(r.m*100)}%${lo?" — low confidence, please double-check":""}</span>`:""}</div>${spk(r.t,r.c)}</div>`}).join(""):msg("Choose a target language different from the input language.","warn");mark()}
+function drawDict(){const r=R,el=$("#wdDict");if(!el)return;
+ if(!r.dict){el.innerHTML=`<h3>Dictionary</h3><p class="wd-note">${r.derr==="phrase"?"Detailed entries are shown for single words; the translations above cover your full phrase.":r.derr==="noen"?"The English equivalent could not be fetched, so no dictionary entry is shown.":r.derr==="none"?`No dictionary entry was found for “${h(r.en)}”.`:"The dictionary service is unavailable right now. Translations above are still shown."}</p>`;return}
+ const E=r.dict,P=E.flatMap(e=>e.phonetics||[]),ipa=E[0].phonetic||(P.find(p=>p.text)||{}).text,au=P.find(p=>p.audio),by={};
+ E.forEach(e=>(e.meanings||[]).forEach(m=>(by[m.partOfSpeech]=by[m.partOfSpeech]||[]).push(m)));
+ const to=[S.to,...S.set].find(c=>c!=="en")||"ur";
+ el.innerHTML=`<h3>Dictionary${r.src!=="en"?` <small>for the English equivalent “${h(r.en)}”</small>`:""}</h3><div class="wd-ipa"><b dir="ltr">${ipa?"IPA "+h(ipa):"IPA not available"}</b>${spk(E[0].word,"en")}${au?`<button type="button" class="wd-btn s" data-a="nat" data-u="${h(au.audio)}">▶ Native recording</button>`:""}</div>`+
+ Object.entries(by).map(([p,ms])=>{const d=ms.flatMap(m=>m.definitions||[]).slice(0,3),sy=[...new Set(ms.flatMap(m=>[...(m.synonyms||[]),...(m.definitions||[]).flatMap(x=>x.synonyms||[])]))].slice(0,8),an=[...new Set(ms.flatMap(m=>[...(m.antonyms||[]),...(m.definitions||[]).flatMap(x=>x.antonyms||[])]))].slice(0,8),cl=(a,t)=>a.length?`<div class="wd-sy"><b>${t}:</b>${a.map(w=>`<button type="button" data-a="go" data-w="${h(w)}">${h(w)}</button>`).join("")}</div>`:"";
+  return `<div class="wd-pos"><span class="wd-chip">${h(p)}</span>${d.map(x=>`<p>${h(x.definition)}</p>${x.example?`<p class="wd-ex">“${h(x.example)}” ${spk(x.example,"en")}<button type="button" class="wd-btn s" data-a="ex" data-t="${h(x.example)}" data-l="${to}">Translate to ${M[to][1]}</button><span class="wd-exo" dir="auto"></span></p>`:""}`).join("")}${cl(sy,"Synonyms")}${cl(an,"Antonyms")}</div>`}).join("")+`<p class="wd-note" style="font-size:12px;margin-top:14px">Dictionary data: dictionaryapi.dev. Translations: MyMemory (machine/community translation — verify important words).</p>`;mark()}
+
+const txt=()=>R?`${R.q} (${M[R.src][1]})\n`+R.rows.filter(r=>r.t).map(r=>`${M[r.c][1]}: ${r.t}`).join("\n")+"\n— Mohsin Tools · World Language Dictionary":"";
+async function act(b){const a=b.dataset.a;
+ if(a==="say")say(b.dataset.t,b.dataset.l);
+ else if(a==="nat"){const u=b.dataset.u.startsWith("//")?"https:"+b.dataset.u:b.dataset.u;new Audio(u).play().catch(()=>toast("The recording could not be played."))}
+ else if(a==="go"){$("#wdQ").value=b.dataset.w;search(b.dataset.w)}
+ else if(a==="fav"&&R){let f=ld("mt_wd_fav",[]);f=f.includes(R.q)?f.filter(x=>x!==R.q):[R.q,...f];sv("mt_wd_fav",f.slice(0,50));b.textContent=isFav(R.q)?"★":"☆";b.setAttribute("aria-pressed",isFav(R.q));lists()}
+ else if(a==="copy"){try{await navigator.clipboard.writeText(txt());toast("Copied")}catch{toast("Copy is not allowed by this browser.")}}
+ else if(a==="share"){const t=txt();try{if(navigator.share)await navigator.share({title:"Mohsin Tools Dictionary",text:t});else{await navigator.clipboard.writeText(t);toast("Sharing isn't supported here — copied instead")}}catch(e){if(e.name!=="AbortError")toast("Could not share.")}}
+ else if(a==="ex"){const o=b.parentNode.querySelector(".wd-exo");o.textContent="Translating…";try{const r=await tr(b.dataset.t,"en",b.dataset.l);o.innerHTML=`<span lang="${b.dataset.l}" dir="${RTL.includes(b.dataset.l)?"rtl":"ltr"}">${h(r.t)}</span> ${spk(r.t,b.dataset.l)}`;mark()}catch(e){o.textContent="Translation unavailable: "+e.message}}
+ else if(a==="clrh"){sv("mt_wd_hist",[]);lists()}else if(a==="clrf"){sv("mt_wd_fav",[]);lists()}
+ else if(a==="pause"){speechSynthesis.speaking&&(speechSynthesis.paused?speechSynthesis.resume():speechSynthesis.pause())}
+ else if(a==="stop")SS&&speechSynthesis.cancel();
+ else if(a==="replay"&&last)say(...last);
+ else if(a==="mode"){S.all=!S.all;b.setAttribute("aria-pressed",S.all);$("#wdChips").hidden=!S.all;$("#wdTo").disabled=S.all}
+ else if(a==="chip"){const c=b.dataset.l;S.set.has(c)?S.set.delete(c):S.set.add(c);b.setAttribute("aria-pressed",S.set.has(c));sv("mt_wd_set",[...S.set])}
+ else if(a==="theme"){const t=document.documentElement.dataset.theme==="dark"?"light":"dark";document.documentElement.dataset.theme=t;try{localStorage.setItem("mt_theme",t)}catch{}}}
+
+const opt=(c,s)=>`<option value="${c}"${c===s?" selected":""}>${M[c]?M[c][1]:"Auto-detect"}</option>`;
+const page=()=>`<div id="wd"><section class="wd-hero"><h1>Every Word, Every Language</h1><p>Learn Meanings • Listen to Pronunciation • Speak with Confidence</p></section>
+<section class="wd-box"><form id="wdForm" class="wd-sr" role="search"><input id="wdQ" type="search" placeholder="Type a word or phrase…" aria-label="Word or phrase" maxlength="200" autocomplete="off"><button class="wd-btn" type="submit">Search</button></form>
+<div class="wd-ctl"><label>From<select id="wdSrc"><option value="auto">Auto-detect</option>${L.map(l=>opt(l[0])).join("")}</select></label><label>To<select id="wdTo">${L.map(l=>opt(l[0],S.to)).join("")}</select></label><button type="button" class="wd-btn s" data-a="mode" aria-pressed="false">🌐 Translate All</button></div>
+<div id="wdChips" class="wd-chips" hidden role="group" aria-label="Languages for Translate All">${L.map(l=>`<button type="button" class="wd-c" data-a="chip" data-l="${l[0]}" aria-pressed="${S.set.has(l[0])}">${badge(l[0])}${l[1]}</button>`).join("")}</div>
+<div class="wd-ctl"><label>Speech speed<select id="wdRate"><option value=".6">Slow</option><option value=".8">Relaxed</option><option value="1" selected>Normal</option><option value="1.25">Fast</option></select></label><button type="button" class="wd-btn s" data-a="replay">↻ Replay</button><button type="button" class="wd-btn s" data-a="pause">⏯ Pause / Resume</button><button type="button" class="wd-btn s" data-a="stop">⏹ Stop</button><button type="button" class="wd-btn s" data-a="theme">◐ Dark / Light</button></div>
+${SS?"":msg("This browser does not support speech synthesis, so audio is unavailable.","warn")}</section>
+<div id="wdOut"></div>
+<section class="wd-box"><h3 style="margin-top:0">Search history <button type="button" class="wd-btn s" data-a="clrh" style="padding:2px 10px;font-size:12px">Clear</button></h3><div id="wdHist" class="wd-chips" style="margin:0"></div><h3>Favorites ★ <button type="button" class="wd-btn s" data-a="clrf" style="padding:2px 10px;font-size:12px">Clear</button></h3><div id="wdFav" class="wd-chips" style="margin:0"></div></section></div>`;
+function init(){const w=$("#wd");if(!w)return;R=null;if(SS&&!V.length)lv();lists();
+ $("#wdForm").onsubmit=e=>{e.preventDefault();search($("#wdQ").value)};
+ $("#wdSrc").onchange=e=>S.src=e.target.value;$("#wdTo").onchange=e=>{S.to=e.target.value;sv("mt_wd_to",S.to)};
+ w.onclick=e=>{const b=e.target.closest("[data-a]");if(b)act(b)}}
+
+tools.push({id:"dictionary",name:"World Language Dictionary",icon:"🌍",cat:"Language",desc:"Meanings, translations in 20+ languages, IPA and spoken pronunciation for any word."});
+const sp=window.simplePage;window.simplePage=function(p){return p==="dictionary"?page():sp.apply(this,arguments)};
+const rd=window.render;window.render=function(p){rd.apply(this,arguments);if(p==="dictionary")init()};
 })();
 </script>
 </body></html>
