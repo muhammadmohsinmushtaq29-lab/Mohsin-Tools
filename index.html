@@ -277,6 +277,51 @@ body{background:transparent}
 @media(max-width:600px){#wd .wd-rows{grid-template-columns:1fr}#wd .wd-card,#wd .wd-box{padding:14px}}
 @media print{#wd{display:none}}
 </style>
+<style id="tc-css">
+/* Text & File Converter */
+#tc{--g:rgba(255,255,255,.78);--gb:rgba(255,255,255,.7)}
+[data-theme="dark"] #tc{--g:rgba(17,31,53,.64);--gb:rgba(120,180,255,.18)}
+#tc .tc-hero{text-align:center;padding:24px 12px 4px}
+#tc .tc-hero h1{margin:0;font-size:clamp(26px,5vw,40px);background:linear-gradient(90deg,var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+#tc .tc-hero p{margin:8px 0 0;color:var(--muted);font-weight:600}
+#tc .tc-box{background:var(--g);border:1px solid var(--gb);border-radius:20px;padding:18px;margin-top:16px;box-shadow:var(--shadow);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);animation:tcin .5s both}
+@keyframes tcin{from{opacity:0;transform:translateY(14px)}}
+#tc h3{margin:0 0 10px;font-size:16px}#tc h3 small{font-weight:500;color:var(--muted);margin-left:6px}
+#tc textarea{width:100%;min-height:240px;resize:vertical;padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:17px/1.7 "Noto Naskh Arabic","Jameel Noori Nastaleeq","Segoe UI",Tahoma,Arial,sans-serif;box-sizing:border-box}
+#tc textarea:focus,#tc select:focus,#tc button:focus-visible,#tc a:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+#tc .tc-bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0 14px}
+#tc .tc-bar .tc-hint{flex:1 1 140px}#tc .tc-hint{color:var(--muted);font-size:13px;margin:0}
+#tc select{padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+#tc .tc-btn{border:1px solid var(--line);border-radius:12px;padding:9px 14px;font-weight:700;background:var(--soft);color:var(--ink);transition:.2s}
+#tc .tc-btn:hover{transform:translateY(-2px)}
+#tc .tc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}#tc .tc-grid.g3{grid-template-columns:repeat(3,1fr)}
+#tc .tc-card{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 8px;border-radius:18px;border:1px solid var(--line);background:var(--panel);color:var(--ink);transition:transform .25s,box-shadow .25s;perspective:600px}
+#tc .tc-card:hover:not(:disabled){transform:translateY(-5px);box-shadow:0 14px 28px rgba(37,99,235,.28)}
+#tc .tc-card:active:not(:disabled){transform:scale(.97)}#tc .tc-card:disabled{opacity:.6;cursor:wait}
+#tc .tc-card small{color:var(--muted)}
+#tc .tc-ic{display:inline-grid;place-items:center;width:54px;height:54px;border-radius:16px;font-size:26px;color:#fff;background:linear-gradient(145deg,#60a5fa,var(--blue) 55%,#1e40af);box-shadow:inset 0 2px 3px rgba(255,255,255,.55),inset 0 -5px 8px rgba(0,0,40,.35),0 8px 0 #1e3a8a55,0 12px 18px rgba(30,64,175,.35);transform:rotateX(14deg) rotateY(-12deg);transition:transform .35s}
+#tc .tc-card:hover .tc-ic,#tc .tc-drop:hover .tc-ic{transform:rotateX(0) rotateY(0) scale(1.08)}
+#tc .tc-ic.s{width:42px;height:42px;font-size:11px;font-weight:800;border-radius:12px}
+#tc .tc-drop{display:flex;flex-direction:column;align-items:center;gap:4px;padding:22px;border:2px dashed var(--cyan);border-radius:18px;background:var(--soft);cursor:pointer;transition:.2s;margin-bottom:12px}
+#tc .tc-drop.on{background:var(--panel);transform:scale(1.01)}#tc .tc-drop small{color:var(--muted)}
+#tc .tc-files{list-style:none;margin:0 0 12px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+#tc .tc-files li{display:flex;gap:8px;align-items:center;padding:6px;border-radius:12px;background:var(--panel);border:1px solid var(--line)}
+#tc .tc-files img{width:42px;height:42px;object-fit:cover;border-radius:8px}
+#tc .tc-files span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}#tc .tc-files small{display:block;color:var(--muted)}
+#tc .tc-files button{border:0;background:transparent;color:var(--muted);font-size:16px}
+#tc .tc-msg{padding:10px 14px;border-radius:12px;margin-bottom:10px;background:var(--soft);font-weight:600}
+#tc .tc-msg.ok{border-left:4px solid #16a34a}#tc .tc-msg.err{border-left:4px solid #ef4444}#tc .tc-msg.info{border-left:4px solid var(--cyan)}
+#tc .tc-big{display:block;text-align:center;padding:14px;border-radius:14px;font-weight:800;color:#fff;text-decoration:none;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 8px 20px rgba(37,99,235,.35);margin-bottom:12px;transition:.2s}
+#tc .tc-big:hover{transform:translateY(-2px)}
+#tc .tc-res{display:flex;gap:12px;align-items:center;padding:10px;border-radius:14px;background:var(--panel);border:1px solid var(--line);margin-top:8px}
+#tc .tc-res>div{flex:1;min-width:0}#tc .tc-res b{display:block;overflow-wrap:anywhere}#tc .tc-res small{color:var(--muted)}
+#tc .tc-dl{padding:8px 14px;border-radius:10px;font-weight:700;text-decoration:none;background:var(--soft);color:var(--ink);border:1px solid var(--cyan)}
+#tc .tc-foot{text-align:center;margin:34px 0 14px;font:italic 600 30px/1.2 "Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;letter-spacing:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+@media(max-width:760px){#tc .tc-grid,#tc .tc-grid.g3{grid-template-columns:repeat(2,1fr)}#tc .tc-grid.g3 .tc-card:last-child{grid-column:1/-1}}
+@media(max-width:420px){#tc .tc-box{padding:13px}#tc .tc-res{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){#tc *{animation:none!important;transition:none!important}}
+@media print{#tc{display:none}}
+</style>
 </head>
 <body>
 <div class="bg3d" aria-hidden="true"><div class="wave w1"></div><div class="wave w2"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="shape s1"><div class="cube"><b></b><b></b><b></b><b></b><b></b><b></b></div></div><div class="shape s2"><div class="ring"></div></div><div class="shape s3"><div class="dia"></div></div><div class="shape s4"><div class="cube"><b></b><b></b><b></b><b></b><b></b><b></b></div></div><span class="ptc" style="left:32%;--d:20s;--dl:-3s"></span><span class="ptc" style="left:94%;--d:22s;--dl:-15s"></span><span class="ptc" style="left:21%;--d:17s;--dl:-2s"></span><span class="ptc" style="left:4%;--d:22s;--dl:-17s"></span><span class="ptc" style="left:39%;--d:28s;--dl:-24s"></span><span class="ptc" style="left:9%;--d:19s;--dl:-16s"></span><span class="ptc" style="left:70%;--d:21s;--dl:-8s"></span><span class="ptc" style="left:24%;--d:29s;--dl:-3s"></span><span class="ptc" style="left:35%;--d:19s;--dl:-0s"></span><span class="ptc" style="left:84%;--d:28s;--dl:-8s"></span><span class="ptc" style="left:36%;--d:19s;--dl:-5s"></span><span class="ptc" style="left:41%;--d:20s;--dl:-20s"></span><span class="ptc" style="left:95%;--d:29s;--dl:-11s"></span><span class="ptc" style="left:13%;--d:29s;--dl:-19s"></span><span class="ptc" style="left:45%;--d:26s;--dl:-12s"></span><span class="ptc" style="left:66%;--d:19s;--dl:-5s"></span></div>
@@ -304,6 +349,9 @@ body{background:transparent}
     <button data-page="studyplan"><span class="ico">📆</span>Study Planner</button>
     <button data-page="certificate"><span class="ico">🏆</span>Certificate Maker</button>
     <button data-page="passport"><span class="ico">🖼️</span>Passport Photo Maker</button>
+  </nav>
+  <div class="nav-label">Converter</div><nav class="nav">
+    <button data-page="converter"><span class="ico">🔄</span>Text &amp; File Converter</button>
   </nav>
   <div class="nav-label">Language Lab</div><nav class="nav">
     <button data-page="dictionary"><span class="ico">🌍</span>World Language Dictionary</button>
@@ -949,12 +997,13 @@ periodic:'<circle cx="12" cy="12" r="1.5"/><ellipse cx="12" cy="12" rx="10" ry="
 scigallery:"M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3M8 15h8",
 heart:"M12 21s-8-5-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 6-8 11-8 11z",
 digestive:"M7 3v8M5 3v5a2 2 0 004 0V3M7 11v10M17 3c-2 2-3 5-3 8h3v10M17 3v18",
+converter:"M4 4h16v6H4zM4 14h16v6H4zM12 10v4",
 dictionary:"M12 21a9 9 0 100-18 9 9 0 000 18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18",
 saved:"M6 3h12v18l-6-4-6 4z",
 settings:"M4 7h10M18 7h2M4 17h2M10 17h10M16 4v6M8 14v6",
 about:"M12 21a9 9 0 100-18 9 9 0 000 18zM12 11v6M12 7.5h.01",
 menu:"M4 6h16M4 12h16M4 18h16"};
-const SH={home:"Home",alltools:"Tools",school:"School",student:"Student",teacher:"Teacher",grades:"Marks",library:"Library",ai:"AI Study",cv:"CV",idcard:"ID Card",timetable:"Timetable",logo:"Logo",paper:"Exam Paper",quiz:"Quiz",studyplan:"Planner",certificate:"Certificate",passport:"Passport",periodic:"Periodic",scigallery:"Diagrams",heart:"Heart",digestive:"Digestive",dictionary:"Dictionary",saved:"Saved",settings:"Settings",about:"About"};
+const SH={home:"Home",alltools:"Tools",school:"School",student:"Student",teacher:"Teacher",grades:"Marks",library:"Library",ai:"AI Study",cv:"CV",idcard:"ID Card",timetable:"Timetable",logo:"Logo",paper:"Exam Paper",quiz:"Quiz",studyplan:"Planner",certificate:"Certificate",passport:"Passport",periodic:"Periodic",scigallery:"Diagrams",heart:"Heart",digestive:"Digestive",dictionary:"Dictionary",converter:"Converter",saved:"Saved",settings:"Settings",about:"About"};
 const svg=k=>{const v=IC[k]||IC.alltools;return `<svg viewBox="0 0 24 24" aria-hidden="true">${v[0]==="<"?v:`<path d="${v}"/>`}</svg>`};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
@@ -1135,6 +1184,114 @@ function init(){const w=$("#wd");if(!w)return;R=null;if(SS&&!V.length)lv();lists
 tools.push({id:"dictionary",name:"World Language Dictionary",icon:"🌍",cat:"Language",desc:"Meanings, translations in 20+ languages, IPA and spoken pronunciation for any word."});
 const sp=window.simplePage;window.simplePage=function(p){return p==="dictionary"?page():sp.apply(this,arguments)};
 const rd=window.render;window.render=function(p){rd.apply(this,arguments);if(p==="dictionary")init()};
+})();
+</script>
+<script id="tc-js">
+(()=>{
+/* ---- core builders (no libraries): ZIP, PDF, DOCX ---- */
+const CT=(()=>{const t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+const crc32=d=>{let c=0xFFFFFFFF;for(let i=0;i<d.length;i++)c=CT[(c^d[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0};
+function zip(files,type){const en=new TextEncoder(),ch=[],cd=[];let o=0;
+ files.forEach(f=>{const nm=en.encode(f.n),c=crc32(f.d),n=f.d.length,l=new Uint8Array(30+nm.length),v=new DataView(l.buffer);
+  v.setUint32(0,0x04034b50,true);v.setUint16(4,20,true);v.setUint16(6,0x0800,true);v.setUint16(12,0x21,true);v.setUint32(14,c,true);v.setUint32(18,n,true);v.setUint32(22,n,true);v.setUint16(26,nm.length,true);l.set(nm,30);
+  const g=new Uint8Array(46+nm.length),w=new DataView(g.buffer);
+  w.setUint32(0,0x02014b50,true);w.setUint16(4,20,true);w.setUint16(6,20,true);w.setUint16(8,0x0800,true);w.setUint16(14,0x21,true);w.setUint32(16,c,true);w.setUint32(20,n,true);w.setUint32(24,n,true);w.setUint16(28,nm.length,true);w.setUint32(42,o,true);g.set(nm,46);
+  ch.push(l,f.d);cd.push(g);o+=l.length+n});
+ const cs=cd.reduce((a,b)=>a+b.length,0),e=new Uint8Array(22),v=new DataView(e.buffer);
+ v.setUint32(0,0x06054b50,true);v.setUint16(8,files.length,true);v.setUint16(10,files.length,true);v.setUint32(12,cs,true);v.setUint32(16,o,true);
+ return new Blob([...ch,...cd,e],{type})}
+/* pages: [{d:JPEG bytes,w,h,pw,ph,x,y,dw,dh}] -> Blob */
+function pdf(pages){const en=new TextEncoder(),parts=[],off=[];let len=0;
+ const add=b=>{const u=typeof b==="string"?en.encode(b):b;parts.push(u);len+=u.length};
+ const obj=(n,b)=>{off[n]=len;add(`${n} 0 obj\n${b}\nendobj\n`)},N=2+3*pages.length;
+ add("%PDF-1.4\n");add(new Uint8Array([37,0xE2,0xE3,0xCF,0xD3,10]));
+ obj(1,"<</Type/Catalog/Pages 2 0 R>>");
+ obj(2,`<</Type/Pages/Count ${pages.length}/Kids[${pages.map((_,i)=>`${3+i*3} 0 R`).join(" ")}]>>`);
+ pages.forEach((p,i)=>{const b=3+i*3,c=`q ${p.dw.toFixed(2)} 0 0 ${p.dh.toFixed(2)} ${p.x.toFixed(2)} ${p.y.toFixed(2)} cm /I${i} Do Q`;
+  obj(b,`<</Type/Page/Parent 2 0 R/MediaBox[0 0 ${p.pw.toFixed(2)} ${p.ph.toFixed(2)}]/Resources<</XObject<</I${i} ${b+2} 0 R>>>>/Contents ${b+1} 0 R>>`);
+  obj(b+1,`<</Length ${c.length}>>\nstream\n${c}\nendstream`);
+  off[b+2]=len;add(`${b+2} 0 obj\n<</Type/XObject/Subtype/Image/Width ${p.w}/Height ${p.h}/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length ${p.d.length}>>\nstream\n`);add(p.d);add("\nendstream\nendobj\n")});
+ const x=len;let t=`xref\n0 ${N+1}\n0000000000 65535 f \n`;for(let i=1;i<=N;i++)t+=String(off[i]).padStart(10,"0")+" 00000 n \n";
+ add(t+`trailer\n<</Size ${N+1}/Root 1 0 R>>\nstartxref\n${x}\n%%EOF`);
+ return new Blob(parts,{type:"application/pdf"})}
+const xe=s=>s.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\uFFFE\uFFFF]/g,"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+/* paras: [{t,r}] -> docx Blob */
+function docx(paras,pt){const en=new TextEncoder(),sz=Math.round(pt*2),
+ body=paras.map(p=>p.t.trim()?`<w:p><w:pPr>${p.r?"<w:bidi/>":""}</w:pPr><w:r><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Arial"/>${p.r?"<w:rtl/>":""}<w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/></w:rPr><w:t xml:space="preserve">${xe(p.t)}</w:t></w:r></w:p>`:"<w:p/>").join(""),
+ H='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+ return zip([
+  {n:"[Content_Types].xml",d:en.encode(H+'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>')},
+  {n:"_rels/.rels",d:en.encode(H+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>')},
+  {n:"word/document.xml",d:en.encode(H+'<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+body+'<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>')}
+ ],"application/vnd.openxmlformats-officedocument.wordprocessingml.document")}
+/* ---- Text & File Converter: UI + conversions ---- */
+const $=(s,r=document)=>r.querySelector(s);
+const FONT='"Noto Naskh Arabic","Jameel Noori Nastaleeq","Segoe UI",Tahoma,"Arial Unicode MS",Arial,sans-serif';
+const W=1240,H=1754,MG=100,AB="\\u0600-\\u06FF\\u0750-\\u077F\\uFB50-\\uFDFF\\uFE70-\\uFEFF";
+const RX=new RegExp("[A-Za-z"+AB+"]"),AX=new RegExp("["+AB+"]");
+const isRtl=p=>{const m=p.match(RX);return !!m&&AX.test(m[0])};
+const h=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let files=[],OUT=[],busy=false;
+const LH=s=>Math.round(s*1.7),sz=()=>+$("#tcSize").value;
+const stamp=()=>new Date().toISOString().replace(/[-:T]/g,"").slice(0,14);
+const kb=n=>n>1048576?(n/1048576).toFixed(2)+" MB":Math.max(1,Math.round(n/1024))+" KB";
+const blob=(cv,t,q)=>new Promise((ok,no)=>cv.toBlob(b=>b?ok(b):no(Error("The browser could not create the image (it may be too large).")),t,q));
+const bytes=async b=>new Uint8Array(await b.arrayBuffer());
+function layout(text,s){const c=document.createElement("canvas").getContext("2d");c.font=`${s}px ${FONT}`;const mw=W-2*MG,L=[],fit=t=>c.measureText(t).width<=mw;
+ text.replace(/\r/g,"").replace(/\t/g,"    ").split("\n").forEach(par=>{const r=isRtl(par);if(!par.trim())return L.push({t:"",r:false});let cur="";
+  par.split(" ").forEach(w=>{let t=cur?cur+" "+w:w;if(fit(t)){cur=t;return}
+   if(cur){L.push({t:cur,r});cur=""}
+   if(fit(w)){cur=w;return}
+   for(const ch of w){const n=cur+ch;if(fit(n)||!cur)cur=n;else{L.push({t:cur,r});cur=ch}}});
+  L.push({t:cur,r})});return L}
+function paint(lines,hh,s){const cv=document.createElement("canvas");cv.width=W;cv.height=hh;const c=cv.getContext("2d");c.fillStyle="#fff";c.fillRect(0,0,W,hh);c.fillStyle="#111827";c.font=`${s}px ${FONT}`;
+ lines.forEach((l,i)=>{if(!l.t)return;c.direction=l.r?"rtl":"ltr";c.textAlign=l.r?"right":"left";c.fillText(l.t,l.r?W-MG:MG,MG+s+i*LH(s))});return cv}
+const getText=()=>{const t=$("#tcText").value;if(!t.trim())throw Error("Please type or paste some text first.");return t};
+const textImage=async(type,ext)=>{const s=sz(),L=layout(getText(),s),hh=2*MG+Math.max(L.length,3)*LH(s);
+ if(hh>15000)throw Error("This text is too long for a single image. Use Text → PDF instead, or shorten the text.");
+ return [{b:await blob(paint(L,hh,s),type,.93),n:`mohsin-text-${stamp()}.${ext}`,f:ext.toUpperCase()}]};
+const textPdf=async()=>{const s=sz(),L=layout(getText(),s),per=Math.max(1,Math.floor((H-2*MG)/LH(s))),pg=[];
+ for(let i=0;i<L.length;i+=per){const b=await blob(paint(L.slice(i,i+per),H,s),"image/jpeg",.93);pg.push({d:await bytes(b),w:W,h:H,pw:595.28,ph:841.89,x:0,y:0,dw:595.28,dh:841.89})}
+ return [{b:pdf(pg),n:`mohsin-text-${stamp()}.pdf`,f:"PDF"}]};
+const textDoc=async()=>{const t=getText();return [{b:docx(t.replace(/\r/g,"").split("\n").map(p=>({t:p,r:isRtl(p)})),sz()*.375),n:`mohsin-text-${stamp()}.docx`,f:"DOCX"}]};
+const load=f=>new Promise((ok,no)=>{const u=URL.createObjectURL(f),i=new Image();i.onload=()=>{URL.revokeObjectURL(u);ok({i,w:i.naturalWidth,h:i.naturalHeight})};i.onerror=()=>{URL.revokeObjectURL(u);no(Error(`“${f.name}” could not be read. It may be damaged or in a format this browser can't open.`))};i.src=u});
+const need=()=>{if(!files.length)throw Error("Please upload at least one image (JPG or PNG) first.")};
+const base=f=>f.name.replace(/\.[^.]+$/,"")||"image";
+const toCv=(im,w,hh)=>{const cv=document.createElement("canvas");cv.width=w;cv.height=hh;const c=cv.getContext("2d");c.fillStyle="#fff";c.fillRect(0,0,w,hh);c.drawImage(im.i,0,0,w,hh);return cv};
+const imgConv=async(type,ext)=>{need();const o=[];for(const f of files){const im=await load(f);o.push({b:await blob(toCv(im,im.w,im.h),type,.95),n:`${base(f)}.${ext}`,f:ext.toUpperCase()})}return o};
+const imgPdf=async()=>{need();const pg=[];for(const f of files){const im=await load(f),k=Math.min(1,3500/Math.max(im.w,im.h)),w=Math.round(im.w*k),hh=Math.round(im.h*k),d=await bytes(await blob(toCv(im,w,hh),"image/jpeg",.92)),la=w>hh,pw=la?841.89:595.28,ph=la?595.28:841.89,m=24,s=Math.min((pw-2*m)/w,(ph-2*m)/hh);
+  pg.push({d,w,h:hh,pw,ph,dw:w*s,dh:hh*s,x:(pw-w*s)/2,y:(ph-hh*s)/2})}
+ return [{b:pdf(pg),n:files.length>1?`mohsin-images-${stamp()}.pdf`:`${base(files[0])}.pdf`,f:"PDF"}]};
+const JOBS={tpdf:textPdf,tdoc:textDoc,tjpg:()=>textImage("image/jpeg","jpg"),tpng:()=>textImage("image/png","png"),ipdf:imgPdf,ijpg:()=>imgConv("image/jpeg","jpg"),ipng:()=>imgConv("image/png","png")};
+function msg(t,k){const e=$("#tcMsg");e.className="tc-msg "+(k||"");e.textContent=t;e.hidden=!t}
+function results(){const el=$("#tcOut");el.innerHTML=OUT.length?`<a class="tc-big" href="${OUT[0].u}" download="${h(OUT[0].n)}">⬇ Download File</a>`+OUT.map(o=>`<div class="tc-res"><span class="tc-ic s">${o.f}</span><div><b>${h(o.n)}</b><small>${o.f} • ${kb(o.b.size)}</small></div><a class="tc-dl" href="${o.u}" download="${h(o.n)}">Download</a></div>`).join(""):`<p class="tc-hint">Converted files will appear here.</p>`}
+async function run(k){if(busy)return;busy=true;document.querySelectorAll("#tc [data-k]").forEach(b=>b.disabled=true);msg("Converting…","info");
+ try{const r=await JOBS[k]();OUT.forEach(o=>URL.revokeObjectURL(o.u));OUT=r.map(o=>({...o,u:URL.createObjectURL(o.b)}));results();msg(`Done! ${OUT.length} file${OUT.length>1?"s":""} ready to download.`,"ok");$("#tcOut").scrollIntoView({behavior:"smooth",block:"nearest"})}
+ catch(e){msg("Conversion failed: "+(e.message||"unknown error"),"err")}
+ finally{busy=false;document.querySelectorAll("#tc [data-k]").forEach(b=>b.disabled=false)}}
+function thumbs(){$("#tcFiles").innerHTML=files.map((f,i)=>`<li><img src="${f.u}" alt=""><span>${h(f.name)}<small>${kb(f.size)}</small></span><button type="button" data-rm="${i}" aria-label="Remove ${h(f.name)}">✕</button></li>`).join("")}
+function addFiles(list){const ok=[...list].filter(f=>/^image\//.test(f.type));if(ok.length<list.length)msg("Some files were skipped because they are not images. Please upload JPG or PNG images.","err");else msg("");
+ ok.forEach(f=>{f.u=URL.createObjectURL(f);files.push(f)});thumbs()}
+function count(){const t=$("#tcText").value;$("#tcCount").textContent=`${t.length} characters • ${(t.trim().match(/\S+/g)||[]).length} words`}
+const card=(k,i,a,b)=>`<button type="button" class="tc-card" data-k="${k}"><span class="tc-ic">${i}</span><b>${a}</b><small>${b}</small></button>`;
+const page=()=>`<div id="tc"><section class="tc-hero"><h1>Text &amp; File Converter</h1><p>Text to PDF, Word, JPG and PNG • JPG/PNG to PDF • Image format converter — all done privately in your browser</p></section>
+<section class="tc-box"><h3>✍️ Text Editor <small>English • اردو • پښتو</small></h3><textarea id="tcText" dir="auto" placeholder="Type or paste text here… یہاں متن لکھیں… دلته متن ولیکئ…" aria-label="Text to convert"></textarea>
+<div class="tc-bar"><span id="tcCount" class="tc-hint"></span><label>Text size <select id="tcSize"><option value="26">Small</option><option value="32" selected>Medium</option><option value="40">Large</option></select></label><button type="button" class="tc-btn s" data-a="copy">⧉ Copy Text</button><button type="button" class="tc-btn s" data-a="clear">🗑 Clear Text</button></div>
+<div class="tc-grid">${card("tpdf","📕","Text → PDF","Download .pdf")}${card("tdoc","📘","Text → Word","Download .docx")}${card("tjpg","🖼️","Text → JPG","Download .jpg")}${card("tpng","🌄","Text → PNG","Download .png")}</div></section>
+<section class="tc-box"><h3>📁 Images <small>JPG, PNG (also WebP, GIF, BMP)</small></h3><label class="tc-drop" id="tcDrop"><input id="tcFile" type="file" accept="image/*" multiple hidden><span class="tc-ic">⬆</span><b>Upload images</b><small>Click to choose or drop files here</small></label><ul id="tcFiles" class="tc-files"></ul>
+<div class="tc-grid g3">${card("ipdf","📑","JPG / PNG → PDF","All images in one PDF")}${card("ijpg","🟦","Image → JPG","One .jpg per image")}${card("ipng","🟪","Image → PNG","One .png per image")}</div></section>
+<section class="tc-box"><h3>✅ Converted File</h3><div id="tcMsg" class="tc-msg" role="status" aria-live="polite" hidden></div><div id="tcOut"></div></section>
+<footer class="tc-foot">Mohsin Khan</footer></div>`;
+function init(){if(!$("#tc"))return;OUT.forEach(o=>URL.revokeObjectURL(o.u));OUT=[];files.forEach(f=>URL.revokeObjectURL(f.u));files=[];results();count();
+ $("#tcText").oninput=count;$("#tcFile").onchange=e=>{addFiles(e.target.files);e.target.value=""};
+ const d=$("#tcDrop");d.ondragover=e=>{e.preventDefault();d.classList.add("on")};d.ondragleave=()=>d.classList.remove("on");d.ondrop=e=>{e.preventDefault();d.classList.remove("on");addFiles(e.dataTransfer.files)};
+ $("#tc").onclick=async e=>{const rm=e.target.closest("[data-rm]");if(rm){const f=files.splice(+rm.dataset.rm,1)[0];URL.revokeObjectURL(f.u);thumbs();return}
+  const b=e.target.closest("[data-k],[data-a]");if(!b)return;if(b.dataset.k)return run(b.dataset.k);
+  if(b.dataset.a==="clear"){$("#tcText").value="";count();msg("Text cleared.","info")}
+  else{const t=$("#tcText");if(!t.value)return msg("There is no text to copy.","err");try{await navigator.clipboard.writeText(t.value)}catch{t.select();if(!document.execCommand("copy"))return msg("Copy is not allowed by this browser.","err")}msg("Text copied to clipboard.","ok")}}}
+tools.push({id:"converter",name:"Text & File Converter",icon:"🔄",cat:"Converter",desc:"Convert text to PDF, Word, JPG, PNG and images to PDF, JPG, PNG in your browser."});
+const sp=window.simplePage;window.simplePage=function(p){return p==="converter"?page():sp.apply(this,arguments)};
+const rd=window.render;window.render=function(p){rd.apply(this,arguments);if(p==="converter")init()};
 })();
 </script>
 </body></html>
