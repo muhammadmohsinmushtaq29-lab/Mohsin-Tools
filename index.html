@@ -1540,8 +1540,8 @@ const say=(t,e)=>{const m=$("#abMsg");if(m){m.textContent=t;m.className="ab-msg"
 /* --- Admin gate: only the admin can change the About photo --- */
 const ADM_SALT="GBTOWRavDDfrI5Iged4ENQ==",ADM_HASH="UTq1pRhEIleagQ8qsCbjzkpMFSuQPF+dcy8086EPwNw=",AK="mt_admin";
 const isAdm=()=>{try{return sessionStorage.getItem(AK)==="1"}catch{return false}};
-const btns=()=>isAdm()?'<button type="button" class="ab-mini" data-ab="pick">📷 Change photo</button><button type="button" class="ab-mini" data-ab="reset">↺ Default photo</button><button type="button" class="ab-mini" data-ab="pw">🔑 Admin password</button><button type="button" class="ab-mini" data-ab="logout">Admin logout</button><input id="abIn" type="file" accept="image/jpeg,image/png" hidden>':'<button type="button" class="ab-mini" data-ab="login">🔒 Admin login</button>';
-const refresh=()=>{const x=$("#abBtns");if(x)x.innerHTML=btns()};
+const btns=()=>isAdm()?'<button type="button" class="ab-mini" data-ab="pick">📷 Change photo</button><button type="button" class="ab-mini" data-ab="reset">↺ Default photo</button><button type="button" class="ab-mini" data-adm="open">⚙ Admin panel</button><button type="button" class="ab-mini" data-ab="pw">🔑 Admin password</button><button type="button" class="ab-mini" data-ab="logout">Admin logout</button><input id="abIn" type="file" accept="image/jpeg,image/png" hidden>':'<button type="button" class="ab-mini" data-ab="login">🔒 Admin login</button>';
+const refresh=()=>{const x=$("#abBtns");if(x)x.innerHTML=btns();window.mtAdminSync&&window.mtAdminSync()};
 const b64=b=>btoa(String.fromCharCode(...new Uint8Array(b))),unb=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function pbk(pw,salt){const k=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveBits"]);return b64(await crypto.subtle.deriveBits({name:"PBKDF2",hash:"SHA-256",salt,iterations:150000},k,256))}
 let admFails=0,admLock=0;
@@ -1566,12 +1566,12 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-ab]");if(!
  if(!isAdm()){refresh();return say(NOADM,1)}
  if(a==="pw")return admOpen("pw");
  if(a==="pick")$("#abIn").click();
- else if(a==="reset"){try{localStorage.removeItem(KEY)}catch{}$("#abImg").src=ABOUT_ME.photo;say("Default photo restored.")}});
+ else if(a==="reset"){try{localStorage.removeItem(KEY)}catch{}window.mtCfgSet&&window.mtCfgSet({aboutPhoto:""});$("#abImg").src=ABOUT_ME.photo;say("Default photo restored.")}});
 document.addEventListener("change",e=>{if(e.target.id!=="abIn")return;const f=e.target.files[0];e.target.value="";if(!f)return;if(!isAdm()){refresh();return say(NOADM,1)}
  if(!/^image\/(jpeg|png)$/.test(f.type))return say("Please choose a JPG or PNG photo.",1);if(f.size>12e6)return say("The photo must be under 12 MB.",1);
  const u=URL.createObjectURL(f),i=new Image();i.onerror=()=>{URL.revokeObjectURL(u);say("That photo could not be read.",1)};
- i.onload=()=>{const s=Math.min(i.naturalWidth,i.naturalHeight),c=document.createElement("canvas");c.width=c.height=480;c.getContext("2d").drawImage(i,(i.naturalWidth-s)/2,(i.naturalHeight-s)/2,s,s,0,0,480,480);URL.revokeObjectURL(u);const d=c.toDataURL("image/jpeg",.88);$("#abImg").src=d;
-  try{localStorage.setItem(KEY,d);say("Photo updated. It is saved in this browser only; to show it to all visitors it must be embedded in index.html.")}catch{say("Photo changed, but this browser could not save it.",1)}};i.src=u});
+ i.onload=()=>{const s=Math.min(i.naturalWidth,i.naturalHeight),c=document.createElement("canvas");c.width=c.height=480;c.getContext("2d").drawImage(i,(i.naturalWidth-s)/2,(i.naturalHeight-s)/2,s,s,0,0,480,480);URL.revokeObjectURL(u);const d=c.toDataURL("image/jpeg",.88);$("#abImg").src=d;window.mtCfgSet&&window.mtCfgSet({aboutPhoto:d});
+  try{localStorage.setItem(KEY,d);say("Photo updated here. To show it to all visitors: Admin panel > Download updated website file, then upload that file to your site.")}catch{say("Photo changed, but this browser could not save it.",1)}};i.src=u});
 const tilt=(e,on)=>{const c=e.target.closest&&e.target.closest("#abCard");if(!c||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
  if(!on){c.style.removeProperty("--rx");c.style.removeProperty("--ry");return}const r=c.getBoundingClientRect();c.style.setProperty("--ry",((e.clientX-r.left)/r.width-.5)*14+"deg");c.style.setProperty("--rx",(.5-(e.clientY-r.top)/r.height)*14+"deg")};
 document.addEventListener("pointermove",e=>tilt(e,1));document.addEventListener("pointerout",e=>tilt(e,0));
@@ -1833,6 +1833,73 @@ function init(){const r=$("#dm");if(!r)return;F={q:"",cls:"",sort:"roll",dir:1,g
 tools.push({id:"dmc",name:"DMC Generator",icon:"📄",cat:"Academic",desc:"Detailed Marks Certificates for a whole class: add or import students, preview, and download all DMCs in one PDF."});
 const sp=window.simplePage;window.simplePage=function(p){return p==="dmc"?page():sp.apply(this,arguments)};
 const rd=window.render;window.render=function(p){rd.apply(this,arguments);if(p==="dmc")init()};
+})();
+</script>
+<script type="application/json" id="mtSiteCfg">{}</script>
+<script id="admin-edit-js">
+/* ===== Admin editor: logo, About photo and site text (admin only) ===== */
+(()=>{
+const $=(s,r=document)=>r.querySelector(s),KEY="mt_site_cfg",AK="mt_admin",AB="mt_about_photo";
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const isAdm=()=>{try{return sessionStorage.getItem(AK)==="1"}catch{return false}};
+const readL=()=>{try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch{return{}}};
+let emb={};try{emb=JSON.parse(($("#mtSiteCfg")||{}).textContent||"{}")||{}}catch{}
+const FIELDS=["logo","siteName","heroTitle","heroText","footer","aboutName","aboutRole","aboutBio","aboutPhoto"];
+const eff=()=>{const l=readL(),o={};FIELDS.forEach(k=>{const v=k in l?l[k]:emb[k];if(typeof v==="string"&&v)o[k]=v});return o};
+const ORIG={name:ABOUT_ME.name,role:ABOUT_ME.role,bio:ABOUT_ME.bio,photo:ABOUT_ME.photo,title:document.title,footer:($(".footer")||{}).textContent,brand:($(".brand b")||{}).textContent,brandImg:($(".brandmark img")||{}).src,icons:[...document.querySelectorAll('link[rel="icon"],link[rel="apple-touch-icon"]')].map(l=>[l,l.href])};
+function applyAbout(){const c=eff();ABOUT_ME.name=c.aboutName||ORIG.name;ABOUT_ME.role=c.aboutRole||ORIG.role;ABOUT_ME.bio=c.aboutBio||ORIG.bio;ABOUT_ME.photo=c.aboutPhoto||ORIG.photo}
+function applyDom(){const c=eff();
+ const hl=$(".hl-frame img");if(hl)hl.src=c.logo||HERO_LOGO;const bm=$(".brandmark img");if(bm)bm.src=c.logo||ORIG.brandImg;
+ ORIG.icons.forEach(p=>{p[0].href=c.logo||p[1]});
+ document.title=c.siteName&&ORIG.title.startsWith("Mohsin Tools")?c.siteName+ORIG.title.slice(12):ORIG.title;
+ const bb=$(".brand b");if(bb)bb.textContent=c.siteName||ORIG.brand;const ft=$(".footer");if(ft)ft.textContent=c.footer||ORIG.footer;
+ const h1=$(".hero h1");if(h1&&c.heroTitle)h1.innerHTML=esc(c.heroTitle).replace(/\n/g,"<br>");const hp=$(".hero > p");if(hp&&c.heroText)hp.textContent=c.heroText}
+const rd=window.render;window.render=function(){applyAbout();const r=rd.apply(this,arguments);applyDom();return r};
+window.mtCfgSet=o=>{if(!isAdm())return false;const l=readL();Object.assign(l,o);try{localStorage.setItem(KEY,JSON.stringify(l))}catch{return false}applyAbout();return true};
+window.mtAdminSync=()=>{let b=$("#adminChip");if(isAdm()){if(!b){b=document.createElement("button");b.id="adminChip";b.className="btn";b.type="button";b.textContent="⚙ Admin panel";const a=$("#authArea");if(a&&a.parentNode)a.parentNode.insertBefore(b,a)}}else{if(b)b.remove();close()}};
+/* ---- panel ---- */
+let draft={};
+const close=()=>{const m=$("#admPanel");if(m)m.remove();document.removeEventListener("keydown",esk)};
+function esk(e){if(e.key==="Escape")close()}
+const say=(t,bad)=>{const m=$("#admMsg");if(m){m.textContent=t;m.style.color=bad?"#c53b4c":"";m.style.fontWeight="600"}};
+function img(file,mode){return new Promise((ok,no)=>{if(!/^image\/(jpeg|png|webp)$/.test(file.type))return no(Error("Please choose a JPG, PNG or WebP image."));if(file.size>12e6)return no(Error("The image must be under 12 MB."));
+ const u=URL.createObjectURL(file),i=new Image();i.onerror=()=>{URL.revokeObjectURL(u);no(Error("That image could not be read."))};
+ i.onload=()=>{const c=document.createElement("canvas");let d;if(mode==="logo"){const k=Math.min(1,512/Math.max(i.naturalWidth,i.naturalHeight));c.width=Math.round(i.naturalWidth*k);c.height=Math.round(i.naturalHeight*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);d=c.toDataURL("image/png");if(d.length>900000)d=c.toDataURL("image/jpeg",.9)}
+  else{const s=Math.min(i.naturalWidth,i.naturalHeight);c.width=c.height=480;c.getContext("2d").drawImage(i,(i.naturalWidth-s)/2,(i.naturalHeight-s)/2,s,s,0,0,480,480);d=c.toDataURL("image/jpeg",.88)}
+  URL.revokeObjectURL(u);ok(d)};i.src=u})}
+const TXT=[["siteName","Website name","admSiteName","input"],["heroTitle","Home page title (Enter = new line)","admHeroTitle","textarea",2],["heroText","Home page description","admHeroText","textarea",3],["footer","Footer text","admFooter","input"],["aboutName","About page: name","admAboutName","input"],["aboutRole","About page: role","admAboutRole","input"],["aboutBio","About page: biography (blank line = new paragraph)","admAboutBio","textarea",7]];
+const DEF={siteName:ORIG.brand,heroTitle:"Learn Smarter.\nCreate Faster.",heroText:"",footer:ORIG.footer,aboutName:ORIG.name,aboutRole:ORIG.role,aboutBio:ORIG.bio};
+function open(){if(!isAdm())return;close();draft=eff();
+ const b=document.createElement("div");b.className="pc-back";b.id="admPanel";b.setAttribute("role","dialog");b.setAttribute("aria-modal","true");b.setAttribute("aria-label","Admin panel");
+ const pv=(id,src)=>`<img id="${id}" alt="" style="width:64px;height:64px;object-fit:contain;border-radius:12px;background:#e8edf5;flex:none">`;
+ b.innerHTML=`<div class="pc-box" style="max-width:660px"><h2 style="margin:0 0 4px">⚙ Admin panel</h2><p class="au-note" style="margin:0 0 14px">Edit the logo, pictures and text. Click <b>Save</b> to see it on your site now. Click <b>Download updated website file</b> to publish it for everyone.</p>
+ <div class="field"><label>Website logo (home page, side menu and browser tab icon)</label><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">${pv("admLogoPv")}<button type="button" class="btn" data-adm="logo">🖼 Upload logo</button><button type="button" class="btn" data-adm="nologo">Use original logo</button><input id="admLogoIn" type="file" accept="image/jpeg,image/png,image/webp" hidden></div></div>
+ <div class="field" style="margin-top:12px"><label>About page picture</label><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">${pv("admPhotoPv")}<button type="button" class="btn" data-adm="photo">📷 Upload picture</button><button type="button" class="btn" data-adm="nophoto">Use original picture</button><input id="admPhotoIn" type="file" accept="image/jpeg,image/png,image/webp" hidden></div></div>
+ ${TXT.map(t=>`<div class="field" style="margin-top:12px"><label for="${t[2]}">${t[1]}</label>${t[3]==="input"?`<input id="${t[2]}" maxlength="200">`:`<textarea id="${t[2]}" rows="${t[4]}" maxlength="4000"></textarea>`}</div>`).join("")}
+ <p class="au-note">Leave a text box empty to use the original text.</p><p id="admMsg" role="status" aria-live="polite" style="min-height:20px;margin:8px 0"></p><div id="admOut"></div>
+ <div class="actions" style="flex-wrap:wrap"><button type="button" class="btn primary" data-adm="save">💾 Save</button><button type="button" class="btn primary" data-adm="export">⬇ Download updated website file</button><button type="button" class="btn" data-adm="copy">Copy settings code</button><button type="button" class="btn danger" data-adm="reset">Reset my edits</button><button type="button" class="btn" data-adm="close">Close</button></div></div>`;
+ document.body.append(b);document.addEventListener("keydown",esk);b.addEventListener("mousedown",e=>{if(e.target===b)close()});fill()}
+function fill(){$("#admLogoPv").src=draft.logo||ORIG.brandImg;$("#admPhotoPv").src=draft.aboutPhoto||ORIG.photo;TXT.forEach(t=>{const el=$("#"+t[2]);el.value=draft[t[0]]||"";el.placeholder=(DEF[t[0]]||"Original text").slice(0,90)})}
+function collect(){const o={logo:draft.logo||"",aboutPhoto:draft.aboutPhoto||""};TXT.forEach(t=>{o[t[0]]=$("#"+t[2]).value.trim()});return o}
+function save(){if(!isAdm()){say("Please log in as admin first.",1);return false}const o=collect();if(!window.mtCfgSet(o)){say("This browser could not save the changes (storage may be full). Try a smaller image.",1);return false}
+ try{if(o.aboutPhoto)localStorage.setItem(AB,o.aboutPhoto);else localStorage.removeItem(AB)}catch{}
+ const pg=window.currentPage||"home";window.render(pg);return true}
+async function exportHtml(){if(!save())return;
+ if(!/^https?:$/.test(location.protocol))return say("This page was opened from a file on your computer, so the browser cannot read its own code. Open your website from its web address (for example GitHub Pages) and try again, or use \"Copy settings code\" and send the code to Claude.",1);
+ let src;try{const r=await fetch(location.href.split("#")[0],{cache:"no-store"});if(!r.ok)throw Error();src=await r.text()}catch{return say("The website file could not be read. Check your internet connection and try again.",1)}
+ const re=/(<script type="application\/json" id="mtSiteCfg">)[\s\S]*?(<\/script>)/;if(!re.test(src))return say("This page does not contain the settings block. Make sure you are using the latest index.html.",1);
+ const json=JSON.stringify(eff()).replace(/</g,"\\u003c"),out=src.replace(re,(m,a,z)=>a+json+z),blob=new Blob([out],{type:"text/html"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="index.html";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),6e4);
+ say("Downloaded index.html with your edits. Upload it to your website (replace the old index.html) to show the changes to everyone.")}
+function copy(){if(!save())return;const j=JSON.stringify(eff());$("#admOut").innerHTML='<textarea readonly rows="4" id="admCode" style="width:100%;font:12px monospace"></textarea>';const t=$("#admCode");t.value=j;t.select();try{navigator.clipboard.writeText(j).then(()=>say("Settings code copied."),()=>say("Select the code above and copy it."))}catch{say("Select the code above and copy it.")}}
+document.addEventListener("click",async e=>{const x=e.target.closest("#adminChip,[data-adm]");if(!x)return;if(x.id==="adminChip"||x.dataset.adm==="open")return open();const a=x.dataset.adm;
+ if(a==="close")close();else if(a==="logo")$("#admLogoIn").click();else if(a==="photo")$("#admPhotoIn").click();
+ else if(a==="nologo"){draft.logo="";fill()}else if(a==="nophoto"){draft.aboutPhoto="";fill()}
+ else if(a==="save"){if(save())say("Saved. Your site now shows these changes in this browser.")}
+ else if(a==="export")exportHtml();else if(a==="copy")copy();
+ else if(a==="reset"){if(!confirm("Remove all admin edits made in this browser and go back to the published version?"))return;try{localStorage.removeItem(KEY);localStorage.removeItem(AB)}catch{}applyAbout();window.render(window.currentPage||"home");open();say("Edits reset.")}});
+document.addEventListener("change",async e=>{const id=e.target.id;if(id!=="admLogoIn"&&id!=="admPhotoIn")return;const f=e.target.files[0];e.target.value="";if(!f)return;if(!isAdm())return say("Please log in as admin first.",1);
+ try{const d=await img(f,id==="admLogoIn"?"logo":"photo");if(id==="admLogoIn")draft.logo=d;else draft.aboutPhoto=d;fill();say("Image ready. Click Save to apply it.")}catch(er){say(er.message,1)}});
+applyAbout();applyDom();window.mtAdminSync();if(Object.keys(eff()).length)window.render(window.currentPage||"home");
 })();
 </script>
 </body></html>
