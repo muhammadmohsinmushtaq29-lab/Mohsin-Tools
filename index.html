@@ -508,6 +508,10 @@ body{background:transparent}
     <button data-page="digestive"><span class="ico">🍽️</span>Digestive System</button>
     <button data-page="electrons"><span class="ico">⚛️</span>Electron Shells Explorer</button>
   </nav>
+  <div class="nav-label">Physics Lab</div><nav class="nav">
+    <button data-page="physics"><span class="ico">⚛</span>Physics Laws Library</button>
+    <button data-page="physlab"><span class="ico">🧪</span>Live Physics Lab</button>
+  </nav>
   <div class="nav-label">Space Lab</div><nav class="nav">
     <button data-page="solar"><span class="ico">🪐</span>Live 3D Solar System</button>
   </nav>
@@ -2792,6 +2796,162 @@ window.mtAuthReady=Promise.resolve().then(sbInit).catch(()=>{});
 window.mtLogin3D={open:openStage,close:closeStage,get engine(){return eng}};
 
 })();
+</script>
+<script id="physics-js">
+(()=>{"use strict";
+const $=(s,r=document)=>r.querySelector(s),LT="\u0026lt;",AM="\u0026amp;",QT="\u0026quot;";
+const H=s=>String(s==null?"":s).replace(/&/g,AM).replace(/</g,LT).replace(/>/g,"\u0026gt;").replace(/"/g,QT);
+const ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
+const isAdm=()=>{try{return sessionStorage.getItem("mt_admin")==="1"}catch{return false}};
+const G=6.674e-11,K=8.988e9,R=8.314,C=299792458,PH=6.62607015e-34,D=Math.PI/180,g9=9.81;
+const L=(id,c,n,u,l,s,f,y,e,m,k,sim)=>({id,c,n,u,l,s,f,y,e,m,k,sim});
+const BASE=[
+L("n1","Mechanics","Newton's First Law","نیوٹن کا پہلا قانون","Beginner","An object stays at rest or keeps moving at constant velocity unless a net external force acts on it.","ΣF = 0  ⇒  v = constant","ΣF net force (N); v velocity (m/s)","Passengers lurch forward when a bus brakes suddenly.","Thinking a force is needed to keep an object moving."),
+L("n2","Mechanics","Newton's Second Law","نیوٹن کا دوسرا قانون","Beginner","The net force on an object equals its mass times its acceleration, in the direction of the net force.","F = m a","F net force (N); m mass (kg); a acceleration (m/s²)","Pushing an empty trolley accelerates it more than a full one.","Using a single force instead of the net force.","newton2"),
+L("n3","Mechanics","Newton's Third Law","نیوٹن کا تیسرا قانون","Beginner","When A exerts a force on B, B exerts an equal-magnitude, opposite-direction force on A. The two forces act on different objects.","F(A on B) = − F(B on A)","F forces (N)","A rocket pushes gas down; the gas pushes the rocket up.","Believing the pair cancels. They act on different bodies, so they never cancel each other.","","newton3"),
+L("grav","Mechanics","Law of Universal Gravitation","عالمگیر کششِ ثقل کا قانون","Intermediate","Every two masses attract with a force proportional to the product of the masses and inversely proportional to the square of their separation.","F = G m₁ m₂ / r²","G = 6.674×10⁻¹¹ N·m²/kg²; m masses (kg); r centre-to-centre distance (m)","The Moon stays in orbit around Earth.","Using surface-to-surface distance instead of centre-to-centre.","grav"),
+L("kep3","Mechanics","Kepler's Third Law","","Advanced","The square of a planet's orbital period is proportional to the cube of its orbit's semi-major axis.","T² = (4π² / GM) a³","T period (s); a semi-major axis (m); M central mass (kg)","Predicting satellite orbit times.","Mixing units of years and metres."),
+L("hooke","Mechanics","Hooke's Law","ہُک کا قانون","Beginner","Within the elastic limit, a spring's restoring force is proportional to its extension.","F = − k x","F force (N); k spring constant (N/m); x extension (m)","Spring balances and car suspensions.","Applying it beyond the elastic limit.","hooke","spring"),
+L("mom","Mechanics","Conservation of Momentum","مومینٹم کی بقا","Intermediate","In a closed system with no net external force, total momentum stays constant.","m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂","m mass (kg); u, v velocities before and after (m/s)","Recoil of a gun; colliding trolleys.","Forgetting that velocity has direction (signs).","","newton3"),
+L("ce","Mechanics","Conservation of Mechanical Energy","میکانکی توانائی کی بقا","Intermediate","If only conservative forces do work, kinetic plus potential energy stays constant.","KE + PE = constant","KE ½mv² (J); PE mgh (J)","A pendulum or roller coaster without friction.","Ignoring friction losses in real situations.","ke","pend"),
+L("we","Mechanics","Work-Energy Theorem","کام اور توانائی کا مسئلہ","Intermediate","The net work done on an object equals its change in kinetic energy.","W = ½mv² − ½mu²","W work (J); m (kg); u, v speeds (m/s)","Braking distance grows with the square of speed.","Using velocity instead of speed squared."),
+L("arch","Mechanics","Archimedes' Principle","ارشمیدس کا اصول","Beginner","The upward buoyant force on a body in a fluid equals the weight of the fluid it displaces.","F_b = ρ V g","ρ fluid density (kg/m³); V displaced volume (m³); g = 9.81 m/s²","Ships float because they displace a lot of water.","Using the object's density instead of the fluid's.","arch"),
+L("pasc","Mechanics","Pascal's Law","پاسکل کا قانون","Beginner","Pressure applied to an enclosed fluid is transmitted undiminished throughout the fluid.","F₁ / A₁ = F₂ / A₂","F force (N); A area (m²)","Hydraulic jacks and brakes.","Thinking the work output is multiplied. Only force is."),
+L("boyle","Heat","Boyle's Law","بوائل کا قانون","Beginner","At constant temperature, the pressure of a fixed mass of gas is inversely proportional to its volume.","P₁V₁ = P₂V₂","P pressure (Pa); V volume (m³)","Squeezing a sealed syringe.","Letting temperature change.","boyle"),
+L("charles","Heat","Charles's Law","چارلس کا قانون","Beginner","At constant pressure, the volume of a fixed mass of gas is proportional to its absolute temperature.","V₁/T₁ = V₂/T₂","V volume; T temperature in kelvin (K)","A balloon shrinks in cold air.","Using °C instead of kelvin."),
+L("ideal","Heat","Ideal Gas Law","مثالی گیس کا قانون","Intermediate","Pressure, volume, amount and temperature of an ideal gas are related by one equation.","P V = n R T","P (Pa); V (m³); n (mol); R = 8.314 J/(mol·K); T (K)","Estimating tyre pressure changes.","Using °C, or litres without converting to m³.","ideal"),
+L("ohm","Electricity","Ohm's Law","اوہم کا قانون","Beginner","For an ohmic conductor at constant temperature, current is proportional to the voltage across it.","V = I R","V voltage (V); I current (A); R resistance (Ω)","Choosing a resistor for an LED.","Applying it to non-ohmic parts such as diodes.","ohm"),
+L("coul","Electricity","Coulomb's Law","کولمب کا قانون","Intermediate","The force between two point charges is proportional to the product of the charges and inversely proportional to the square of their distance.","F = k q₁ q₂ / r²","k = 8.988×10⁹ N·m²/C²; q charge (C); r (m)","Static cling and lightning physics.","Forgetting that like charges repel.","coul"),
+L("fara","Electricity","Faraday's Law of Induction","فیراڈے کا قانون","Advanced","The induced emf equals the negative rate of change of magnetic flux through a coil.","ε = − N dΦ/dt","ε emf (V); N turns; Φ flux (Wb)","Generators and transformers.","Ignoring the sign (Lenz's law gives the direction)."),
+L("joule","Electricity","Joule's Law of Heating","جول کا قانون","Intermediate","Heat produced by a current is proportional to the square of the current, the resistance and the time.","H = I² R t","H heat (J); I (A); R (Ω); t (s)","Electric heaters and kettles.","Forgetting the square on I.","joule"),
+L("snell","Waves and Optics","Snell's Law","سنیل کا قانون","Intermediate","When light passes between media, the product of refractive index and sine of the angle to the normal is constant.","n₁ sin θ₁ = n₂ sin θ₂","n refractive index; θ angle from the normal","A straw looks bent in water.","Measuring angles from the surface, not the normal.","snell"),
+L("wave","Waves and Optics","Wave Equation","موج کی مساوات","Beginner","Wave speed equals frequency times wavelength.","v = f λ","v speed (m/s); f frequency (Hz); λ wavelength (m)","Radio stations and sound pitch.","Mixing up period and frequency.","wave"),
+L("emc","Modern Physics","Mass-Energy Equivalence","کمیت و توانائی کی مساوات","Advanced","A mass m has rest energy equal to m c².","E = m c²","E energy (J); m mass (kg); c = 2.998×10⁸ m/s","Nuclear reactions release energy as mass is converted.","Thinking it means mass turns into energy by itself in everyday burning.","emc"),
+L("dbr","Modern Physics","de Broglie Wavelength","ڈی بروگلی طول موج","Advanced","A particle with momentum p has an associated wavelength λ = h/p.","λ = h / (m v)","h = 6.626×10⁻³⁴ J·s; m (kg); v (m/s)","Electron microscopes.","Using it for fast speeds without relativity.","dbr"),
+L("decay","Modern Physics","Radioactive Decay Law","تابکار تحلیل کا قانون","Intermediate","The number of undecayed nuclei falls exponentially; each nucleus decays randomly with a fixed probability per unit time.","N = N₀ e^(−λt),  T½ = ln2 / λ","N nuclei; λ decay constant (1/s); T½ half-life (s)","Carbon dating and medical tracers.","Thinking a sample is fully gone after two half-lives.","","decay")];
+const CALC={
+newton2:{v:[["m","Mass","kg"],["a","Acceleration","m/s²"],["F","Force","N"]],f:{F:v=>v.m*v.a,m:v=>v.F/v.a,a:v=>v.F/v.m}},
+grav:{v:[["m1","Mass 1","kg"],["m2","Mass 2","kg"],["r","Distance","m"],["F","Force","N"]],f:{F:v=>G*v.m1*v.m2/v.r**2,m1:v=>v.F*v.r**2/(G*v.m2),m2:v=>v.F*v.r**2/(G*v.m1),r:v=>Math.sqrt(G*v.m1*v.m2/v.F)}},
+hooke:{v:[["k","Spring constant","N/m"],["x","Extension","m"],["F","Force","N"]],f:{F:v=>v.k*v.x,k:v=>v.F/v.x,x:v=>v.F/v.k}},
+ke:{v:[["m","Mass","kg"],["v","Speed","m/s"],["E","Kinetic energy","J"]],f:{E:v=>.5*v.m*v.v**2,m:v=>2*v.E/v.v**2,v:v=>Math.sqrt(2*v.E/v.m)}},
+arch:{v:[["rho","Fluid density","kg/m³"],["V","Displaced volume","m³"],["F","Buoyant force","N"]],f:{F:v=>v.rho*v.V*g9,rho:v=>v.F/(v.V*g9),V:v=>v.F/(v.rho*g9)}},
+boyle:{v:[["P1","P₁","Pa"],["V1","V₁","m³"],["P2","P₂","Pa"],["V2","V₂","m³"]],f:{P2:v=>v.P1*v.V1/v.V2,V2:v=>v.P1*v.V1/v.P2,P1:v=>v.P2*v.V2/v.V1,V1:v=>v.P2*v.V2/v.P1}},
+ideal:{v:[["n","Amount","mol"],["T","Temperature","K"],["V","Volume","m³"],["P","Pressure","Pa"]],f:{P:v=>v.n*R*v.T/v.V,V:v=>v.n*R*v.T/v.P,n:v=>v.P*v.V/(R*v.T),T:v=>v.P*v.V/(v.n*R)}},
+ohm:{v:[["I","Current","A"],["R","Resistance","Ω"],["V","Voltage","V"]],f:{V:v=>v.I*v.R,I:v=>v.V/v.R,R:v=>v.V/v.I}},
+coul:{v:[["q1","Charge 1","C"],["q2","Charge 2","C"],["r","Distance","m"],["F","Force","N"]],f:{F:v=>K*v.q1*v.q2/v.r**2,r:v=>Math.sqrt(K*v.q1*v.q2/v.F),q1:v=>v.F*v.r**2/(K*v.q2),q2:v=>v.F*v.r**2/(K*v.q1)}},
+joule:{v:[["I","Current","A"],["R","Resistance","Ω"],["t","Time","s"],["H","Heat","J"]],f:{H:v=>v.I**2*v.R*v.t,I:v=>Math.sqrt(v.H/(v.R*v.t)),R:v=>v.H/(v.I**2*v.t),t:v=>v.H/(v.I**2*v.R)}},
+snell:{v:[["n1","n₁",""],["t1","θ₁","°"],["n2","n₂",""],["t2","θ₂","°"]],f:{t2:v=>Math.asin(v.n1*Math.sin(v.t1*D)/v.n2)/D,t1:v=>Math.asin(v.n2*Math.sin(v.t2*D)/v.n1)/D,n2:v=>v.n1*Math.sin(v.t1*D)/Math.sin(v.t2*D),n1:v=>v.n2*Math.sin(v.t2*D)/Math.sin(v.t1*D)}},
+wave:{v:[["f","Frequency","Hz"],["l","Wavelength","m"],["v","Speed","m/s"]],f:{v:v=>v.f*v.l,f:v=>v.v/v.l,l:v=>v.v/v.f}},
+emc:{v:[["m","Mass","kg"],["E","Energy","J"]],f:{E:v=>v.m*C*C,m:v=>v.E/(C*C)}},
+dbr:{v:[["m","Mass","kg"],["v","Speed","m/s"],["l","Wavelength","m"]],f:{l:v=>PH/(v.m*v.v),m:v=>PH/(v.l*v.v),v:v=>PH/(v.m*v.l)}}};
+const SOON=["Kirchhoff's laws","Gauss's laws","Biot–Savart and Ampère","Bernoulli's principle","Stefan–Boltzmann","Doppler effect","Heisenberg uncertainty","Schrödinger equation","Time dilation","Kepler 1 and 2","Friction laws","Newton's law of cooling","Fourier conduction","Lens and mirror formulas","Malus and Brewster","Torque and moments"];
+const T={en:{t:"Physics Laws Library",lab:"Open Live Lab",s:"Search laws…",all:"All"},ur:{t:"طبیعیات کے قوانین",lab:"لائیو لیب کھولیں",s:"قوانین تلاش کریں…",all:"سب"}};
+let lang=ld("mt_ph_lang","en"),fav=ld("mt_ph_fav",[]),ovr=ld("mt_ph_ovr",{ed:{},add:[],del:[],hid:[]}),q="",cat="",lv="",onlyF=false,open=null,manage=false,PQ={};
+const laws=()=>BASE.concat(ovr.add).filter(x=>!ovr.del.includes(x.id)).map(x=>Object.assign({},x,ovr.ed[x.id]||{}));
+const vis=()=>laws().filter(x=>(isAdm()&&manage)||!ovr.hid.includes(x.id));
+const num=v=>+(+v).toPrecision(6),fmt=n=>Math.abs(n)>=1e5||(Math.abs(n)<1e-3&&n!==0)?n.toExponential(4):String(num(n));
+function calcHtml(k){const c=CALC[k];return`<div class="panel" style="margin:10px 0"><b>Live calculator</b> — leave the box you want to find empty, or choose it below.<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:8px 0" data-calc="${k}">${c.v.map(v=>`<label>${H(v[1])} (${H(v[2]||"no unit")})<input class="phc" data-k="${v[0]}" type="text" inputmode="decimal" style="width:100%"></label>`).join("")}</div><div class="result" id="phr-${k}" aria-live="polite">Fill all but one value.</div></div>`}
+function calcRun(box){const k=box.dataset.calc,c=CALC[k],o=$("#phr-"+k),val={},empty=[];
+ c.v.forEach(v=>{const el=box.querySelector(`[data-k="${v[0]}"]`),t=el.value.trim().replace(",",".");el.setAttribute("aria-invalid","false");if(t==="")empty.push(v);else if(!isFinite(+t)){el.setAttribute("aria-invalid","true");empty.push(null)}else val[v[0]]=+t});
+ if(empty.includes(null))return o.textContent="⚠ One input is not a valid number.";
+ if(empty.length!==1)return o.textContent=empty.length?"Leave exactly one box empty (it will be calculated).":"Clear one box to calculate it.";
+ const tg=empty[0],r=c.f[tg[0]](val);
+ if(!isFinite(r)||Number.isNaN(r))return o.textContent=k==="snell"?"⚠ No refracted ray (total internal reflection) or invalid angle/index.":"⚠ Invalid values (division by zero or impossible root).";
+ const bad=Object.entries(val).find(([a,b])=>(["m","m1","m2","r","V","rho","n1","n2","T","k","l","t"].includes(a)&&b<0));if(bad)return o.textContent="⚠ "+bad[0]+" cannot be negative.";
+ o.innerHTML=`<b>Step 1</b> Law: ${H(BASE.find(x=>x.k===k).f)}<br><b>Step 2</b> Given: ${c.v.filter(v=>v!==tg).map(v=>H(v[1])+" = "+fmt(val[v[0]])+" "+H(v[2])).join(", ")}<br><b>Step 3</b> Result: <b>${H(tg[1])} = ${fmt(r)} ${H(tg[2])}</b>`}
+function mkPQ(k){const c=CALC[k],tg=c.v[c.v.length-1];PQ[k]=[0,1,2].map(()=>{const v={};c.v.slice(0,-1).forEach(x=>v[x[0]]=1+Math.floor(Math.random()*9));return{v,tg,a:c.f[tg[0]](v)}})}
+function pqHtml(k){if(k==="snell")return"";if(!PQ[k])mkPQ(k);return`<div class="panel" style="margin:10px 0"><b>Practice (random numbers)</b>${PQ[k].map((p,i)=>`<div style="margin:8px 0">${i+1}. Given ${Object.entries(p.v).map(([a,b])=>H(CALC[k].v.find(x=>x[0]===a)[1])+" = "+b+" "+H(CALC[k].v.find(x=>x[0]===a)[2])).join(", ")}. Find ${H(p.tg[1])} (${H(p.tg[2])}). <input id="pq-${k}-${i}" style="width:110px" inputmode="decimal"> <button class="btn" data-ph="chk:${k}:${i}">Check</button> <span id="pqo-${k}-${i}"></span></div>`).join("")}<button class="btn" data-ph="newq:${k}">New questions</button></div>`}
+function card(x){const o=open===x.id,tt=lang==="ur"&&x.u?x.u:x.n,hid=ovr.hid.includes(x.id);
+ return`<div class="panel" style="margin-bottom:10px"><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn" data-ph="fav:${x.id}" aria-pressed="${fav.includes(x.id)}" aria-label="Favourite">${fav.includes(x.id)?"★":"☆"}</button><b style="font-size:17px;flex:1" ${lang==="ur"&&x.u?'dir="rtl" lang="ur"':""}>${H(tt)}</b><small>${H(x.c)} · ${H(x.l)}${hid?" · UNPUBLISHED":""}</small><button class="btn" data-ph="open:${x.id}" aria-expanded="${o}">${o?"Close":"Details"}</button></div><div style="font-size:20px;margin:8px 0;font-family:Georgia,serif">${H(x.f)}</div>
+ ${o?`<p><b>Statement:</b> ${H(x.s)}</p><p><b>Symbols and SI units:</b> ${H(x.y||"")}</p><p><b>Daily life:</b> ${H(x.e||"")}</p><p><b>Common mistake:</b> ${H(x.m||"")}</p>${x.k&&CALC[x.k]?calcHtml(x.k)+pqHtml(x.k):""}${x.sim?`<button class="btn primary" data-ph="sim:${x.sim}">▶ Run the live simulation</button>`:""}${lang==="ur"&&!x.u?'<p><small>Urdu text for this law is pending review.</small></p>':""}`:""}
+ ${isAdm()&&manage?`<div style="margin-top:8px"><button class="btn" data-ph="ed:${x.id}">Edit</button> <button class="btn" data-ph="pub:${x.id}">${hid?"Publish":"Unpublish"}</button> <button class="btn" data-ph="del:${x.id}">Delete</button></div>`:""}</div>`}
+function list(){const t=q.toLowerCase(),r=vis().filter(x=>(!cat||x.c===cat)&&(!lv||x.l===lv)&&(!onlyF||fav.includes(x.id))&&(!t||(x.n+x.f+x.s+(x.u||"")).toLowerCase().includes(t)));
+ const e=$("#phL");if(!e)return;e.innerHTML=r.length?r.map(card).join(""):'<div class="panel">No laws match. Clear the filters.</div>';e.querySelectorAll("[data-calc]").forEach(b=>calcRun(b))}
+function libHtml(){const cs=[...new Set(vis().map(x=>x.c))],tr=T[lang];
+ return`<div id="phlib"><h1 class="page-title" ${lang==="ur"?'dir="rtl"':""}>${tr.t}</h1><p class="sub">Explore the Laws. Run the Experiment. Understand the Physics.</p>
+ <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0"><input id="phS" placeholder="${tr.s}" style="flex:1;min-width:180px" aria-label="Search laws" value="${H(q)}"><select id="phC" aria-label="Category"><option value="">${tr.all}</option>${cs.map(c=>`<option ${c===cat?"selected":""}>${H(c)}</option>`).join("")}</select><select id="phV" aria-label="Level"><option value="">${tr.all}</option>${["Beginner","Intermediate","Advanced"].map(c=>`<option ${c===lv?"selected":""}>${c}</option>`).join("")}</select><button class="btn ${onlyF?"primary":""}" data-ph="onlyf">★ Favourites</button><button class="btn" data-ph="lang">${lang==="en"?"اردو":"English"}</button><button class="btn primary" data-ph="sim:">${tr.lab}</button>${isAdm()?`<button class="btn ${manage?"primary":""}" data-ph="manage">⚙ Manage</button>`:""}</div>
+ ${isAdm()&&manage?`<div class="panel"><b>Add a law</b> <small>(saved in this browser only; not a server database)</small><div style="display:grid;gap:6px;margin-top:6px"><input id="aN" placeholder="Name"><input id="aC" placeholder="Category"><select id="aL"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select><input id="aF" placeholder="Formula"><textarea id="aS" placeholder="Accurate statement" rows="2"></textarea><button class="btn primary" data-ph="add">Add law</button></div></div>`:""}
+ <div id="phL"></div><div class="panel"><b>Coming soon (not yet in the library):</b> ${SOON.map(H).join(" · ")}</div></div>`}
+/* ---------- LAB ---------- */
+const SIMS={
+newton3:{n:"Newton's Third Law",f:"F(A on B) = − F(B on A);  a = F / m",tmax:2.5,P:[["m1","Mass A",1,20,1,2,"kg"],["m2","Mass B",1,20,1,4,"kg"],["F","Push force",1,50,1,10,"N"]],
+ init:()=>({x1:-.3,v1:0,x2:.3,v2:0}),step(s,p,dt,t){const on=t<1,F=on?p.F:0;s.v1-=F/p.m1*dt;s.v2+=F/p.m2*dt;s.x1+=s.v1*dt;s.x2+=s.v2*dt},
+ pt:(s)=>[s.v1,s.v2],gl:"velocity A (blue), B (cyan) m/s",
+ draw(c,s,p,t){const sc=30,cx=320,gy=200,a=x=>Math.max(40,Math.min(600,cx+x*sc));c.fillStyle="#2a3b55";c.fillRect(0,gy,640,6);[[s.x1,p.m1,"#4cc9f0","A"],[s.x2,p.m2,"#ffd166","B"]].forEach(([x,m,col,l],i)=>{const w=30+m*3,px=a(x)+(i?w/2:-w/2);c.fillStyle=col;c.fillRect(px-w/2,gy-w,w,w);c.fillStyle="#001";c.font="bold 16px sans-serif";c.fillText(l+" "+m+"kg",px-w/2+3,gy-w/2+5)});
+  if(t<1){const px1=a(s.x1),px2=a(s.x2);arrow(c,px1,gy-70,-p.F*2.4,"#ff6b6b","F on A");arrow(c,px2,gy-100,p.F*2.4,"#ff6b6b","F on B")}},
+ out:(s,p,t)=>`Force on A by B: <b>${t<1?-p.F:0} N</b> · Force on B by A: <b>${t<1?p.F:0} N</b> (equal size, opposite direction, different bodies)<br>a<sub>A</sub> = ${t<1?(-p.F/p.m1).toFixed(2):0} m/s² · a<sub>B</sub> = ${t<1?(p.F/p.m2).toFixed(2):0} m/s² · total momentum = <b>${(p.m1*s.v1+p.m2*s.v2).toFixed(4)} kg·m/s</b>`,
+ note:"Frictionless surface; the pair pushes for the first 1 s only (like a released spring). Positions are clipped at the screen edge. Idealised model."},
+proj:{n:"Projectile Motion",f:"x = v cosθ·t;  y = v sinθ·t − ½ g t²",tmax:0,P:[["v","Launch speed",5,50,1,25,"m/s"],["a","Angle",5,85,1,45,"°"],["g","Gravity",1,25,.1,9.8,"m/s²"]],
+ init:()=>({x:0,y:0}),step(s,p,dt,t){const a=p.a*D,T=2*p.v*Math.sin(a)/p.g,tt=Math.min(t+dt,T);s.x=p.v*Math.cos(a)*tt;s.y=Math.max(0,p.v*Math.sin(a)*tt-.5*p.g*tt*tt)},T:p=>2*p.v*Math.sin(p.a*D)/p.g,
+ pt:s=>[s.y],gl:"height y (m) against time",
+ draw(c,s,p){const a=p.a*D,Rg=p.v*p.v*Math.sin(2*a)/p.g,Hm=p.v*p.v*Math.sin(a)**2/(2*p.g),k=Math.min(560/Math.max(Rg,1),170/Math.max(Hm,1)),T=2*p.v*Math.sin(a)/p.g;c.fillStyle="#1b3a2a";c.fillRect(0,210,640,10);c.strokeStyle="#4cc9f0";c.setLineDash([4,5]);c.beginPath();for(let i=0;i<=50;i++){const t=T*i/50,X=40+p.v*Math.cos(a)*t*k,Y=210-(p.v*Math.sin(a)*t-.5*p.g*t*t)*k;i?c.lineTo(X,Y):c.moveTo(X,Y)}c.stroke();c.setLineDash([]);c.fillStyle="#ffd166";c.beginPath();c.arc(40+s.x*k,210-s.y*k,8,0,7);c.fill()},
+ out:(s,p)=>{const a=p.a*D;return`Range R = v²sin2θ/g = <b>${(p.v*p.v*Math.sin(2*a)/p.g).toFixed(2)} m</b> · Max height = <b>${(p.v*p.v*Math.sin(a)**2/(2*p.g)).toFixed(2)} m</b> · Flight time = <b>${(2*p.v*Math.sin(a)/p.g).toFixed(2)} s</b><br>x = ${s.x.toFixed(2)} m, y = ${s.y.toFixed(2)} m`},
+ note:"Flat ground, no air resistance, constant g. Real projectiles land shorter."},
+pend:{n:"Simple Pendulum",f:"θ'' = −(g/L) sinθ;  T ≈ 2π√(L/g) for small θ",tmax:20,P:[["L","Length",.2,3,.05,1,"m"],["g","Gravity",1,25,.1,9.8,"m/s²"],["t0","Start angle",5,90,1,30,"°"]],
+ init:p=>({th:p.t0*D,w:0,up:[],prev:p.t0*D,t:0}),step(s,p,dt,t){s.w+=-(p.g/p.L)*Math.sin(s.th)*dt;s.th+=s.w*dt;if(s.prev<0&&s.th>=0)s.up.push(t);s.prev=s.th;s.t=t},
+ pt:s=>[s.th/D],gl:"angle θ (degrees) against time",
+ draw(c,s,p){const px=320,py=30,len=40+p.L*60,bx=px+len*Math.sin(s.th),by=py+len*Math.cos(s.th);c.strokeStyle="#9fb4d6";c.lineWidth=2;c.beginPath();c.moveTo(px,py);c.lineTo(bx,by);c.stroke();c.fillStyle="#ffd166";c.beginPath();c.arc(bx,by,14,0,7);c.fill();c.fillStyle="#9fb4d6";c.fillRect(px-40,py-6,80,6)},
+ out:(s,p)=>`θ = <b>${(s.th/D).toFixed(1)}°</b> · ω = ${s.w.toFixed(2)} rad/s · small-angle T = <b>${(2*Math.PI*Math.sqrt(p.L/p.g)).toFixed(3)} s</b> · measured T = <b>${s.up.length>1?(s.up[s.up.length-1]-s.up[s.up.length-2]).toFixed(3)+" s":"(running…)"}</b>`,
+ note:"Numerical integration of the full equation; no friction. At large start angles the measured period is longer than the small-angle formula."},
+spring:{n:"Hooke's Law — Spring-Mass",f:"F = −kx;  T = 2π√(m/k)",tmax:20,P:[["m","Mass",.1,10,.1,1,"kg"],["k","Spring constant",1,100,1,20,"N/m"],["A","Amplitude",.1,1,.05,.5,"m"]],
+ init:p=>({x:p.A,v:0}),step(s,p,dt){s.v+=-(p.k/p.m)*s.x*dt;s.x+=s.v*dt},pt:s=>[s.x],gl:"displacement x (m) against time",
+ draw(c,s,p){const x0=60,bx=330+s.x*220/Math.max(p.A,.5),y=130;c.fillStyle="#9fb4d6";c.fillRect(x0-14,60,14,140);c.strokeStyle="#4cc9f0";c.lineWidth=3;c.beginPath();c.moveTo(x0,y);const n=14;for(let i=1;i<n;i++)c.lineTo(x0+(bx-60-x0)*i/n,y+(i%2?-18:18));c.lineTo(bx-60,y);c.stroke();c.fillStyle="#ffd166";c.fillRect(bx-60,y-30,60,60)},
+ out:(s,p)=>`x = <b>${s.x.toFixed(3)} m</b> · v = ${s.v.toFixed(3)} m/s · F = −kx = <b>${(-p.k*s.x).toFixed(2)} N</b> · T = <b>${(2*Math.PI*Math.sqrt(p.m/p.k)).toFixed(3)} s</b> · energy ${(.5*p.k*s.x*s.x+.5*p.m*s.v*s.v).toFixed(3)} J (start ${(.5*p.k*p.A*p.A).toFixed(3)} J)`,
+ note:"Frictionless, ideal spring within its elastic limit."},
+decay:{n:"Radioactive Decay",f:"N = N₀ e^(−λt);  T½ = ln2 / λ",tmax:0,P:[["lam","Decay constant λ",.05,2,.05,.5,"1/s"]],N0:300,
+ init:p=>({a:Array(300).fill(true),n:300}),step(s,p,dt){const pr=1-Math.exp(-p.lam*dt);s.a.forEach((v,i)=>{if(v&&Math.random()<pr){s.a[i]=false;s.n--}})},
+ pt:(s,p,t)=>[s.n,300*Math.exp(-p.lam*t)],gl:"nuclei N (blue = simulation, cyan = exact curve)",
+ draw(c,s){s.a.forEach((v,i)=>{c.fillStyle=v?"#4cc9f0":"#34425e";c.beginPath();c.arc(40+(i%30)*19,40+Math.floor(i/30)*18,6,0,7);c.fill()})},
+ out:(s,p,t)=>`Undecayed N = <b>${s.n}</b> · exact N₀e<sup>−λt</sup> = ${(300*Math.exp(-p.lam*t)).toFixed(1)} · half-life T½ = <b>${(Math.LN2/p.lam).toFixed(2)} s</b>`,
+ note:"Each nucleus decays at random, so the simulation scatters around the exact curve. A model, not a real measurement."}};
+const SOONSIM=["Gravity and falling objects","Friction and inclined planes","Collisions","Work, power and energy","Boyle's law piston","Wave superposition","Reflection and refraction","Ohm's law circuit","Series and parallel circuits","Electromagnetic induction","Lens ray diagrams","Planetary orbits","Heat transfer"];
+function arrow(c,x,y,l,col,tx){c.strokeStyle=c.fillStyle=col;c.lineWidth=3;c.beginPath();c.moveTo(x,y);c.lineTo(x+l,y);c.stroke();const d=Math.sign(l)||1;c.beginPath();c.moveTo(x+l,y);c.lineTo(x+l-8*d,y-6);c.lineTo(x+l-8*d,y+6);c.fill();c.font="12px sans-serif";c.fillText(tx+" "+Math.abs(l/2.4).toFixed(0)+" N",x-20,y-8)}
+let S=null,sel="newton3";
+const DT=1/240;
+const prm=()=>{const p={};SIMS[sel].P.forEach(a=>p[a[0]]=+($("#lb-"+a[0])||{value:a[5]}).value);return p};
+function reset(){cancelAnimationFrame(S&&S.raf);const sm=SIMS[sel],p=prm();S={p,s:sm.init(p),t:0,h:[],run:false,acc:0,raf:0,sp:S?S.sp:1,tmax:sm.tmax||(sm.T?sm.T(p):sm.N0?6*Math.LN2/p.lam:10)};S.h.push([0,...sm.pt(S.s,p,0)]);paint();btn()}
+function adv(dt){const sm=SIMS[sel];let n=Math.round(dt/DT);for(let i=0;i<n&&S.t<S.tmax;i++){sm.step(S.s,S.p,DT,S.t);S.t+=DT;if(i%8===0)S.h.push([S.t,...sm.pt(S.s,S.p,S.t)])}if(S.t>=S.tmax-1e-9)S.run=false}
+function loop(ts){if(!S||!$("#phcv"))return;if(S.run){const dt=Math.min((ts-(S.last||ts))/1000,.05)*S.sp;adv(dt)}S.last=ts;paint();btn();if(S.run)S.raf=requestAnimationFrame(loop)}
+function btn(){const b=$("#lbRun");if(b)b.textContent=S.run?"⏸ Pause":(S.t>=S.tmax-1e-9?"✔ Finished":"▶ Start")}
+function paint(){const sm=SIMS[sel],cv=$("#phcv");if(!cv)return;const c=cv.getContext("2d");c.clearRect(0,0,640,260);c.fillStyle="#0b1830";c.fillRect(0,0,640,260);sm.draw(c,S.s,S.p,S.t);c.fillStyle="#cfe3ff";c.font="13px sans-serif";c.fillText("t = "+S.t.toFixed(2)+" s",10,18);
+ $("#lbOut").innerHTML=sm.out(S.s,S.p,S.t);const g=$("#phgr").getContext("2d");g.clearRect(0,0,640,170);g.fillStyle="#0b1830";g.fillRect(0,0,640,170);const nS=S.h[0].length-1;let lo=1e9,hi=-1e9;S.h.forEach(r=>{for(let i=1;i<=nS;i++){lo=Math.min(lo,r[i]);hi=Math.max(hi,r[i])}});if(hi-lo<1e-9){hi+=1;lo-=1}
+ g.strokeStyle="#34425e";g.beginPath();g.moveTo(40,10);g.lineTo(40,150);g.lineTo(630,150);g.stroke();g.fillStyle="#9fb4d6";g.font="11px sans-serif";g.fillText(hi.toPrecision(3),2,16);g.fillText(lo.toPrecision(3),2,150);g.fillText("0",40,164);g.fillText(S.tmax.toFixed(1)+" s",590,164);
+ ["#4cc9f0","#ffd166"].slice(0,nS).forEach((col,k)=>{g.strokeStyle=col;g.beginPath();S.h.forEach((r,i)=>{const X=40+r[0]/S.tmax*590,Y=150-(r[k+1]-lo)/(hi-lo)*135;i?g.lineTo(X,Y):g.moveTo(X,Y)});g.stroke()})}
+function labHtml(){const sm=SIMS[sel];return`<div id="phlab"><h1 class="page-title">Live Physics Lab</h1><p class="sub">Simplified educational models. These are simulations, not real experiments.</p>
+<div style="display:flex;gap:6px;flex-wrap:wrap">${Object.entries(SIMS).map(([k,v])=>`<button class="btn ${k===sel?"primary":""}" data-ph="sim:${k}">${H(v.n)}</button>`).join("")}</div>
+<div class="panel" style="margin-top:10px"><h2>${H(sm.n)}</h2><div style="font-size:18px;font-family:Georgia,serif">${H(sm.f)}</div>
+<canvas id="phcv" width="640" height="260" style="width:100%;border-radius:12px;margin-top:8px" role="img" aria-label="${H(sm.n)} animation"></canvas>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:8px 0">${sm.P.map(a=>`<label>${H(a[1])}: <b id="lv-${a[0]}">${a[5]}</b> ${H(a[6])}<input class="lbs" id="lb-${a[0]}" type="range" min="${a[2]}" max="${a[3]}" step="${a[4]}" value="${a[5]}" style="width:100%"></label>`).join("")}<label>Speed: <b id="lv-sp">1</b>×<input id="lb-sp" type="range" min=".25" max="4" step=".25" value="1" style="width:100%"></label></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="lbRun" data-ph="run">▶ Start</button><button class="btn" data-ph="step">⏭ Step</button><button class="btn" data-ph="reset">↺ Reset</button></div>
+<div class="result" id="lbOut" aria-live="off" style="margin-top:8px"></div><canvas id="phgr" width="640" height="170" style="width:100%;border-radius:12px" role="img" aria-label="Live graph: ${H(sm.gl)}"></canvas><small>Graph: ${H(sm.gl)}</small><p class="sub"><b>Model limits:</b> ${H(sm.note)}</p></div>
+<div class="panel"><b>Coming soon (not yet built):</b> ${SOONSIM.join(" · ")}</div></div>`}
+function labInit(){reset();if(!matchMedia("(prefers-reduced-motion: reduce)").matches){S.run=true;S.raf=requestAnimationFrame(loop)}else{const o=$("#lbOut");o.insertAdjacentHTML("beforebegin","<small>Reduced motion is on: press Start or Step to run.</small>")}}
+/* ---------- events ---------- */
+document.addEventListener("click",e=>{const b=e.target.closest("[data-ph]");if(!b)return;const[k,a,c2]=b.dataset.ph.split(":");
+ if(k==="sim"){if(a)sel=a;go("physlab");return}
+ if(["run","step","reset"].includes(k)&&S){if(k==="run"){if(S.t>=S.tmax-1e-9)reset();S.run=!S.run;if(S.run)S.raf=requestAnimationFrame(loop);btn()}else if(k==="step"){S.run=false;adv(.05);paint();btn()}else reset();return}
+ if(k==="lang"){lang=lang==="en"?"ur":"en";sv("mt_ph_lang",lang);go("physics");return}
+ if(k==="fav"){fav=fav.includes(a)?fav.filter(x=>x!==a):[...fav,a];sv("mt_ph_fav",fav);return list()}
+ if(k==="onlyf"){onlyF=!onlyF;b.classList.toggle("primary",onlyF);return list()}
+ if(k==="open"){open=open===a?null:a;return list()}
+ if(k==="newq"){mkPQ(a);return list()}
+ if(k==="chk"){const p=PQ[a][+c2],v=parseFloat(($("#pq-"+a+"-"+c2).value||"").replace(",",".")),o=$("#pqo-"+a+"-"+c2);o.textContent=!isFinite(v)?"Enter a number.":Math.abs(v-p.a)<=Math.abs(p.a)*.01+1e-12?"✅ Correct":"❌ Not quite. Answer = "+fmt(p.a)+" "+p.tg[2];return}
+ if(!isAdm()&&["manage","add","ed","pub","del"].includes(k))return;
+ if(k==="manage"){manage=!manage;go("physics");return}
+ if(k==="add"){const n=$("#aN").value.trim(),f=$("#aF").value.trim(),s=$("#aS").value.trim();if(!n||!f||!s)return alert("Name, formula and statement are required.");ovr.add.push({id:"u"+Date.now(),c:$("#aC").value.trim()||"Custom",n,u:"",l:$("#aL").value,s,f,y:"",e:"",m:"",k:""});sv("mt_ph_ovr",ovr);go("physics");return}
+ if(k==="ed"){const x=laws().find(z=>z.id===a),n=prompt("Name:",x.n);if(n===null)return;const f=prompt("Formula:",x.f);if(f===null)return;const s=prompt("Statement:",x.s);if(s===null)return;ovr.ed[a]={n:n||x.n,f:f||x.f,s:s||x.s};sv("mt_ph_ovr",ovr);return list()}
+ if(k==="pub"){ovr.hid=ovr.hid.includes(a)?ovr.hid.filter(z=>z!==a):[...ovr.hid,a];sv("mt_ph_ovr",ovr);return list()}
+ if(k==="del"){if(!confirm("Delete this law? This cannot be undone."))return;ovr.del.push(a);sv("mt_ph_ovr",ovr);list()}});
+document.addEventListener("input",e=>{const t=e.target;
+ if(t.id==="phS"){q=t.value;list()}else if(t.classList.contains("phc"))calcRun(t.closest("[data-calc]"));
+ else if(t.id==="lb-sp"&&S){S.sp=+t.value;$("#lv-sp").textContent=t.value}
+ else if(t.classList.contains("lbs")){$("#lv-"+t.id.slice(3)).textContent=t.value;reset();if(!matchMedia("(prefers-reduced-motion: reduce)").matches){S.run=true;S.raf=requestAnimationFrame(loop)}}});
+document.addEventListener("change",e=>{if(e.target.id==="phC"){cat=e.target.value;list()}if(e.target.id==="phV"){lv=e.target.value;list()}});
+tools.push({id:"physics",name:"Physics Laws Library",icon:"⚛",cat:"Science",desc:"Searchable library of 23 physics laws with live calculators, practice questions, favourites and Urdu titles."},{id:"physlab",name:"Live Physics Lab",icon:"🧪",cat:"Science",desc:"Five live simulations with sliders, start/pause/step/reset, formulas and real-time graphs."});
+const sp=window.simplePage;window.simplePage=function(p){return p==="physics"?libHtml():p==="physlab"?labHtml():sp.apply(this,arguments)};
+const rd=window.render;window.render=function(p){if(S){cancelAnimationFrame(S.raf);S=null}const r=rd.apply(this,arguments);if(p==="physics")list();if(p==="physlab")labInit();return r};
+})();
+
 </script>
 <script id="auth-gate-js">
 (()=>{"use strict";
