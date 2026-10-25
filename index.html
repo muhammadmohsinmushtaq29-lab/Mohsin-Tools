@@ -507,6 +507,9 @@ body{background:transparent}
     <button data-page="digestive"><span class="ico">🍽️</span>Digestive System</button>
     <button data-page="electrons"><span class="ico">⚛️</span>Electron Shells Explorer</button>
   </nav>
+  <div class="nav-label">Science &amp; Maths Hub</div><nav class="nav">
+    <button data-page="scihub"><span class="ico">🔬</span>Science &amp; Maths Hub</button>
+  </nav>
   <div class="nav-label">Space Lab</div><nav class="nav">
     <button data-page="solar"><span class="ico">🪐</span>Live 3D Solar System</button>
   </nav>
@@ -2680,6 +2683,99 @@ window.mtAuthReady=Promise.resolve().then(sbInit).catch(()=>{});
 window.mtLogin3D={open:openStage,close:closeStage,get engine(){return eng}};
 
 })();
+</script>
+<script id="sci-hub-js">
+(()=>{"use strict";
+const $=(s,r=document)=>r.querySelector(s),H=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","&lt;":"&lt;","&gt;":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const FORM=[
+{s:"Maths",t:"Quadratic formula",f:"x = (−b ± √(b² − 4ac)) / 2a",n:"Needs a ≠ 0. Real roots when b² − 4ac ≥ 0."},
+{s:"Maths",t:"Area of a circle",f:"A = πr²",n:"r is the radius, in the same length unit as the answer's square."},
+{s:"Maths",t:"Pythagoras' theorem",f:"a² + b² = c²",n:"Right-angled triangles only; c is the hypotenuse."},
+{s:"Maths",t:"Simple interest",f:"I = P × r × t / 100",n:"P principal, r rate % per year, t years."},
+{s:"Physics",t:"Newton's second law",f:"F = ma",n:"Net force in newtons, mass in kg, acceleration in m/s²."},
+{s:"Physics",t:"Ohm's law",f:"V = IR",n:"For ohmic conductors at constant temperature."},
+{s:"Physics",t:"Projectile range",f:"R = v² sin 2θ / g",n:"Level ground, no air resistance."},
+{s:"Physics",t:"Kinetic energy",f:"KE = ½mv²",n:"Speeds much less than the speed of light."},
+{s:"Chemistry",t:"Moles",f:"n = m / M",n:"m mass in g, M molar mass in g/mol."},
+{s:"Chemistry",t:"Molarity",f:"M = n / V",n:"V is solution volume in litres."},
+{s:"Chemistry",t:"Ideal gas law",f:"PV = nRT",n:"Ideal behaviour; T in kelvin; R = 8.314 J/(mol·K)."},
+{s:"Biology",t:"Photosynthesis (word/symbol)",f:"6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂",n:"Overall simplified equation; needs light and chlorophyll."}];
+const CELL={
+animal:[["Nucleus",150,110,32,"#7c3aed","Holds DNA and controls the cell's activities."],["Mitochondrion",230,150,16,"#f59e0b","Releases energy from food (cellular respiration)."],["Ribosome",95,150,7,"#ef4444","Builds proteins."],["Vacuole",105,80,12,"#38bdf8","Small storage sac in animal cells."]],
+plant:[["Nucleus",150,110,26,"#7c3aed","Holds DNA and controls the cell's activities."],["Chloroplast",235,85,17,"#16a34a","Contains chlorophyll; site of photosynthesis."],["Mitochondrion",235,160,13,"#f59e0b","Releases energy from food."],["Large vacuole",95,125,30,"#38bdf8","Stores water and helps keep the cell firm."]]};
+const QZ=[["What does the discriminant b² − 4ac tell you?",["Number of real roots","The slope","The area"],0],["F = ma: doubling mass at the same force makes acceleration…",["double","half","unchanged"],1],["Which organelle carries out photosynthesis?",["Mitochondrion","Chloroplast","Nucleus"],1],["Balanced equation: H₂ + O₂ → H₂O needs coefficients…",["1,1,1","2,1,2","1,2,2"],1],["V = IR: V = 12 V, R = 4 Ω. I = ?",["3 A","48 A","8 A"],0],["Molar mass of water (H=1, O=16) is…",["16 g/mol","18 g/mol","20 g/mol"],1]];
+let tab="hub",P=null,qa={};
+/* ---- rational helpers + safe equation balancer (no eval) ---- */
+const gcd=(a,b)=>b?gcd(b,a%b):Math.abs(a);
+const fr=(n,d=1)=>{if(d<0){n=-n;d=-d}const g=gcd(n,d)||1;return[n/g,d/g]};
+const fadd=(a,b)=>fr(a[0]*b[1]+b[0]*a[1],a[1]*b[1]),fmul=(a,b)=>fr(a[0]*b[0],a[1]*b[1]),fdiv=(a,b)=>fr(a[0]*b[1],a[1]*b[0]);
+function parseF(f){let i=0;const err=m=>{throw new Error(m)};
+ function grp(){const m={};while(i<f.length&&f[i]!==")"){if(f[i]==="("){i++;const g=grp();if(f[i]!==")")err("Missing )");i++;const k=num();for(const e in g)m[e]=(m[e]||0)+g[e]*k}else{const mt=/^[A-Z][a-z]?/.exec(f.slice(i));if(!mt)err("Unsupported character '"+f[i]+"' in "+f);i+=mt[0].length;const k=num();m[mt[0]]=(m[mt[0]]||0)+k}}return m}
+ function num(){const mt=/^\d+/.exec(f.slice(i));if(!mt)return 1;i+=mt[0].length;return +mt[0]}
+ const r=grp();if(i<f.length)err("Unbalanced ) in "+f);if(!Object.keys(r).length)err("Empty formula");return r}
+function balance(eq){const parts=eq.split(/->|→|=>|=/);if(parts.length!==2)throw new Error("Use one arrow, e.g. H2 + O2 -> H2O");
+ const side=s=>s.split("+").map(x=>x.trim().replace(/^\d+\s*/,"")).filter(Boolean);
+ const L=side(parts[0]),R=side(parts[1]);if(!L.length||!R.length)throw new Error("Both sides need at least one substance");
+ const sp=[...L,...R],ms=sp.map(parseF),els=[...new Set(ms.flatMap(m=>Object.keys(m)))];
+ const A=els.map(e=>ms.map((m,j)=>fr((m[e]||0)*(j<L.length?1:-1))));
+ for(const e of new Set(R.flatMap(x=>Object.keys(parseF(x)))))if(!L.some(x=>e in parseF(x)))throw new Error("Element "+e+" appears only on one side");
+ let row=0;const piv=[];for(let c=0;c<sp.length&&row<A.length;c++){let p=A.findIndex((r,i)=>i>=row&&r[c][0]!==0);if(p<0)continue;[A[row],A[p]]=[A[p],A[row]];const d=A[row][c];A[row]=A[row].map(v=>fdiv(v,d));A.forEach((r,i)=>{if(i!==row&&r[c][0]!==0){const k=r[c];A[i]=r.map((v,j)=>fadd(v,fmul(fr(-k[0],k[1]),A[row][j])))}});piv.push(c);row++}
+ const free=sp.map((_,c)=>c).filter(c=>!piv.includes(c));if(free.length!==1)throw new Error(free.length?"Equation has more than one valid balance; check the substances.":"Cannot be balanced with these substances.");
+ const x=Array(sp.length).fill(fr(0));x[free[0]]=fr(1);piv.forEach((c,r)=>{x[c]=fr(-A[r][free[0]][0],A[r][free[0]][1])});
+ let l=1;x.forEach(v=>{l=l*v[1]/gcd(l,v[1])});const co=x.map(v=>v[0]*l/v[1]);if(co.some(v=>v<=0))throw new Error("No all-positive balance exists for these substances.");
+ const g=co.reduce(gcd);const c=co.map(v=>v/g);
+ const cnt=(i0,i1)=>{const t={};for(let j=i0;j<i1;j++)for(const e in ms[j])t[e]=(t[e]||0)+ms[j][e]*c[j];return t};
+ const lt=cnt(0,L.length),rt=cnt(L.length,sp.length);if(els.some(e=>lt[e]!==rt[e]))throw new Error("Internal check failed");
+ const fmt=(a,o)=>a.map((s,j)=>(c[o+j]>1?c[o+j]:"")+s.replace(/(\d+)/g,"<sub>$1</sub>")).join(" + ");
+ return{html:fmt(L,0)+" → "+fmt(R,L.length),els,lt,rt}}
+/* ---- pages ---- */
+const card=(k,i,t,d)=>`<button type="button" class="btn" data-sh="${k}" style="text-align:left;padding:16px;display:block;min-height:110px"><b style="font-size:28px">${i}</b><br><b>${t}</b><br><small>${d}</small></button>`;
+function tabs(){return[["hub","🏠 Hub"],["math","➗ Maths"],["phys","⚡ Physics"],["bio","🧬 Biology"],["chem","⚗️ Chemistry"],["quiz","❓ Quiz"],["search","⌕ Search"]].map(([k,l])=>`<button type="button" class="btn ${tab===k?"primary":""}" data-sh="${k}">${l}</button>`).join("")}
+function body(){
+if(tab==="hub")return`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">${card("math","➗","Mathematics","Quadratic solver, percentage calculator, formulas")}${card("phys","⚡","Physics","Projectile simulation, Ohm's law calculator")}${card("bio","🧬","Biology","Clickable plant &amp; animal cell explorer")}${card("chem","⚗️","Chemistry","Equation balancer, mole calculator")}${card("quiz","❓","Quiz","6 instant-feedback questions")}${card("search","⌕","Formula search","Search all subjects")}</div><p class="sub">Also in your site: Periodic Table, Heart, Digestive System, Electron Shells and Solar System under <b>Science Lab</b>.</p>`;
+if(tab==="math")return`<div class="panel"><h2>Quadratic solver</h2><p>ax² + bx + c = 0</p><div style="display:flex;gap:8px;flex-wrap:wrap">${["a","b","c"].map(k=>`<input id="shq${k}" type="number" step="any" placeholder="${k}" aria-label="${k}" style="width:90px">`).join("")}<button class="btn primary" data-sh="solveq">Solve</button></div><div id="shqo" class="result" aria-live="polite"></div></div><div class="panel" style="margin-top:14px"><h2>Percentage</h2><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="shp1" type="number" step="any" placeholder="Part" style="width:110px"><input id="shp2" type="number" step="any" placeholder="Whole" style="width:110px"><button class="btn primary" data-sh="pct">Calculate</button></div><div id="shpo" class="result" aria-live="polite"></div></div>`;
+if(tab==="phys")return`<div class="panel"><h2>Projectile motion</h2><canvas id="shcv" width="640" height="260" style="width:100%;background:#0b1830;border-radius:12px" aria-label="Projectile path"></canvas><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:10px"><label>Speed <span id="shvv">25</span> m/s<input id="shv" type="range" min="5" max="50" value="25"></label><label>Angle <span id="shaa">45</span>°<input id="sha" type="range" min="5" max="85" value="45"></label><label>g <span id="shgg">9.8</span> m/s²<input id="shg" type="range" min="1" max="25" step=".1" value="9.8"></label></div><div style="margin-top:10px"><button class="btn primary" data-sh="launch">▶ Launch</button> <button class="btn" data-sh="preset">↺ Reset</button></div><div id="shpo2" class="result" aria-live="polite"></div><p class="sub"><b>Model:</b> flat ground, no air resistance, constant g. Real projectiles travel shorter distances.</p></div><div class="panel" style="margin-top:14px"><h2>Ohm's law (V = IR)</h2><p>Fill any two boxes, leave one empty.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="shV" type="number" step="any" placeholder="V (volts)" style="width:120px"><input id="shI" type="number" step="any" placeholder="I (amps)" style="width:120px"><input id="shR" type="number" step="any" placeholder="R (ohms)" style="width:120px"><button class="btn primary" data-sh="ohm">Solve</button></div><div id="shoo" class="result" aria-live="polite"></div></div>`;
+if(tab==="bio"){const k=window.__cell||"animal";return`<div class="panel"><h2>Cell explorer</h2><div><button class="btn ${k==="animal"?"primary":""}" data-sh="cell-animal">Animal cell</button> <button class="btn ${k==="plant"?"primary":""}" data-sh="cell-plant">Plant cell</button></div><svg viewBox="0 0 320 220" style="width:100%;max-width:520px;display:block;margin:12px auto" role="img" aria-label="${k} cell diagram">${k==="plant"?'<rect x="20" y="15" width="280" height="190" rx="14" fill="#a7d99b" stroke="#2f7d32" stroke-width="6"/><rect x="30" y="25" width="260" height="170" rx="10" fill="#e8f7e1" stroke="#66bb6a" stroke-width="2"/>':'<ellipse cx="160" cy="110" rx="140" ry="95" fill="#ffe3ec" stroke="#d6336c" stroke-width="3"/>'}${CELL[k].map((o,i)=>`<circle data-sh="org${i}" cx="${o[1]}" cy="${o[2]}" r="${o[3]}" fill="${o[4]}" fill-opacity=".8" stroke="#fff" stroke-width="2" tabindex="0" role="button" aria-label="${o[0]}" style="cursor:pointer"/>`).join("")}</svg><div id="shbo" class="result" aria-live="polite">Select an organelle.</div><p class="sub">Simplified educational diagram, not a microscope image.</p></div>`}
+if(tab==="chem")return`<div class="panel"><h2>Chemical equation balancer</h2><p>Example: <code>Fe + O2 -> Fe2O3</code> or <code>Ca(OH)2 + H3PO4 -> Ca3(PO4)2 + H2O</code></p><input id="shce" style="width:100%;max-width:560px" placeholder="Type an equation, use -> between sides" aria-label="Equation"><div style="margin-top:8px"><button class="btn primary" data-sh="bal">Balance</button></div><div id="shco" class="result" aria-live="polite"></div><p class="sub">Supports element symbols, subscripts and brackets. Ions, charges and hydrates are reported as unsupported.</p></div><div class="panel" style="margin-top:14px"><h2>Mole calculator (n = m / M)</h2><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="shm" type="number" step="any" placeholder="Mass (g)" style="width:120px"><input id="shM" type="number" step="any" placeholder="Molar mass (g/mol)" style="width:160px"><button class="btn primary" data-sh="mole">Calculate</button></div><div id="shmo" class="result" aria-live="polite"></div></div>`;
+if(tab==="quiz"){const n=Object.keys(qa).length,sc=Object.entries(qa).filter(([i,v])=>v===QZ[i][2]).length;return`<div class="panel"><h2>Mixed quiz</h2>${QZ.map((q,i)=>`<fieldset style="border:0;padding:0;margin:0 0 14px"><legend><b>${i+1}. ${q[0]}</b></legend>${q[1].map((o,j)=>`<div><button type="button" class="btn ${qa[i]===j?(j===q[2]?"primary":""):""}" data-sh="ans${i}_${j}" ${qa[i]!==undefined?"disabled":""} style="margin:3px 0">${o}</button></div>`).join("")}${qa[i]!==undefined?`<small>${qa[i]===q[2]?"✅ Correct":"❌ Correct answer: "+q[1][q[2]]}</small>`:""}</fieldset>`).join("")}<div class="result">Score: ${sc} / ${n} answered (${QZ.length} total)</div><button class="btn" data-sh="qreset">Retake</button></div>`}
+return`<div class="panel"><h2>Search formulas</h2><input id="shs" placeholder="e.g. energy, circle, gas…" style="width:100%;max-width:420px" aria-label="Search"><div id="shso" style="margin-top:12px"></div></div>`}
+function html(){return`<div id="sh"><h1 class="page-title">Science &amp; Maths Hub</h1><p class="sub">Learn. Explore. Experiment. Discover.</p><div style="display:flex;gap:6px;flex-wrap:wrap;margin:12px 0">${tabs()}</div>${body()}</div>`}
+function fresh(){const el=$("#sh");if(el)el.outerHTML=html();after()}
+function after(){const q=$("#shs");if(q){q.oninput=()=>list(q.value);list("")}
+ if(tab==="phys"){["v","a","g"].forEach(k=>{const r=$("#sh"+k);r.oninput=()=>{$("#sh"+k+k).textContent=r.value;P=null;draw(0)}});draw(0)}}
+function list(t){t=t.trim().toLowerCase();const r=FORM.filter(x=>!t||(x.t+x.s+x.f+x.n).toLowerCase().includes(t));$("#shso").innerHTML=r.length?r.map(x=>`<div class="panel" style="margin-bottom:8px"><small>${x.s}</small><br><b>${H(x.t)}</b><div style="font-size:18px;margin:4px 0">${H(x.f)}</div><small>${H(x.n)}</small></div>`).join(""):"No matching formulas."}
+/* physics */
+const gv=()=>({v:+$("#shv").value,a:+$("#sha").value*Math.PI/180,g:+$("#shg").value});
+function draw(t){const cv=$("#shcv");if(!cv)return;const c=cv.getContext("2d"),{v,a,g}=gv(),R=v*v*Math.sin(2*a)/g,Hm=v*v*Math.sin(a)**2/(2*g),T=2*v*Math.sin(a)/g;
+ c.clearRect(0,0,640,260);c.fillStyle="#1b3a2a";c.fillRect(0,240,640,20);const sx=580/Math.max(R,1),sy=200/Math.max(Hm,1),s=Math.min(sx,sy);
+ c.strokeStyle="#4cc9f0";c.setLineDash([5,5]);c.beginPath();for(let i=0;i<=60;i++){const tt=T*i/60,x=30+v*Math.cos(a)*tt*s,y=240-(v*Math.sin(a)*tt-g*tt*tt/2)*s;i?c.lineTo(x,y):c.moveTo(x,y)}c.stroke();c.setLineDash([]);
+ const tt=Math.min(t,T),x=30+v*Math.cos(a)*tt*s,y=240-(v*Math.sin(a)*tt-g*tt*tt/2)*s;c.fillStyle="#ffd166";c.beginPath();c.arc(x,y,8,0,7);c.fill();
+ $("#shpo2").innerHTML=`Range R = v²sin2θ/g = <b>${R.toFixed(2)} m</b> · Max height = <b>${Hm.toFixed(2)} m</b> · Flight time = <b>${T.toFixed(2)} s</b> · t = ${tt.toFixed(2)} s`;return T}
+function launch(){const T=draw(0);P={t0:performance.now(),T};cancelAnimationFrame(P.raf);(function f(n){if(!P||!$("#shcv"))return;const t=(n-P.t0)/1000;draw(t);if(t<P.T)P.raf=requestAnimationFrame(f)})(performance.now())}
+/* actions */
+const nv=id=>{const e=$("#"+id);return e&&e.value.trim()!==""&&isFinite(+e.value)?+e.value:null};
+const act={
+solveq(){const a=nv("shqa"),b=nv("shqb"),c=nv("shqc"),o=$("#shqo");if(a===null||b===null||c===null)return o.textContent="Enter numbers for a, b and c.";if(a===0)return o.textContent="a must not be 0 (not quadratic). Then x = "+(b?(-c/b).toPrecision(6):"undefined");
+ const D=b*b-4*a*c,f=n=>+n.toPrecision(8);o.innerHTML=`Discriminant D = b² − 4ac = ${f(D)}<br>`+(D>0?`Two real roots: x₁ = ${f((-b+Math.sqrt(D))/(2*a))}, x₂ = ${f((-b-Math.sqrt(D))/(2*a))}`:D===0?`One repeated root: x = ${f(-b/(2*a))}`:`Complex roots: ${f(-b/(2*a))} ± ${f(Math.sqrt(-D)/(2*a))}i`)},
+pct(){const p=nv("shp1"),w=nv("shp2"),o=$("#shpo");if(p===null||w===null||w===0)return o.textContent="Enter a part and a non-zero whole.";o.textContent=`${p} ÷ ${w} × 100 = ${+(p/w*100).toPrecision(8)} %`},
+launch,preset(){P=null;$("#shv").value=25;$("#sha").value=45;$("#shg").value=9.8;["v","a","g"].forEach(k=>$("#sh"+k+k).textContent=$("#sh"+k).value);draw(0)},
+ohm(){const V=nv("shV"),I=nv("shI"),R=nv("shR"),o=$("#shoo"),n=[V,I,R].filter(x=>x===null).length;if(n!==1)return o.textContent="Fill exactly two boxes.";
+ if(V===null)o.textContent=`V = I × R = ${+(I*R).toPrecision(6)} V`;else if(I===null)o.textContent=R===0?"R cannot be 0.":`I = V ÷ R = ${+(V/R).toPrecision(6)} A`;else o.textContent=I===0?"I cannot be 0.":`R = V ÷ I = ${+(V/I).toPrecision(6)} Ω`},
+bal(){const o=$("#shco");try{const r=balance($("#shce").value.trim());o.innerHTML=`<div style="font-size:20px">${r.html}</div><small>Atom check ✔ — `+r.els.map(e=>`${e}: ${r.lt[e]} = ${r.rt[e]}`).join(", ")+`</small>`}catch(e){o.textContent="⚠ "+e.message}},
+mole(){const m=nv("shm"),M=nv("shM"),o=$("#shmo");if(m===null||!M||M<=0)return o.textContent="Enter mass and a positive molar mass.";const n=m/M;o.textContent=`n = ${m} ÷ ${M} = ${+n.toPrecision(6)} mol (≈ ${(n*6.02214076e23).toExponential(3)} particles)`},
+qreset(){qa={};fresh()}};
+document.addEventListener("click",e=>{const b=e.target.closest("[data-sh]");if(!b||!$("#sh"))return;const k=b.dataset.sh;
+ if(act[k])return act[k]();
+ let m;if(m=/^org(\d+)$/.exec(k)){const o=CELL[window.__cell||"animal"][m[1]];$("#shbo").innerHTML=`<b>${o[0]}</b>: ${o[5]}`;return}
+ if(m=/^ans(\d+)_(\d+)$/.exec(k)){qa[m[1]]=+m[2];return fresh()}
+ if(k.startsWith("cell-")){window.__cell=k.slice(5);tab="bio";return fresh()}
+ tab=k;P=null;fresh()});
+document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches("#sh circle[data-sh]")){e.preventDefault();e.target.dispatchEvent(new MouseEvent("click",{bubbles:true}))}});
+tools.push({id:"scihub",name:"Science & Maths Hub",icon:"🔬",cat:"Science",desc:"Maths, Physics, Biology and Chemistry: calculators, simulations, equation balancer, cell explorer and quiz."});
+const sp=window.simplePage;window.simplePage=function(p){return p==="scihub"?html():sp.apply(this,arguments)};
+const rd=window.render;window.render=function(p){const r=rd.apply(this,arguments);if(p==="scihub")after();else P=null;return r};
+})();
+
 </script>
 <script id="auth-gate-js">
 (()=>{"use strict";
