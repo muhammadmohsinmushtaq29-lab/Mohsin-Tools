@@ -462,8 +462,10 @@ body{background:transparent}
 @media(max-width:480px){#dm .dm-box{padding:13px}#dm .dm-ov{padding:8px}}
 @media(prefers-reduced-motion:reduce){#dm *{animation:none!important;transition:none!important}}
 </style>
+<style id="authboot-css">#authBoot{position:fixed;inset:0;z-index:99999;display:grid;place-content:center;gap:14px;text-align:center;background:radial-gradient(circle at 50% 40%,#10346c,#071634 75%);color:#dbe8ff;font:600 15px system-ui,sans-serif;transition:opacity .3s}#authBoot.done{opacity:0;pointer-events:none}#authBoot i{width:42px;height:42px;margin:auto;border:4px solid rgba(255,255,255,.2);border-top-color:#27e0ff;border-radius:50%;animation:abs 1s linear infinite}@keyframes abs{to{transform:rotate(360deg)}}</style>
 </head>
 <body>
+<div id="authBoot" role="status" aria-live="polite"><i></i><span>Checking your session…</span></div><script>setTimeout(function(){var b=document.getElementById("authBoot");if(b)b.remove()},9000)</script>
 <div class="bg3d" aria-hidden="true"><div class="wave w1"></div><div class="wave w2"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="shape s1"><div class="cube"><b></b><b></b><b></b><b></b><b></b><b></b></div></div><div class="shape s2"><div class="ring"></div></div><div class="shape s3"><div class="dia"></div></div><div class="shape s4"><div class="cube"><b></b><b></b><b></b><b></b><b></b><b></b></div></div><span class="ptc" style="left:32%;--d:20s;--dl:-3s"></span><span class="ptc" style="left:94%;--d:22s;--dl:-15s"></span><span class="ptc" style="left:21%;--d:17s;--dl:-2s"></span><span class="ptc" style="left:4%;--d:22s;--dl:-17s"></span><span class="ptc" style="left:39%;--d:28s;--dl:-24s"></span><span class="ptc" style="left:9%;--d:19s;--dl:-16s"></span><span class="ptc" style="left:70%;--d:21s;--dl:-8s"></span><span class="ptc" style="left:24%;--d:29s;--dl:-3s"></span><span class="ptc" style="left:35%;--d:19s;--dl:-0s"></span><span class="ptc" style="left:84%;--d:28s;--dl:-8s"></span><span class="ptc" style="left:36%;--d:19s;--dl:-5s"></span><span class="ptc" style="left:41%;--d:20s;--dl:-20s"></span><span class="ptc" style="left:95%;--d:29s;--dl:-11s"></span><span class="ptc" style="left:13%;--d:29s;--dl:-19s"></span><span class="ptc" style="left:45%;--d:26s;--dl:-12s"></span><span class="ptc" style="left:66%;--d:19s;--dl:-5s"></span></div>
 <div id="printName" class="print-name"></div>
 <div class="app">
@@ -503,6 +505,9 @@ body{background:transparent}
     <button data-page="heart"><span class="ico">🫀</span>Heart &amp; Function</button>
     <button data-page="digestive"><span class="ico">🍽️</span>Digestive System</button>
     <button data-page="electrons"><span class="ico">⚛️</span>Electron Shells Explorer</button>
+  </nav>
+  <div class="nav-label">Space Lab</div><nav class="nav">
+    <button data-page="solar"><span class="ico">🪐</span>Live 3D Solar System</button>
   </nav>
   <div class="nav-label">Account</div><nav class="nav">
     <button data-page="saved"><span class="ico">♡</span>Saved Projects</button>
@@ -572,10 +577,7 @@ return `${pageHead(title,tools.find(t=>t.id===id)?.desc||"")}<div class="panel">
 }
 let idPhotoData="",idLogoData="",cvPhotoData="";
 function readImg(file,cb){if(!file)return cb("");if(!file.type.startsWith("image/")){alert("Please choose an image file (JPG, PNG or WebP).");return}if(file.size>2e6){alert("The image must be under 2 MB.");return}const r=new FileReader();r.onload=()=>cb(r.result);r.onerror=()=>alert("Could not read this image.");r.readAsDataURL(file)}
-function cvPage(){cvPhotoData="";return `${pageHead("CV & Resume Maker","Fill in your details, add a photo, preview your CV, then print or save it as PDF.")}<div class="notice">Your entries and photo stay in this browser. Use the browser's Print dialog and select “Save as PDF” to create a PDF.</div><div class="two-col"><section class="panel no-print"><h2>Personal details</h2><div class="form-grid"><div class="field full"><label for="cvPhoto">Profile photo (optional)</label><input id="cvPhoto" type="file" accept="image/*"></div>${field("Full name","cvName","Your full name")}${field("Professional title","cvTitle","e.g. Teacher / Student")}${field("Email","cvEmail","name@example.com","email")}${field("Phone","cvPhone","+92…")}${field("Location","cvLocation","City, Country")}${field("Accent color","cvColor","","color","#246bfe")}<div class="field full"><label for="cvSummary">Profile summary</label><textarea id="cvSummary" placeholder="A short professional introduction"></textarea></div><div class="field full"><label for="cvEducation">Education (one item per line)</label><textarea id="cvEducation" placeholder="Degree — Institution — Year"></textarea></div><div class="field full"><label for="cvExperience">Experience (one item per line)</label><textarea id="cvExperience" placeholder="Role — Organization — Achievement"></textarea></div><div class="field full"><label for="cvSkills">Skills (comma separated)</label><input id="cvSkills" placeholder="Communication, MS Office, Teamwork"></div></div><div class="actions">${btn("Update preview","id=\"cvUpdate\"","primary")}${btn("Save project","id=\"cvSave\"")}${btn("Print / Save PDF","id=\"printBtn\"")}</div></section><section class="panel"><h2>Live preview</h2><div id="cvPreview" class="preview"></div></section></div>`}
 function idPage(){idPhotoData="";idLogoData="";idPhotoFile=null;return `${pageHead("ID Card Designer","Create a printable Student or Teacher / Staff ID card with a front and a back side.")}<div class="two-col"><section class="panel no-print"><div class="form-grid">${selectField("Card type","idType",["Student ID Card","Teacher / Staff ID Card"])}${selectField("Card design","idDesign",["Classic Gradient","Modern White","Side Band"])}${selectField("Print layout","idLayout",["Single set (front + back)","A4 sheet: 3 sets"])}${field("School / institution name","idSchool","School / College")}<div class="field"><label for="idLogo">School logo (optional)</label><input id="idLogo" type="file" accept="image/*"></div><div class="field"><label for="idPhoto">Photo (JPG, JPEG or PNG)</label><input id="idPhoto" type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png"><div class="actions" style="margin-top:8px">${btn("Crop / change background",'id="idCrop"')}</div><small class="muted">Cropped to 160 × 200 px. Background: white, blue or black.</small></div>${field("Student name","idName","Full name")}${field("Father's name","idFather","")}${field("Class","idClass","e.g. Class 8")}${field("Roll number","idRoll","e.g. 021")}${field("Session / validity","idSession","2026–2027")}${field("Back side: Blood group","idBlood","e.g. B+")}${field("Back side: Date of birth","idDob","e.g. 12-03-2012")}${field("Back side: Contact phone","idPhone","03xx xxxxxxx")}${field("Back side: Emergency / guardian phone","idEmerg","03xx xxxxxxx")}${field("Card color","idColor","","color","#1459a8")}<div class="field full"><label for="idAddr">Back side: address</label><input id="idAddr" placeholder="School address"></div><div class="field full"><label for="idBack">Back side: note</label><textarea id="idBack" placeholder="If found, please return this card to the school."></textarea></div>${field("Back side: signature title","idSign","e.g. Principal")}</div><div class="actions">${btn("Update card","id=\"idUpdate\"","primary")}${btn("Print / Save PDF","id=\"printBtn\"")}${btn("Save project","id=\"idSave\"")}</div></section><section class="panel"><h2>Card preview</h2><div id="idPreview" class="preview"></div></section></div>`}
-function cvData(){const v=id=>$("#"+id)?.value||"";return {name:v("cvName"),title:v("cvTitle"),email:v("cvEmail"),phone:v("cvPhone"),location:v("cvLocation"),summary:v("cvSummary"),education:v("cvEducation"),experience:v("cvExperience"),skills:v("cvSkills"),color:v("cvColor")}}
-function updateCV(){if(!$("#cvPreview"))return;let d=cvData();const c=/^#[0-9a-f]{6}$/i.test(d.color)?d.color:"#246bfe";$("#cvPreview").innerHTML=`<div style="display:flex;gap:16px;align-items:center;justify-content:space-between;border-bottom:3px solid ${c};padding-bottom:12px"><div><h1 style="margin:0;font-size:28px">${escapeHtml(d.name||"Your Name")}</h1><b>${escapeHtml(d.title||"Professional Title")}</b><p class="muted">${[d.email,d.phone,d.location].filter(Boolean).map(escapeHtml).join(" · ")}</p></div>${cvPhotoData?`<img alt="Profile photo" src="${cvPhotoData}" style="width:96px;height:96px;object-fit:cover;border-radius:50%;border:3px solid ${c};flex:none">`:""}</div>${d.summary?`<h3>Profile</h3><p>${escapeHtml(d.summary)}</p>`:""}${sectionCV("Education",d.education)}${sectionCV("Experience",d.experience)}${d.skills?`<h3>Skills</h3><p>${escapeHtml(d.skills)}</p>`:""}`}
 function timetablePage(){return `${pageHead("Timetable Generator","Build a weekly class timetable and export it as CSV or print it.")}<div class="panel"><div class="form-grid">${field("School / Institution","ttSchool","School name")}${field("Class / Section","ttClass","Class 8 - A")}${selectField("Days","ttDays",["Monday–Friday","Monday–Saturday","Sunday–Thursday"])}</div><div class="actions">${btn("Create timetable","id=\"ttBuild\"","primary")}${btn("Download CSV","id=\"ttCsv\"")}${btn("Print timetable","id=\"printBtn\"")}${btn("Save project","id=\"ttSave\"")}</div><div id="ttOutput" class="table-wrap" style="margin-top:20px"></div></div>`}
 function logoPage(){return `${pageHead("Logo Maker","Create a clean, editable SVG logo. This is a template-based editor; AI image generation is not configured.")}<div class="two-col"><section class="panel"><div class="form-grid">${field("Brand name","logoName","Mohsin Tools","text","Mohsin Tools")}${field("Tagline","logoTag","Learn. Create. Achieve.","text","Learn. Create. Achieve.")}${selectField("Style","logoStyle",["Modern","Education","Minimal","Geometric","Corporate"])}${field("Logo color","logoColor","","color","#246bfe")}</div><div class="actions">${btn("Generate logo","id=\"logoUpdate\"","primary")}${btn("Download SVG","id=\"logoSvg\"")}${btn("Download PNG","id=\"logoPng\"")}${btn("Print","id=\"printBtn\"")}${btn("Save project","id=\"logoSave\"")}</div></section><section class="panel"><h2>Logo preview</h2><div id="logoPreview" class="logo-preview"></div></section></div>`}
 function paperPage(){return `${pageHead("Exam Paper Generator","Generate an editable sample paper with class-appropriate question styles.")}<div class="notice">This creates a generic sample paper. It does not claim to follow a specific board, textbook, or syllabus unless you provide and verify that content.</div><div class="two-col"><section class="panel"><div class="form-grid">${field("School name","pSchool","School name")}${selectField("Class / Grade","pClass",["Nursery","KG","Class 1","Class 2","Class 3","Class 4","Class 5","Class 6","Class 7","Class 8","Class 9","Class 10","Class 11","Class 12","College","University"])}${selectField("Subject","pSubject",["Urdu","English","Mathematics","Science","General Knowledge","Islamiyat","Computer Science","Biology","Physics","Chemistry"])}${selectField("Language","pLang",["English","Urdu","Pashto"])}${selectField("Exam type","pType",["Class Test","Monthly Test","Mid-Term","Final Exam","Annual Exam"])}${field("Total marks","pMarks","50","number","50")}${field("Duration","pDuration","1 hour","text","1 hour")}${field("Chapter / topic","pTopic","Enter chapter or topic")}</div><div class="actions">${btn("Generate paper","id=\"paperGenerate\"","primary")}${btn("Print / Save PDF","id=\"printBtn\"")}${btn("Save project","id=\"paperSave\"")}</div></section><section class="panel"><h2>Paper preview</h2><div id="paperPreview" class="preview"><div class="empty">Complete the form and generate a sample paper.</div></div></section></div>`}
@@ -616,8 +618,6 @@ if(id==="age"){let d=new Date($("#dob").value),as=new Date($("#asof").value);if(
 if(id==="countdown"){let date=$("#examdate").value;if(!date){out.textContent="Choose an exam date.";return}let days=Math.ceil((new Date(date+"T00:00:00")-new Date(new Date().toDateString()))/86400000);out.innerHTML=`<div class="result"><strong>${days<0?Math.abs(days)+" days ago":days+" days left"}</strong>${escapeHtml($("#examname").value||"Your exam")}</div>`}
 });
 document.addEventListener("input",e=>{if(e.target.id==="words"){let v=e.target.value;let words=v.trim()?v.trim().split(/\s+/).length:0;let sentences=v.trim()?v.split(/[.!?]+/).filter(x=>x.trim()).length:0;$("#calcResult").innerHTML=`<div class="result"><strong>${words} words</strong>Characters: ${v.length} · Characters (no spaces): ${v.replace(/\s/g,"").length} · Sentences: ${sentences}</div>`}});
-function sectionCV(title,val){return val?`<h3>${title}</h3><ul>${val.split("\n").filter(x=>x.trim()).map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul>`:""}
-document.addEventListener("click",e=>{if(e.target.id==="cvUpdate")updateCV();if(e.target.id==="cvSave"){let d=cvData();saveItem("CV",d.name||"My CV",d)}});
 function updateID(){if(!$("#idPreview"))return;const val=id=>($("#"+id)?.value||"").trim(),teacher=(val("idType")||"").startsWith("Teacher"),c=$("#idColor")?.value||"#1459a8";
 const L=(id,a,b)=>{const el=document.querySelector(`label[for="${id}"]`);if(el)el.textContent=teacher?b:a};L("idName","Student name","Teacher / staff name");L("idFather","Father's name","Subject / Department");L("idClass","Class","Designation");L("idRoll","Roll number","Staff number");
 const rows=(teacher?[["Subject",val("idFather")],["Designation",val("idClass")],["Staff No",val("idRoll")]]:[["Father",val("idFather")],["Class",val("idClass")],["Roll No",val("idRoll")]]).concat([["Session",val("idSession")]]).filter(r=>r[1]);
@@ -984,7 +984,7 @@ async function auHash(pw,salt){const k=await crypto.subtle.importKey("raw",new T
 let auFails=0,auLockUntil=0,auTab="login";
 function authRender(){
  const a=$("#authArea");if(!a)return;const s=auSession();
- a.innerHTML=s?`<button class="btn" id="auChip" title="${escapeHtml(s.email)}">👤 ${escapeHtml(s.name.split(" ")[0])}</button>`:`<button class="btn" id="auOpenLogin">Login</button><button class="btn primary" id="auOpenSignup">Sign up</button>`;
+ a.innerHTML=s?`<button class="btn" id="auChip" title="${escapeHtml(s.email)}">👤 ${escapeHtml(s.name.split(" ")[0])}</button><button class="btn" id="auLogout">Logout</button>`:`<button class="btn" id="auOpenLogin">Login</button><button class="btn primary" id="auOpenSignup">Sign up</button>`;
 }
 function auClose(){const m=$("#auModal");if(m)m.remove();document.removeEventListener("keydown",auEsc)}
 function auEsc(e){if(e.key==="Escape")auClose()}
@@ -1003,7 +1003,10 @@ function auBody(){
  b.innerHTML=`<div class="au-tabs" role="tablist"><button role="tab" id="auTabLogin" aria-selected="${!su}">Login</button><button role="tab" id="auTabSignup" aria-selected="${su}">Sign up</button></div><form id="auForm" novalidate>${su?`<div class="field"><label for="auName">Full name</label><input id="auName" autocomplete="name" maxlength="60"></div>`:""}<div class="field" style="margin-top:10px"><label for="auEmail">Email</label><input id="auEmail" type="email" autocomplete="${su?"email":"username"}" inputmode="email"></div><div class="field" style="margin-top:10px"><label for="auPass">Password${su?" (at least 8 characters)":""}</label><input id="auPass" type="password" autocomplete="${su?"new-password":"current-password"}"></div>${su?`<div class="field" style="margin-top:10px"><label for="auPass2">Confirm password</label><input id="auPass2" type="password" autocomplete="new-password"></div>`:""}<label class="au-row"><input type="checkbox" id="auShow"> Show password</label>${su?"":`<label class="au-row"><input type="checkbox" id="auRemember" checked> Keep me logged in on this device</label>`}<div id="auErr" class="au-err" role="alert" aria-live="polite"></div><button class="btn primary" id="auSubmit" type="submit" style="width:100%;justify-content:center">${su?"Create account":"Login"}</button></form><p class="au-note">${su?"Already have an account? ":"New here? "}<a href="#" id="auSwitch">${su?"Login":"Create an account"}</a></p><p class="au-note">Accounts are stored only in this browser. They are not shared between devices and there is no password reset.</p>`;
  (su?$("#auName"):$("#auEmail")).focus();
 }
+let auBusy=false;
 async function auSubmit(){
+ if(auBusy)return;auBusy=true;try{await auSubmit2()}finally{auBusy=false}}
+async function auSubmit2(){
  const err=m=>{$("#auErr").textContent=m},su=auTab==="signup",email=($("#auEmail").value||"").trim().toLowerCase(),pw=$("#auPass").value;
  if(!window.crypto||!crypto.subtle){err("This browser cannot create secure accounts here. Open the site over https.");return}
  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err("Enter a valid email address.");return}
@@ -1026,8 +1029,8 @@ async function auSubmit(){
 }
 function auStart(email,name,remember){
  sessionStorage.removeItem(AU_SESSION);localStorage.removeItem(AU_SESSION);
- (remember?localStorage:sessionStorage).setItem(AU_SESSION,JSON.stringify({email,name}));
- auClose();authRender();toast("Welcome, "+name.split(" ")[0]+"!");
+ (remember?localStorage:sessionStorage).setItem(AU_SESSION,JSON.stringify({email,name,provider:"local",exp:Date.now()+(remember?30:1)*864e5}));
+ auClose();authRender();try{window.render("home")}catch{}toast("Welcome, "+name.split(" ")[0]+"!");
 }
 function auLogout(){sessionStorage.removeItem(AU_SESSION);localStorage.removeItem(AU_SESSION);auClose();authRender();toast("You are logged out")}
 document.addEventListener("submit",e=>{if(e.target.id==="auForm"){e.preventDefault();auSubmit()}});
@@ -1036,7 +1039,7 @@ document.addEventListener("click",e=>{
  const t=e.target.closest("button,a");if(!t)return;
  if(t.id==="auOpenLogin")auOpen("login");
  else if(t.id==="auOpenSignup")auOpen("signup");
- else if(t.id==="auChip")auOpen("login");
+ else if(t.id==="auChip")auOpen("account");
  else if(t.id==="auTabLogin"||t.id==="auTabSignup"){auTab=t.id==="auTabSignup"?"signup":"login";auBody()}
  else if(t.id==="auSwitch"){e.preventDefault();auTab=auTab==="signup"?"login":"signup";auBody()}
  else if(t.id==="auCancel")auClose();
@@ -1094,6 +1097,155 @@ function libraryPage(){return libraryPage0()+libSciHtml()}
 function sciPage(id){const h=sciPage0(id);return id==="scigallery"?h+libSciHtml():h}
 document.addEventListener("click",e=>{const g=e.target.closest("[data-ls]");if(g)lsShow(g.dataset.ls)});
 render("home");
+</script>
+<style id="cs-css">.cs{--gold:#c9a24a}
+.cs-bar{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:18px;background:linear-gradient(120deg,#10244a,#1f4fd8);color:#fff;margin-bottom:14px;box-shadow:var(--shadow);flex-wrap:wrap}
+.cs-logo{width:44px;height:44px;flex:none;aspect-ratio:1/1;filter:drop-shadow(0 4px 6px #0006)}
+.cs-bar b{font-size:1.1rem}.cs-bar .sp{flex:1}.cs-bar .btn{margin:0;background:#ffffff1f;color:#fff;border-color:#fff4}
+.cs-glass{background:color-mix(in srgb,var(--panel) 82%,transparent);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:16px}
+.cs-main{display:grid;grid-template-columns:minmax(330px,480px) 1fr;gap:16px;align-items:start}
+@media(max-width:980px){.cs-main{grid-template-columns:1fr}}
+.cs-hero{text-align:center;padding:28px 16px;margin-bottom:16px}.cs-hero .cs-logo{width:84px;height:84px}.cs-hero h1{margin:.4em 0 .1em;font-size:clamp(1.6rem,4vw,2.4rem);background:linear-gradient(90deg,#1f4fd8,#c9a24a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cs-ths{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:16px 0}.cs-ths.sm{justify-content:flex-start;max-height:230px;overflow:auto}
+.cs-th{background:none;border:0;color:var(--ink);text-align:center;cursor:pointer;padding:4px;transition:transform .2s}.cs-th:hover{transform:translateY(-4px)}.cs-th em{display:block;font-style:normal;font-size:12px;margin-top:4px;max-width:118px}
+.thw{display:block;width:118px;height:167px;overflow:hidden;border-radius:6px;border:1px solid var(--line);position:relative;background:#fff;box-shadow:0 4px 12px #0003}
+.thw .cs-paper{transform:scale(.1486);transform-origin:top left;position:absolute;left:0;top:0;pointer-events:none}
+.cs-th.on .thw{outline:3px solid var(--gold)}
+.cs-row{display:flex;flex-wrap:wrap;gap:8px;align-items:end;margin:8px 0}.cs-row .btn{margin:0}
+.cs .f{display:block;margin:8px 0;font-size:13px;color:var(--muted)}.cs .f input,.cs .f textarea,.cs .f select,.cs select{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.cs .f input[type=color]{height:40px;padding:2px}.cs .miss{border-style:dashed;border-color:#e0a030}
+.cs-d{border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:8px 0}.cs-d summary{cursor:pointer;font-weight:700;padding:4px 0}.cs-d small{color:var(--muted)}
+.cs-it{border:1px solid var(--line);border-radius:10px;margin:8px 0;padding:6px 10px}.cs-ib{display:flex;justify-content:space-between;align-items:center}.cs-ib .btn{padding:3px 9px;margin:0 0 0 4px}
+.cs-pg{height:8px;border-radius:9px;background:var(--line);overflow:hidden}.cs-pg i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1f4fd8,#c9a24a);transition:width .4s}
+.cs .btn.g{background:linear-gradient(135deg,#c9a24a,#e6c76f);color:#10244a;border:0;font-weight:700}
+.cs-fit{width:100%;overflow:hidden;border-radius:6px}
+.cs dialog{border:1px solid var(--line);border-radius:16px;background:var(--panel);color:var(--ink);max-width:460px;width:92%}.cs dialog::backdrop{background:#0008}
+.cs-hide{display:none!important}
+.cs-paper{width:var(--pw);min-height:var(--ph);box-sizing:border-box;background:#fff;color:#1b2433;font:var(--fs)/1.45 var(--f);--sbb:var(--a);--sbt:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:0 10px 40px #0004}
+.cs-paper *{box-sizing:border-box}.cs-paper h1{font-size:2.3em;margin:0;line-height:1.1}.cs-paper h2{font-size:1.15em;font-weight:500;margin:.2em 0 .6em;opacity:.85}
+.cs-paper h3{font-size:.95em;letter-spacing:.08em;text-transform:uppercase;margin:1.1em 0 .5em;color:var(--a)}
+.cs-paper section{break-inside:avoid-page}.cs-paper .it{margin:0 0 .7em;break-inside:avoid}.cs-paper p{margin:0}
+.cs-paper .r{display:flex;justify-content:space-between;gap:1em}.cs-paper .r i{font-style:normal;opacity:.7;white-space:nowrap;font-size:.9em}.cs-paper .o{opacity:.85}
+.cs-paper ul{margin:.25em 0 0;padding-inline-start:1.2em}.cs-paper .sk{margin:.25em 0}
+.cs-paper .sk s{display:block;height:.35em;background:#0002;border-radius:9px;margin-top:.2em}.cs-paper .sk u{display:block;height:100%;background:var(--a);border-radius:9px}
+.cs-paper .ph{width:7em;height:7em;object-fit:cover;display:block;flex:none}.cs-paper .ph.c{border-radius:50%}
+.cs-paper .ct{display:flex;flex-direction:column;gap:.2em;font-size:.92em;word-break:break-word}
+.cs-paper[data-lay=sl],.cs-paper[data-lay=sr]{display:grid}
+.cs-paper[data-lay=sl]{grid-template-columns:32% 1fr;background:linear-gradient(90deg,var(--sbb) 32%,#fff 32%)}
+.cs-paper[data-lay=sr]{grid-template-columns:1fr 32%;background:linear-gradient(90deg,#fff 68%,var(--sbb) 68%)}
+.cs-paper[dir=rtl][data-lay=sl]{background:linear-gradient(270deg,var(--sbb) 32%,#fff 32%)}
+.cs-paper[dir=rtl][data-lay=sr]{background:linear-gradient(270deg,#fff 68%,var(--sbb) 68%)}
+.cs-paper .sb{padding:12mm 7mm;color:var(--sbt)}.cs-paper .sb h3{color:inherit;border-bottom:1px solid #fff5;padding-bottom:.3em}.cs-paper .sb .ph{margin:0 auto 1em}
+.cs-paper[data-lay=sl]>main,.cs-paper[data-lay=sr]>main{padding:12mm 9mm}
+.cs-paper[data-sb=dark]{--sbb:#111827}.cs-paper[data-sb=navy]{--sbb:#10244a}.cs-paper[data-sb=soft]{--sbb:#eef2ff;--sbt:#1b2433}
+.cs-paper .sb .sk s{background:#fff4}.cs-paper .sb .sk u{background:#fff}.cs-paper[data-sb=soft] .sb .sk s{background:#0001}.cs-paper[data-sb=soft] .sb .sk u{background:var(--a)}.cs-paper[data-sb=soft] .sb h3{border-color:#0002}
+.cs-paper[data-lay=top] .hd{display:flex;justify-content:space-between;align-items:center;gap:1em;padding:12mm 14mm 8mm;background:var(--sbb);color:var(--sbt);border-bottom:.8mm solid var(--a)}
+.cs-paper[data-lay=top][data-sb=none] .hd{background:#fff;color:#1b2433}.cs-paper[data-lay=top] .hd .ct{flex-direction:row;flex-wrap:wrap;gap:.2em 1em}
+.cs-paper .cols{display:grid;grid-template-columns:1.7fr 1fr;gap:0 8mm;padding:2mm 14mm 12mm}
+.cs-paper[data-lay=one]{padding:14mm}.cs-paper[data-lay=one] .hd{text-align:center;border-bottom:.4mm solid var(--a);padding-bottom:4mm}.cs-paper[data-lay=one] .ct{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:.2em 1em}
+.cs-paper[data-lay=split]{padding:14mm}.cs-paper[data-lay=split] .hd{display:flex;gap:1em;align-items:center;margin-bottom:4mm}.cs-paper[data-lay=split] .ct{flex-direction:row;flex-wrap:wrap;gap:.2em 1em}
+.cs-paper[data-lay=split] section{display:grid;grid-template-columns:26% 1fr;gap:0 4%}.cs-paper[data-lay=split] section>h3{grid-column:1;grid-row:1/span 50;margin-top:0}.cs-paper[data-lay=split] section>:not(h3){grid-column:2}
+.cs-paper[data-hd=pill] h3{background:var(--a);color:#fff;border-radius:99px;padding:.2em .9em;display:inline-block}
+.cs-paper[data-hd=bar] h3{border-inline-start:.3em solid var(--a);padding-inline-start:.5em}
+.cs-paper[data-hd=line] h3{border-bottom:.3mm solid var(--a);padding-bottom:.2em}
+.cs-paper[data-hd=plain] h3{text-transform:none;color:#555;letter-spacing:0;font-weight:600}
+.cs-paper[data-hd=mono] h3::before{content:"// "}.cs-paper[data-hd=mono] .sk,.cs-paper[data-hd=ats] .sk{display:inline-block;margin:.15em .4em .15em 0}.cs-paper[data-hd=mono] .sk s,.cs-paper[data-hd=ats] .sk s{display:none}
+.cs-paper[data-hd=mono] .sk span{border:1px solid var(--a);padding:.1em .5em;border-radius:4px}
+.cs-paper[data-hd=ats] h3{color:#000;border-bottom:.3mm solid #000;padding-bottom:.15em}.cs-paper[data-hd=ats] .sk:not(:last-child) span::after{content:","}
+@media print{.cs-ui,.cs-bar,.cs dialog{display:none!important}.cs-main{display:block}.cs-glass{border:0;box-shadow:none;padding:0;background:none}.cs-fit{height:auto!important;overflow:visible}.cs-paper{transform:none!important;box-shadow:none!important;margin:0}}
+</style>
+<script id="cs-js">
+(()=>{
+const LS=localStorage,K='mt_cv_drafts',KC='mt_cv_cur',$=(s,r=document)=>r.querySelector(s),H=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const FN={sans:'Inter,"Segoe UI",Arial,sans-serif',serif:'Georgia,"Times New Roman",serif',mono:'ui-monospace,Consolas,monospace',disp:'"Trebuchet MS","Segoe UI",sans-serif'},UF='"Noto Nastaliq Urdu","Jameel Noori Nastaleeq","Noto Naskh Arabic",Tahoma,serif';
+const T=[['modern','Modern Professional','sl','bar','acc','sans','#1f4fd8'],['exec','Corporate Executive','top','caps','navy','serif','#10244a'],['mini','Minimalist','split','plain','none','sans','#334155'],['student','Student CV','top','pill','soft','sans','#0e7490'],['grad','Fresh Graduate','sr','bar','soft','sans','#7c3aed'],['teacher','Teacher CV','one','bar','none','serif','#b45309'],['design','Graphic Designer','sl','caps','dark','disp','#e11d48'],['dev','Software Developer','split','mono','none','mono','#0f766e'],['med','Medical Professional','top','line','none','sans','#0891b2'],['biz','Business Manager','sr','caps','navy','serif','#1e3a8a'],['creative','Creative Portfolio','top','pill','acc','disp','#c026d3'],['ats','ATS-Friendly Resume','one','ats','none','sans','#000000']];
+const LB={en:{exp:'Work Experience',edu:'Education',skills:'Skills',proj:'Projects',cert:'Certifications & Awards',lang:'Languages',ref:'References',links:'Links',sum:'Profile',contact:'Contact',present:'Present'},ur:{exp:'کام کا تجربہ',edu:'تعلیم',skills:'مہارتیں',proj:'پراجیکٹس',cert:'اسناد اور اعزازات',lang:'زبانیں',ref:'حوالہ جات',links:'روابط',sum:'تعارف',contact:'رابطہ',present:'جاری'}};
+const SEC={exp:[['role','Job title'],['org','Company'],['from','Start','month'],['to','End (blank = present)','month'],['desc','Achievements (one per line)','ta']],edu:[['role','Degree / program'],['org','School / university'],['from','Start','month'],['to','End','month'],['desc','Details (one per line)','ta']],skills:[['name','Skill'],['lv','Level %','range']],proj:[['name','Project name'],['link','Portfolio link'],['desc','Description','ta']],cert:[['name','Certificate / award'],['org','Issuer'],['yr','Year']],lang:[['name','Language'],['lv','Level']],ref:[['name','Name'],['role','Position / company'],['contact','Phone or email']],links:[['name','Label (e.g. LinkedIn)'],['url','URL']]};
+const TT={exp:'Work experience',edu:'Education',skills:'Skills & proficiency',proj:'Projects & portfolio',cert:'Certifications & awards',lang:'Languages',ref:'References',links:'LinkedIn & professional links'};
+const PH={name:'e.g. Ayesha Khan',title:'e.g. Mathematics Teacher',phone:'+92 300 1234567',email:'name@example.com',city:'e.g. Lahore, Pakistan',addr:'Street, area',summary:'2–3 lines about your experience and goals',role:'e.g. Senior Teacher',org:'e.g. City Grammar School',desc:'One achievement per line',name2:''};
+const RQ=['name','title','email','phone','summary'],has=o=>Object.values(o).some(v=>String(v).trim());
+const blank=()=>({t:'modern',c:'#1f4fd8',f:'sans',fs:10.5,ph:1,sh:'c',pg:'A4',lang:'en',d:{name:'',title:'',phone:'',email:'',city:'',addr:'',summary:'',photo:'',exp:[{}],edu:[{}],skills:[{lv:70}],proj:[],cert:[],lang:[],ref:[],links:[]}});
+const SAMPLE=(()=>{const s=blank();Object.assign(s.d,{name:'Ayesha Khan',title:'Mathematics Teacher',phone:'+92 300 1234567',email:'ayesha@example.com',city:'Lahore',summary:'Dedicated educator with six years of classroom experience, focused on clear teaching and student confidence.',exp:[{role:'Senior Teacher',org:'City Grammar School',from:'2021-04',desc:'Raised class pass rate to 96%\nLed the maths club'},{role:'Teacher',org:'Bright Future School',from:'2018-08',to:'2021-03',desc:'Taught grades 6–10'}],edu:[{role:'MSc Mathematics',org:'University of the Punjab',from:'2014-09',to:'2016-07'}],skills:[{name:'Lesson planning',lv:90},{name:'MS Office',lv:80},{name:'Public speaking',lv:70}],lang:[{name:'Urdu',lv:'Native'},{name:'English',lv:'Fluent'}],cert:[{name:'Teaching Excellence Award',org:'City Schools',yr:'2023'}],proj:[]});return s})();
+let S,cur,started=false,tm,TH='';
+const norm=o=>{const b=blank();o=o||{};const s=Object.assign(b,o);s.d=Object.assign(b.d,o.d||{});for(const k in SEC)if(!Array.isArray(s.d[k]))s.d[k]=[];if(!/^#[0-9a-f]{6}$/i.test(s.c))s.c='#1f4fd8';if(!FN[s.f])s.f='sans';if(!LB[s.lang])s.lang='en';if(!T.some(t=>t[0]==s.t))s.t='modern';s.fs=Math.min(12,Math.max(9,+s.fs||10.5));s.pg=s.pg=='Letter'?'Letter':'A4';return s};
+const rd=()=>{try{return JSON.parse(LS.getItem(K)||'{}')||{}}catch{return{}}},wr=o=>{try{LS.setItem(K,JSON.stringify(o));return 1}catch{toast('Browser storage is full. Delete a draft or remove the photo.');return 0}};
+const dt=v=>{if(!v)return'';const[y,m]=v.split('-');if(!m)return H(y);try{return new Date(y,m-1).toLocaleDateString('en',{month:'short',year:'numeric'})}catch{return H(v)}};
+const rg=(i,L)=>[dt(i.from),i.from||i.to?(i.to?dt(i.to):L.present):''].filter(Boolean).join(' – ');
+const ul=t=>t?`<ul>${String(t).split('\n').filter(x=>x.trim()).map(x=>`<li>${H(x)}</li>`).join('')}</ul>`:'';
+const blk={exp:(i,L)=>`<div class="it"><div class="r"><b>${H(i.role)}</b><i>${rg(i,L)}</i></div><div class="o">${H(i.org)}</div>${ul(i.desc)}</div>`,proj:i=>`<div class="it"><div class="r"><b>${H(i.name)}</b><i>${H(i.link)}</i></div>${ul(i.desc)}</div>`,cert:i=>`<div class="it"><div class="r"><b>${H(i.name)}</b><i>${H(i.yr)}</i></div><div class="o">${H(i.org)}</div></div>`,skills:i=>`<div class="sk"><span>${H(i.name)}</span><s><u style="width:${Math.min(100,+i.lv||70)}%"></u></s></div>`,lang:i=>`<div class="sk"><span>${H(i.name)}${i.lv?' — '+H(i.lv):''}</span></div>`,ref:i=>`<div class="it"><b>${H(i.name)}</b><div class="o">${H(i.role)}</div><div>${H(i.contact)}</div></div>`,links:i=>`<div class="sk"><span>${H(i.name)}${i.name&&i.url?': ':''}${H(i.url)}</span></div>`};blk.edu=blk.exp;
+function paper(S){const t=T.find(x=>x[0]==S.t)||T[0],[id,,lay,hd,sb]=t,d=S.d,L=LB[S.lang],ats=id=='ats',a4=S.pg=='A4';
+const sc=k=>{const a=(d[k]||[]).filter(has);return a.length?`<section><h3>${L[k]}</h3>${a.map(i=>blk[k](i,L)).join('')}</section>`:''},sum=d.summary?`<section><h3>${L.sum}</h3><p>${H(d.summary).replace(/\n/g,'<br>')}</p></section>`:'';
+const ph=S.ph&&d.photo&&!ats?`<img class="ph ${S.sh=='c'?'c':''}" src="${d.photo}" alt="">`:'';
+const ct=[d.phone,d.email,[d.city,d.addr].filter(Boolean).join(', ')].filter(Boolean).map(x=>`<span>${H(x)}</span>`).join('');
+const nm=`<div><h1>${H(d.name||'Your Name')}</h1><h2>${H(d.title)}</h2>${lay=='sl'||lay=='sr'?'':`<div class="ct">${ct}</div>`}</div>`;
+const O=['student','grad'].includes(id)?['edu','exp']:['exp','edu'];let h;
+if(lay=='sl'||lay=='sr'){const side=`<aside class="sb">${ph}<section><h3>${L.contact}</h3><div class="ct">${ct}</div></section>${sc('links')}${sc('skills')}${sc('lang')}</aside>`,main=`<main><header class="hd">${nm}</header>${sum}${O.map(sc).join('')}${sc('proj')}${sc('cert')}${sc('ref')}</main>`;h=lay=='sl'?side+main:main+side}
+else if(lay=='top')h=`<header class="hd">${nm}${ph}</header><div class="cols"><main>${sum}${sc(O[0])}${sc('proj')}${sc(O[1])}</main><aside>${sc('skills')}${sc('cert')}${sc('lang')}${sc('links')}${sc('ref')}</aside></div>`;
+else h=`<header class="hd">${ph}${nm}</header>${sum}${O.map(sc).join('')}${sc('skills')}${sc('proj')}${sc('cert')}${sc('lang')}${sc('links')}${sc('ref')}`;
+return`<div class="cs-paper" data-lay="${lay}" data-hd="${hd}" data-sb="${sb}" dir="${S.lang=='ur'?'rtl':'ltr'}" style="--a:${S.c};--f:${S.lang=='ur'?UF+','+FN[S.f]:FN[S.f]};--fs:${S.fs}pt;--pw:${a4?210:215.9}mm;--ph:${a4?297:279.4}mm">${h}</div>`}
+const logo=()=>`<svg class="cs-logo" viewBox="0 0 100 100" role="img" aria-label="MT CV Builder logo"><defs><linearGradient id="csg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b7bff"/><stop offset="1" stop-color="#0b1e45"/></linearGradient><linearGradient id="csg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4d98a"/><stop offset="1" stop-color="#b8893a"/></linearGradient><radialGradient id="csg3" cx=".3" cy=".2" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><circle cx="50" cy="50" r="48" fill="url(#csg2)"/><circle cx="50" cy="50" r="44.5" fill="url(#csg1)"/><circle cx="50" cy="50" r="44.5" fill="url(#csg3)"/><path d="M33 20h22l12 12v26H33z" fill="#fff"/><path d="M55 20v12h12" fill="#cfe0ff"/><path d="M39 40h20M39 46h20M39 52h10" stroke="#9db6e8" stroke-width="2" stroke-linecap="round"/><circle cx="64" cy="56" r="9" fill="#c9a24a"/><path d="M59.5 56l3 3 6-6.5" stroke="#10244a" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="50" y="81" text-anchor="middle" font-size="15" font-weight="800" fill="#fff" font-family="Arial,sans-serif" letter-spacing="1">MT</text></svg>`;
+const thumbs=sm=>{if(!TH)TH=T.map(t=>`<button type="button" class="cs-th" data-act="tpl" data-t="${t[0]}" title="${t[1]}"><span class="thw">${paper({...SAMPLE,t:t[0],c:t[6],f:t[5]})}</span><em>${t[1]}</em></button>`).join('');return`<div class="cs-ths${sm?' sm':''}">${TH}</div>`};
+window.cvPage=()=>`<div class="cs"><div class="cs-bar cs-ui">${logo()}<b>CV / Resume Builder</b><span class="sp"></span><button type="button" class="btn" data-act="theme">◐ Theme</button><button type="button" class="btn" data-act="home">⌂ Home</button></div>
+<section id="csWelcome" class="cs-glass cs-hero cs-ui">${logo()}<h1>Build Your Professional Future</h1><p class="sub">Pick one of 12 templates, type your details and watch your CV update live. Everything stays in your browser.</p>${thumbs()}<div class="cs-row" style="justify-content:center"><button type="button" class="btn primary" data-act="start">Start with the selected template</button><select id="csOpen" aria-label="Open saved draft" style="width:auto"></select></div></section>
+<div id="csApp" class="cs-main cs-hide"><section class="cs-glass cs-ui"><div class="cs-pg" aria-hidden="true"><i id="csBar"></i></div><p id="csPct" class="sub" style="margin:6px 0 10px"></p>
+<div class="cs-row"><select id="csDr" aria-label="Saved CVs" style="flex:1;min-width:140px"></select><button type="button" class="btn" data-act="new">+ New</button><button type="button" class="btn" data-act="dup">Duplicate</button><button type="button" class="btn" data-act="del">Delete</button><button type="button" class="btn" data-act="reset">Reset</button></div><p id="csSaved" class="sub" role="status" style="margin:0 0 8px"></p>
+<details class="cs-d" open data-n="design"><summary>Template &amp; design</summary>${thumbs(1)}<div class="cs-row"><label class="f">Accent<input type="color" id="csColor"></label><label class="f">Font<select id="csFont"><option value="sans">Sans</option><option value="serif">Serif</option><option value="mono">Mono</option><option value="disp">Display</option></select></label><label class="f">Size<input type="range" id="csSize" min="9" max="12" step=".25"></label></div><div class="cs-row"><label class="f">Page<select id="csPg"><option>A4</option><option>Letter</option></select></label><label class="f">CV language<select id="csLang"><option value="en">English</option><option value="ur">اردو (RTL)</option></select></label><label class="f">Photo shape<select id="csShape"><option value="c">Circle</option><option value="s">Square</option></select></label><label class="f"><input type="checkbox" id="csPh" style="width:auto"> Show photo</label></div></details>
+<div id="csForm"></div></section>
+<section class="cs-prev"><div class="cs-row cs-ui"><button type="button" class="btn g" data-act="review">✔ Review &amp; download</button><button type="button" class="btn" data-act="print">Print / PDF</button><button type="button" class="btn" data-act="docx">DOCX</button><button type="button" class="btn" data-act="txt">Plain text</button></div><div class="cs-fit" id="csFit"></div></section></div>
+<dialog id="csRev"><h2 style="margin-top:0">Final review</h2><ul id="csChk" style="padding-left:18px"></ul><p class="sub">Missing items don't block you. PDF: choose “Save as PDF” in the print window.</p><div class="cs-row"><button type="button" class="btn primary" data-act="print">Download PDF</button><button type="button" class="btn" data-act="docx">DOCX</button><button type="button" class="btn" data-act="txt">ATS text</button><button type="button" class="btn" data-act="close">Close</button></div></dialog><style id="csPageStyle"></style></div>`;
+const fld=(s,i,k,lab,ty)=>{let v=s?S.d[s][i][k]:S.d[k];if(ty=='range'&&v==null)v=70;const a=`data-k="${k}" data-s="${s}" data-i="${i}" placeholder="${PH[k]||''}"`,rq=!s&&RQ.includes(k)?' data-req':'';return`<label class="f">${lab}${ty=='ta'?`<textarea ${a}${rq} rows="3">${H(v)}</textarea>`:`<input ${a}${rq} type="${ty||'text'}" value="${H(v??'')}"${ty=='range'?' min="10" max="100" step="5"':''}>`}</label>`};
+const rep=s=>`<details class="cs-d" data-n="${s}"><summary>${TT[s]} <small>(${S.d[s].length})</small></summary>${S.d[s].map((it,i)=>`<fieldset class="cs-it"><div class="cs-ib"><b>#${i+1}</b><span><button type="button" class="btn" data-act="up" data-s="${s}" data-i="${i}" aria-label="Move up">↑</button><button type="button" class="btn" data-act="dn" data-s="${s}" data-i="${i}" aria-label="Move down">↓</button><button type="button" class="btn" data-act="rm" data-s="${s}" data-i="${i}" aria-label="Remove">✕</button></span></div>${SEC[s].map(([k,l,ty])=>fld(s,i,k,l,ty)).join('')}</fieldset>`).join('')}<button type="button" class="btn" data-act="add" data-s="${s}">+ Add</button></details>`;
+function form(){const op=new Set([...document.querySelectorAll('#csForm details[open]')].map(x=>x.dataset.n));if(!$('#csForm').children.length)['me','exp','edu'].forEach(x=>op.add(x));
+$('#csForm').innerHTML=`<details class="cs-d" data-n="me"><summary>Personal information</summary><label class="f">Profile photo (JPG, PNG or WebP)<input type="file" id="csPhotoIn" accept="image/jpeg,image/png,image/webp"></label>${S.d.photo?'<button type="button" class="btn" data-act="rmph">Remove photo</button>':''}${['name','title','phone','email','city','addr'].map(k=>fld('','',k,{name:'Full name',title:'Professional title',phone:'Phone',email:'Email',city:'City',addr:'Address'}[k])).join('')}${fld('','','summary','Professional summary','ta')}</details>`+Object.keys(SEC).map(rep).join('');
+document.querySelectorAll('#csForm details').forEach(x=>{if(op.has(x.dataset.n))x.open=true});mark()}
+const mark=()=>document.querySelectorAll('#csForm [data-req]').forEach(x=>x.classList.toggle('miss',!x.value.trim()));
+const chk=()=>{const d=S.d,n=k=>d[k].filter(has).length;return[['Full name',d.name],['Professional title',d.title],['Email',d.email],['Phone',d.phone],['Summary',d.summary],['Work experience',n('exp')],['Education',n('edu')],['3 or more skills',n('skills')>2]].map(([l,v])=>[l,!!(v&&String(v).trim())])};
+function prog(){const c=chk(),p=Math.round(c.filter(x=>x[1]).length/c.length*100),m=c.filter(x=>!x[1]).map(x=>x[0]);$('#csBar').style.width=p+'%';$('#csPct').textContent=`Completion ${p}%`+(m.length?` · still missing: ${m.join(', ')}`:' · looking complete!')}
+function fit(){const p=$('#csFit .cs-paper'),w=$('#csFit');if(!p||!w||!w.clientWidth)return;const s=Math.min(1,w.clientWidth/p.offsetWidth);p.style.transformOrigin='top left';p.style.transform=`scale(${s})`;w.style.height=p.offsetHeight*s+'px'}
+function upd(){$('#csFit').innerHTML=paper(S);$('#csPageStyle').textContent=`@media print{@page{size:${S.pg=='A4'?'A4':'letter'};margin:0}}`;prog();fit()}
+function sync(){$('#csColor').value=S.c;$('#csFont').value=S.f;$('#csSize').value=S.fs;$('#csPg').value=S.pg;$('#csLang').value=S.lang;$('#csShape').value=S.sh;$('#csPh').checked=!!S.ph;document.querySelectorAll('.cs-th').forEach(b=>b.classList.toggle('on',b.dataset.t==S.t))}
+function drafts(){const dr=rd(),o=Object.values(dr).sort((a,b)=>b.up-a.up).map(x=>`<option value="${H(x.id)}"${x.id==cur?' selected':''}>${H(x.s.d.name||'Untitled CV')} · ${new Date(x.up).toLocaleDateString()}</option>`).join('');$('#csDr').innerHTML=(cur&&dr[cur]?'':'<option value="">Unsaved CV</option>')+o;$('#csOpen').innerHTML='<option value="">Open a saved draft…</option>'+o}
+function persist(){clearTimeout(tm);tm=setTimeout(()=>{const dr=rd();if(!cur)cur='cv'+Date.now();dr[cur]={id:cur,up:Date.now(),s:S};if(wr(dr)){try{LS.setItem(KC,cur)}catch{}drafts();$('#csSaved').textContent='Autosaved in this browser at '+new Date().toLocaleTimeString()}},500)}
+function open(id){const dr=rd();if(!dr[id])return;cur=id;S=norm(dr[id].s);try{LS.setItem(KC,id)}catch{}show()}
+function show(){started=true;$('#csWelcome').classList.add('cs-hide');$('#csApp').classList.remove('cs-hide');form();sync();drafts();upd()}
+function init(){const dr=rd();cur=LS.getItem(KC);if(!dr[cur])cur=null;S=cur?norm(dr[cur].s):blank();started=false;drafts();$('#csPhotoIn')&&0;if(cur)show();addEventListener('resize',fit)}
+window.updateCV=()=>{if($('#csFit')||$('#csApp'))init()};
+function photo(f){if(!f)return;if(!/^image\/(jpeg|png|webp)$/.test(f.type)){toast('Please choose a JPG, PNG or WebP image');return}if(f.size>6e6){toast('Image must be under 6 MB');return}const u=URL.createObjectURL(f),im=new Image();im.onload=()=>{const n=Math.min(im.width,im.height),c=document.createElement('canvas');c.width=c.height=360;c.getContext('2d').drawImage(im,(im.width-n)/2,(im.height-n)/2,n,n,0,0,360,360);S.d.photo=c.toDataURL('image/jpeg',.85);URL.revokeObjectURL(u);form();upd();persist()};im.onerror=()=>toast('That image could not be read');im.src=u}
+const fname=()=>((S.d.name||'cv').toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]+/g,'-').replace(/^-|-$/g,'')||'cv')+'-cv';
+function lines(){const d=S.d,L=LB[S.lang],o=[],P=(t,x={})=>{if(String(t).trim())o.push({t:String(t),...x})},Hd=k=>P(L[k],{b:1,z:24,b4:240,h:1}),each=(k,f)=>{const a=d[k].filter(has);if(a.length){Hd(k);a.forEach(f)}};
+P(d.name||'Your Name',{b:1,z:36});P(d.title,{z:26});P([d.phone,d.email,d.city,d.addr].filter(Boolean).join(' | '));if(d.summary){Hd('sum');P(d.summary)}
+const job=i=>{P([i.role,i.org].filter(Boolean).join(' — ')+(rg(i,L)?` (${rg(i,L)})`:''),{b:1});String(i.desc||'').split('\n').filter(x=>x.trim()).forEach(x=>P('• '+x.trim()))};
+(['student','grad'].includes(S.t)?['edu','exp']:['exp','edu']).forEach(k=>each(k,job));each('proj',i=>{P(i.name+(i.link?` (${i.link})`:''),{b:1});String(i.desc||'').split('\n').filter(x=>x.trim()).forEach(x=>P('• '+x.trim()))});
+const sk=d.skills.filter(has);if(sk.length){Hd('skills');P(sk.map(i=>i.name).filter(Boolean).join(', '))}each('cert',i=>P([i.name,i.org].filter(Boolean).join(' — ')+(i.yr?` (${i.yr})`:'')));
+const lg=d.lang.filter(has);if(lg.length){Hd('lang');P(lg.map(i=>i.name+(i.lv?` (${i.lv})`:'')).join(', '))}each('links',i=>P([i.name,i.url].filter(Boolean).join(': ')));each('ref',i=>P([i.name,i.role,i.contact].filter(Boolean).join(' — ')));return o}
+function dl(b,n){const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=n;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4e3)}
+const CT=(()=>{const t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})(),crc=b=>{let c=-1;for(const x of b)c=CT[(c^x)&255]^(c>>>8);return(c^-1)>>>0};
+function zip(fs){const te=new TextEncoder(),u2=v=>[v&255,v>>8&255],u4=v=>[v&255,v>>8&255,v>>16&255,v>>>24&255],par=[],cd=[];let off=0;fs.forEach(([n,s])=>{const nb=te.encode(n),b=te.encode(s),c=crc(b),Z=u4(b.length),lh=[0x50,0x4b,3,4,20,0,0,8,0,0,0,0,33,0,...u4(c),...Z,...Z,...u2(nb.length),0,0];par.push(new Uint8Array(lh),nb,b);cd.push(new Uint8Array([0x50,0x4b,1,2,20,0,20,0,0,8,0,0,0,0,33,0,...u4(c),...Z,...Z,...u2(nb.length),...Array(12).fill(0),...u4(off)]),nb);off+=lh.length+nb.length+b.length});const cs=cd.reduce((a,x)=>a+x.length,0);return new Blob([...par,...cd,new Uint8Array([0x50,0x4b,5,6,0,0,0,0,...u2(fs.length),...u2(fs.length),...u4(cs),...u4(off),0,0])],{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'})}
+function docx(){const rtl=S.lang=='ur',a4=S.pg=='A4',X=s=>String(s).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g,'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'),p=l=>`<w:p><w:pPr>${rtl?'<w:bidi/>':''}<w:spacing w:before="${l.b4||0}" w:after="60"/></w:pPr><w:r><w:rPr>${l.b?'<w:b/>':''}${rtl?'<w:rtl/>':''}<w:sz w:val="${l.z||21}"/></w:rPr><w:t xml:space="preserve">${X(l.t)}</w:t></w:r></w:p>`;
+const W='http://schemas.openxmlformats.org/wordprocessingml/2006/main',hd='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+dl(zip([['[Content_Types].xml',`${hd}<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>`],['_rels/.rels',`${hd}<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>`],['word/document.xml',`${hd}<w:document xmlns:w="${W}"><w:body>${lines().map(p).join('')}<w:sectPr><w:pgSz w:w="${a4?11906:12240}" w:h="${a4?16838:15840}"/><w:pgMar w:top="1000" w:right="1000" w:bottom="1000" w:left="1000"/></w:sectPr></w:body></w:document>`]]),fname()+'.docx');toast('DOCX downloaded')}
+const txt=()=>{dl(new Blob([lines().map(l=>(l.h?'\n'+l.t.toUpperCase():l.t)).join('\n')],{type:'text/plain;charset=utf-8'}),fname()+'.txt');toast('Plain-text CV downloaded')};
+function print(){const t=document.title;document.title=fname();fit();setTimeout(()=>{window.print();setTimeout(()=>document.title=t,800)},60)}
+const MV={csColor:['c',v=>/^#[0-9a-f]{6}$/i.test(v)?v:S.c],csFont:['f',v=>FN[v]?v:'sans'],csSize:['fs',v=>Math.min(12,Math.max(9,+v||10.5))],csPg:['pg',v=>v=='Letter'?'Letter':'A4'],csLang:['lang',v=>LB[v]?v:'en'],csShape:['sh',v=>v=='s'?'s':'c']};
+const root=e=>e.target.closest&&e.target.closest('.cs');
+document.addEventListener('input',e=>{if(!root(e))return;const t=e.target,{k,s,i}=t.dataset;if(k){if(s)S.d[s][i][k]=t.value;else S.d[k]=t.value;if(t.hasAttribute('data-req'))t.classList.toggle('miss',!t.value.trim());upd();persist()}else if(MV[t.id]&&(t.type=='color'||t.type=='range')){S[MV[t.id][0]]=MV[t.id][1](t.value);upd();persist()}});
+document.addEventListener('change',e=>{if(!root(e))return;const t=e.target;if(t.id=='csPhotoIn'){photo(t.files[0]);t.value=''}else if(t.id=='csPh'){S.ph=t.checked?1:0;upd();persist()}else if(MV[t.id]){S[MV[t.id][0]]=MV[t.id][1](t.value);upd();persist()}else if(t.id=='csDr'||t.id=='csOpen'){if(t.value)open(t.value)}});
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('.cs [data-act]');if(!b)return;const a=b.dataset.act,s=b.dataset.s,i=+b.dataset.i;
+if(a=='tpl'){const t=T.find(x=>x[0]==b.dataset.t);S.t=t[0];S.c=t[6];S.f=t[5];if(!started)show();else{sync();upd()}persist()}
+else if(a=='start'){show()}
+else if(a=='add'){S.d[s].push(s=='skills'?{lv:70}:{});form();upd();persist();const d=document.querySelector(`#csForm details[data-n="${s}"]`);d&&(d.open=true)}
+else if(a=='rm'){if(S.d[s].length<=1&&['exp','edu','skills'].includes(s))S.d[s]=[s=='skills'?{lv:70}:{}];else S.d[s].splice(i,1);form();upd();persist()}
+else if(a=='up'||a=='dn'){const j=a=='up'?i-1:i+1,r=S.d[s];if(j>=0&&j<r.length){[r[i],r[j]]=[r[j],r[i]];form();upd();persist()}}
+else if(a=='rmph'){S.d.photo='';form();upd();persist()}
+else if(a=='new'){S=blank();cur=null;try{LS.removeItem(KC)}catch{}form();sync();drafts();upd();$('#csSaved').textContent='New CV — it saves automatically as you type.'}
+else if(a=='dup'){const n=JSON.parse(JSON.stringify(S));n.d.name=(n.d.name||'My CV')+' (copy)';S=n;cur=null;persist();setTimeout(()=>{form();upd()},600);toast('Duplicated as a new draft')}
+else if(a=='del'){if(!cur||!confirm('Delete this saved CV? This cannot be undone.'))return;const dr=rd();delete dr[cur];wr(dr);cur=null;try{LS.removeItem(KC)}catch{}S=blank();form();sync();drafts();upd();toast('Draft deleted')}
+else if(a=='reset'){if(!confirm('Reset the form? All entries in this CV will be cleared.'))return;const t=S.t,c=S.c,f=S.f;S=Object.assign(blank(),{t,c,f});form();sync();upd();persist()}
+else if(a=='review'){$('#csChk').innerHTML=chk().map(([l,ok])=>`<li>${ok?'✅':'⬜'} ${l}</li>`).join('');$('#csRev').showModal()}
+else if(a=='close')$('#csRev').close();else if(a=='print'){$('#csRev').open&&$('#csRev').close();print()}else if(a=='docx')docx();else if(a=='txt')txt();
+else if(a=='theme')$('#themeBtn')&&$('#themeBtn').click();else if(a=='home')window.render('home')});
+})();
+
 </script>
 <script id="x3d-js">
 (()=>{
@@ -1520,6 +1672,106 @@ const page=()=>`<div id="es"></div>`;
 tools.push({id:"electrons",name:"Electron Shells Explorer",icon:"⚛️",cat:"Science",desc:T.en.sub});
 const sp=window.simplePage;window.simplePage=function(p){return p==="electrons"?page():sp.apply(this,arguments)};
 const rd=window.render;window.render=function(p){rd.apply(this,arguments);if(p==="electrons")init()};
+})();
+</script>
+<style id="solar-css">#sol .sol-hero{text-align:center;padding:22px 12px 4px}#sol .sol-hero h1{margin:0;font-size:clamp(26px,5vw,40px);background:linear-gradient(90deg,var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}#sol .sol-hero p{margin:8px 0 0;color:var(--muted);font-weight:600}
+.sol-note{margin:14px 0;padding:11px 14px;border-radius:12px;background:rgba(36,107,254,.1);border:1px solid rgba(36,107,254,.25);font-size:13px;color:var(--ink)}
+.sol-stage{position:relative;height:min(72vh,640px);min-height:380px;border-radius:20px;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#0b1a3a,#02040c 70%);box-shadow:0 20px 50px -20px rgba(0,30,120,.6);border:1px solid rgba(80,150,255,.3);color:#e8f1ff}
+.sol-stage canvas{width:100%;height:100%;display:block;touch-action:none;cursor:grab}.sol-stage canvas:active{cursor:grabbing}
+.sol-load,.sol-help{position:absolute;inset:0;display:grid;place-content:center;gap:12px;text-align:center;background:rgba(2,6,20,.88);z-index:3;padding:20px}.sol-load[hidden],.sol-help[hidden]{display:none}.sol-help{background:rgba(2,6,20,.55);backdrop-filter:blur(3px)}.sol-help span{font-size:14px;color:#b9cdf0}.sol-help .btn{justify-self:center}
+.sol-spin{width:44px;height:44px;margin:auto;border:4px solid rgba(255,255,255,.2);border-top-color:#27e0ff;border-radius:50%;animation:solsp 1s linear infinite}@keyframes solsp{to{transform:rotate(360deg)}}.sol-err{color:#ffb4b4;max-width:420px}
+.sol-bar{position:absolute;left:10px;right:10px;bottom:10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px;border-radius:14px;background:rgba(10,22,52,.62);backdrop-filter:blur(10px);border:1px solid rgba(120,170,255,.25);z-index:2}
+.sol-bar .btn{padding:6px 10px;font-size:13px;background:rgba(255,255,255,.08);color:#e8f1ff;border-color:rgba(255,255,255,.18)}.sol-bar .btn.on,.sol-bar .btn[aria-pressed=true]{background:linear-gradient(120deg,#246bfe,#1dc8e8);border-color:transparent}.sol-sp{display:flex;gap:4px}.sol-date{margin-left:auto;font-size:12px;color:#a9c4ee}
+.sol-info{position:absolute;top:10px;right:10px;width:min(320px,calc(100% - 20px));max-height:calc(100% - 90px);overflow:auto;padding:16px;border-radius:16px;background:rgba(10,22,52,.72);backdrop-filter:blur(14px);border:1px solid rgba(120,170,255,.3);z-index:2}.sol-info[hidden]{display:none}
+.sol-info h2{margin:0 0 6px;display:flex;align-items:center;gap:8px;font-size:22px;color:#fff}.sol-info h2 i,.sol-chips i{width:16px;height:16px;border-radius:50%;display:inline-block;box-shadow:0 0 12px currentColor}.sol-info p{margin:0 0 10px;color:#cfe0ff;font-size:14px}
+.sol-info dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:0 0 12px;font-size:13px}.sol-info dt{color:#8fb0e6}.sol-info dd{margin:0;color:#fff;font-weight:600}.sol-info small{display:block;margin-top:8px;color:#7f9bc8;font-size:11px}
+.sol-ia{display:flex;flex-wrap:wrap;gap:6px}.sol-x{position:absolute;top:8px;right:8px;border:0;background:transparent;color:#cfe0ff;font-size:16px}
+.sol-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.sol-chips .btn{display:flex;align-items:center;gap:6px;padding:7px 12px}.sol-chips .btn.on{border-color:var(--blue);background:var(--soft)}
+.sol-feat{display:flex;align-items:center;gap:16px;margin-top:18px;padding:16px 20px;border-radius:18px;cursor:pointer;color:#fff;background:radial-gradient(circle at 12% 50%,#1d3f8a,#071634 70%);border:1px solid rgba(80,150,255,.35);box-shadow:0 14px 34px -16px rgba(20,60,160,.7);transition:transform .2s}.sol-feat:hover{transform:translateY(-3px)}
+.sol-feat h3{margin:0;font-size:18px}.sol-feat h3 em{font-style:normal;font-size:10px;background:#27e0ff;color:#04112a;padding:2px 7px;border-radius:20px;margin-left:6px;vertical-align:middle}.sol-feat p{margin:3px 0 0;color:#b9cdf0;font-size:13px}.sol-feat b{margin-left:auto;color:#27e0ff;white-space:nowrap}.sol-orb{font-size:38px;animation:solfl 4s ease-in-out infinite}@keyframes solfl{50%{transform:translateY(-5px) rotate(8deg)}}
+@media(max-width:720px){.sol-stage{height:74vh}.sol-info{top:auto;bottom:66px;max-height:44%}.sol-date{margin-left:0;width:100%}.sol-feat{flex-wrap:wrap}.sol-feat b{margin-left:0}}
+@media(prefers-reduced-motion:reduce){.sol-orb,.sol-spin{animation:none}}
+</style>
+<script id="solar-js">
+(()=>{"use strict";
+const $=(s,r=document)=>r.querySelector(s),H=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const SRC=["https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js","https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"];
+// name,color,size(scaled),orbit radius(scaled),period d,rotation h,diameter km,distance million km,temp,gravity m/s2,moons,fact,simple
+const D=[
+["Mercury","#9a9a9a",1.1,14,88,1407.6,"4,879","57.9","−180 to 430 °C","3.7",0,"Mercury has almost no atmosphere, so days are scorching and nights freezing.","The smallest planet and closest to the Sun."],
+["Venus","#e3b776",1.9,20,224.7,-5832.5,"12,104","108.2","about 465 °C","8.9",0,"Venus spins backwards and is hotter than Mercury because of its thick CO₂ atmosphere.","The hottest planet. It spins the opposite way."],
+["Earth","#3b82d6",2,27,365.25,23.93,"12,742","149.6","about 15 °C (average)","9.8",1,"Earth is the only place we know that has life and liquid water on its surface.","Our home. One year is about 365 days."],
+["Mars","#c1583a",1.5,34,687,24.62,"6,779","227.9","−125 to 20 °C","3.7",2,"Mars has Olympus Mons, the tallest volcano known in the Solar System.","The red planet, with two small moons."],
+["Jupiter","#d2a77a",5.2,48,4333,9.93,"139,820","778.5","about −110 °C (cloud tops)","24.8",95,"Jupiter's Great Red Spot is a storm larger than Earth that has lasted centuries.","The biggest planet. A day is only 10 hours."],
+["Saturn","#e6cf9a",4.5,63,10759,10.66,"116,460","1,434","about −140 °C (cloud tops)","10.4",146,"Saturn's rings are made mostly of ice and are very thin compared with their width.","The planet with the famous rings."],
+["Uranus","#8fd6df",3,77,30687,-17.24,"50,724","2,871","about −195 °C","8.9",28,"Uranus is tilted about 98°, so it rolls around the Sun on its side.","An icy planet that rotates on its side."],
+["Neptune","#4361d8",2.9,90,60190,16.11,"49,244","4,495","about −200 °C","11.2",16,"Neptune has the fastest winds in the Solar System, over 2,000 km/h.","The farthest planet. It is cold and windy."]];
+let S=null,boot=0;
+const html=()=>`<div id="sol"><section class="sol-hero"><h1>Live 3D Solar System</h1><p>Drag to rotate 360°, scroll or pinch to zoom, tap a planet to learn about it.</p></section>
+<div class="sol-note" role="note"><b>Simulation, not live tracking.</b> Orbits and rotations use real periods, but sizes and distances are scaled for usability and planet positions are not NASA data. Textures are generated in your browser.</div>
+<div class="sol-stage" id="solStage"><canvas id="solCv" aria-label="3D solar system"></canvas>
+<div class="sol-load" id="solLoad"><div class="sol-spin"></div><p>Launching solar system…</p></div>
+<div class="sol-help" id="solHelp"><b>How to explore</b><span>🖱 Drag: rotate · Wheel / pinch: zoom · Click planet: details</span><button class="btn primary" data-s="hide">Start</button></div>
+<div class="sol-bar" id="solBar"><button class="btn" data-s="play" aria-pressed="false">⏸ Pause</button><span class="sol-sp" role="group" aria-label="Speed">${[.25,.5,1,2,5].map(v=>`<button class="btn${v===1?" on":""}" data-sp="${v}">${v}×</button>`).join("")}</span><button class="btn" data-s="reset">⟲ Reset</button><button class="btn" data-s="full">⛶ Fullscreen</button><button class="btn" data-s="edu" aria-pressed="false">🎓 Simple mode</button><span class="sol-date" id="solDate"></span></div>
+<aside class="sol-info" id="solInfo" hidden></aside></div>
+<div class="sol-chips" id="solChips">${D.map((p,i)=>`<button class="btn" data-pl="${i}"><i style="background:${p[1]}"></i>${p[0]}</button>`).join("")}</div></div>`;
+function load(src){return new Promise((ok,no)=>{const s=document.createElement("script");s.src=src;s.onload=ok;s.onerror=()=>no(Error("Could not load "+src));document.head.append(s)})}
+function tex(c,kind){const T=THREE,k=document.createElement("canvas");k.width=256;k.height=128;const g=k.getContext("2d");g.fillStyle=c;g.fillRect(0,0,256,128);const r=(a,b)=>a+Math.random()*(b-a);
+ if(kind==="gas"){for(let y=0;y<128;y+=3){g.fillStyle=`rgba(${Math.random()<.5?"255,255,255":"60,30,10"},${r(.04,.16)})`;g.fillRect(0,y,256,r(2,7))}}
+ else if(kind==="earth"){g.fillStyle="#2f9e57";for(let i=0;i<14;i++){g.beginPath();g.ellipse(r(0,256),r(25,100),r(8,28),r(5,16),r(0,3),0,7);g.fill()}g.fillStyle="#fff";g.fillRect(0,0,256,7);g.fillRect(0,121,256,7)}
+ else{for(let i=0;i<70;i++){g.fillStyle=`rgba(${Math.random()<.5?"0,0,0":"255,255,255"},${r(.05,.2)})`;g.beginPath();g.arc(r(0,256),r(0,128),r(1,8),0,7);g.fill()}}
+ const t=new T.CanvasTexture(k);return t}
+function glow(color,size){const k=document.createElement("canvas");k.width=k.height=128;const g=k.getContext("2d"),q=g.createRadialGradient(64,64,0,64,64,64);q.addColorStop(0,color);q.addColorStop(.25,color.replace(/[\d.]+\)$/,".35)"));q.addColorStop(1,"rgba(255,160,0,0)");g.fillStyle=q;g.fillRect(0,0,128,128);const s=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(k),transparent:true,blending:THREE.AdditiveBlending,depthWrite:false}));s.scale.set(size,size,1);return s}
+function build(){const T=THREE,cv=$("#solCv"),st=$("#solStage");
+ const rd=new T.WebGLRenderer({canvas:cv,antialias:!matchMedia("(pointer:coarse)").matches,alpha:false});rd.setPixelRatio(Math.min(devicePixelRatio||1,matchMedia("(pointer:coarse)").matches?1.5:2));rd.setClearColor(0x02040c);
+ const sc=new T.Scene(),cam=new T.PerspectiveCamera(50,1,.1,2000);cam.position.set(0,70,125);
+ const ct=new T.OrbitControls(cam,cv);ct.enableDamping=true;ct.dampingFactor=.07;ct.minDistance=6;ct.maxDistance=400;ct.rotateSpeed=.7;
+ sc.add(new T.AmbientLight(0x334466,.55));const sun=new T.PointLight(0xfff2d0,2.2,0,1);sc.add(sun);
+ const sm=new T.Mesh(new T.SphereGeometry(8,40,28),new T.MeshBasicMaterial({color:0xffb830}));sc.add(sm,glow("rgba(255,200,80,1)",46));
+ const stars=(n)=>{const a=new Float32Array(n*3);for(let i=0;i<n;i++){const u=Math.random()*6.283,v=Math.acos(2*Math.random()-1),r=700+Math.random()*200;a.set([r*Math.sin(v)*Math.cos(u),r*Math.cos(v),r*Math.sin(v)*Math.sin(u)],i*3)}const g=new T.BufferGeometry();g.setAttribute("position",new T.BufferAttribute(a,3));return new T.Points(g,new T.PointsMaterial({color:0xffffff,size:1.6,sizeAttenuation:false}))};
+ sc.add(stars(matchMedia("(pointer:coarse)").matches?900:2000));
+ const belt=(()=>{const n=1100,a=new Float32Array(n*3);for(let i=0;i<n;i++){const u=Math.random()*6.283,r=38.5+Math.random()*6;a.set([Math.cos(u)*r,(Math.random()-.5)*1.4,Math.sin(u)*r],i*3)}const g=new T.BufferGeometry();g.setAttribute("position",new T.BufferAttribute(a,3));return new T.Points(g,new T.PointsMaterial({color:0x998877,size:.5}))})();sc.add(belt);
+ const P=D.map((d,i)=>{const kind=i===2?"earth":i>3?"gas":"rock",m=new T.Mesh(new T.SphereGeometry(d[2],32,20),new T.MeshStandardMaterial({map:tex(d[1],kind),roughness:.9,metalness:0})),piv=new T.Object3D();piv.add(m);m.position.x=d[3];m.userData.i=i;
+  const o=new T.Mesh(new T.RingGeometry(d[3]-.07,d[3]+.07,160),new T.MeshBasicMaterial({color:0x3b82ff,transparent:true,opacity:.22,side:T.DoubleSide}));o.rotation.x=Math.PI/2;sc.add(o);
+  if(i===5){const rg=new T.Mesh(new T.RingGeometry(d[2]*1.4,d[2]*2.3,96),new T.MeshBasicMaterial({color:0xcdb98a,transparent:true,opacity:.75,side:T.DoubleSide}));rg.rotation.x=Math.PI/2.2;m.add(rg)}
+  m.rotation.z=[0,3.1,.41,.44,.05,.47,1.7,.5][i];sc.add(piv);piv.rotation.y=Math.random()*6.28;return{d,m,piv}});
+ const mp=new T.Object3D(),moon=new T.Mesh(new T.SphereGeometry(.5,16,12),new T.MeshStandardMaterial({color:0xbbbbbb,roughness:1}));moon.position.x=3.6;mp.add(moon);P[2].m.add(mp);
+ S={rd,sc,cam,ct,P,mp,speed:1,paused:false,day:new Date(),sel:-1,edu:false,run:true,tg:null,tc:null,mv:0};
+ const ray=new T.Raycaster(),mv=new T.Vector2();let dn=null;
+ cv.addEventListener("pointerdown",e=>{dn=[e.clientX,e.clientY]});
+ cv.addEventListener("pointerup",e=>{if(!dn||Math.hypot(e.clientX-dn[0],e.clientY-dn[1])>6)return;const r=cv.getBoundingClientRect();mv.set((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1);ray.setFromCamera(mv,cam);const h=ray.intersectObjects(P.map(p=>p.m),false)[0];if(h)pick(h.object.userData.i)});
+ function size(){const w=st.clientWidth,h=st.clientHeight;rd.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+ new ResizeObserver(size).observe(st);size();S.size=size;let last=performance.now();
+ const wp=new T.Vector3();
+ (function loop(t){if(!S||S.dead)return;S.raf=requestAnimationFrame(loop);if(!S.run||document.hidden){last=t;return}const dt=Math.min(.05,(t-last)/1e3);last=t;
+  if(!S.paused){const dd=dt*S.speed*20;S.day=new Date(S.day.getTime()+dd*864e5);P.forEach(p=>{p.piv.rotation.y+=dd*6.2832/p.d[4];p.m.rotation.y+=dt*S.speed*.8*(24/Math.abs(p.d[5]))*Math.sign(p.d[5])*.25});mp.rotation.y+=dd*6.2832/27.3;sm.rotation.y+=dt*.1;$("#solDate").textContent="Simulated date: "+S.day.toDateString()}
+  if(S.sel>=0){P[S.sel].m.getWorldPosition(wp);const delta=wp.clone().sub(ct.target);ct.target.add(delta);cam.position.add(delta)}
+  if(S.tg){cam.position.lerp(S.tg,.06);ct.target.lerp(S.tc,.06);if(cam.position.distanceTo(S.tg)<.3)S.tg=null}
+  ct.update();rd.render(sc,cam)})(last)}
+function info(i){const d=D[i],e=S.edu;return `<button class="sol-x" data-s="close" aria-label="Close">✕</button><h2><i style="background:${d[1]}"></i>${d[0]}</h2><p>${H(e?d[12]:d[11])}</p>${e?"":`<dl><dt>Diameter</dt><dd>${d[6]} km</dd><dt>Distance from Sun</dt><dd>${d[7]} million km</dd><dt>Orbital period</dt><dd>${d[4]} Earth days</dd><dt>Rotation period</dt><dd>${Math.abs(d[5])} hours${d[5]<0?" (retrograde)":""}</dd><dt>Temperature</dt><dd>${d[8]}</dd><dt>Gravity</dt><dd>${d[9]} m/s²</dd><dt>Known moons</dt><dd>${d[10]}</dd></dl>`}${e?`<dl><dt>Year length</dt><dd>${d[4]} Earth days</dd><dt>Day length</dt><dd>${Math.abs(d[5])} hours</dd></dl>`:""}<div class="sol-ia"><button class="btn primary" data-s="focus">🎯 Focus camera</button><button class="btn" data-s="all">🌌 Full view</button></div><small>Values are approximate. Sizes and distances in the 3D view are scaled.</small>`}
+function pick(i){S.sel=i;S.edu=S.edu;const p=S.P[i],v=new THREE.Vector3();p.m.getWorldPosition(v);S.tc=v.clone();S.tg=v.clone().add(new THREE.Vector3(0,p.d[2]*1.2,p.d[2]*3.6+4));const b=$("#solInfo");b.hidden=false;b.innerHTML=info(i);$$c().forEach(x=>x.classList.toggle("on",+x.dataset.pl===i))}
+const $$c=()=>[...document.querySelectorAll("#solChips [data-pl]")];
+function reset(){S.sel=-1;S.tg=new THREE.Vector3(0,70,125);S.tc=new THREE.Vector3();$("#solInfo").hidden=true;$$c().forEach(x=>x.classList.remove("on"))}
+function fail(m){const l=$("#solLoad");if(l)l.innerHTML=`<p class="sol-err">⚠ ${H(m)}</p>`}
+async function init(){if(!$("#sol"))return;if(S){S.dead=true;cancelAnimationFrame(S.raf);try{S.rd.dispose()}catch{}S=null}
+ const c=document.createElement("canvas");if(!(c.getContext("webgl")||c.getContext("experimental-webgl")))return fail("Your browser or device does not support WebGL, so the 3D view cannot run. Try a newer browser.");
+ try{if(!window.THREE)await load(SRC[0]);if(!THREE.OrbitControls)await load(SRC[1]);build();$("#solLoad").hidden=true}catch(e){return fail("The 3D engine could not be loaded. Check your internet connection and reload. ("+e.message+")")}
+ const r=$("#sol");r.onclick=e=>{const b=e.target.closest("button");if(!b||!S)return;const a=b.dataset.s;
+  if(b.dataset.pl!==undefined)return pick(+b.dataset.pl);
+  if(b.dataset.sp){S.speed=+b.dataset.sp;r.querySelectorAll("[data-sp]").forEach(x=>x.classList.toggle("on",x===b));return}
+  if(a==="hide")$("#solHelp").hidden=true;else if(a==="play"){S.paused=!S.paused;b.textContent=S.paused?"▶ Play":"⏸ Pause";b.setAttribute("aria-pressed",S.paused)}
+  else if(a==="reset"||a==="all"||a==="close")reset();else if(a==="focus")pick(S.sel);
+  else if(a==="edu"){S.edu=!S.edu;b.setAttribute("aria-pressed",S.edu);b.classList.toggle("on",S.edu);if(S.sel>=0)$("#solInfo").innerHTML=info(S.sel)}
+  else if(a==="full"){const s=$("#solStage");if(document.fullscreenElement)document.exitFullscreen();else if(s.requestFullscreen)s.requestFullscreen().catch(()=>0);else toast("Fullscreen is not supported here.")}};
+ document.addEventListener("visibilitychange",()=>{if(S)S.run=!document.hidden})}
+document.addEventListener("keydown",e=>{if(S&&e.key==="Escape"&&!document.fullscreenElement)reset()});
+tools.push({id:"solar",name:"Live 3D Solar System",icon:"🪐",cat:"Science",desc:"Explore the Sun and eight planets in an interactive 360° 3D simulation with facts for students."});
+const sp=window.simplePage;window.simplePage=function(p){return p==="solar"?html():sp.apply(this,arguments)};
+const rd=window.render;window.render=function(p){const r=rd.apply(this,arguments);if(S&&p!=="solar"){S.dead=true;cancelAnimationFrame(S.raf);S=null}
+ if(p==="solar")init();
+ if(p==="home"||p===undefined){const h=document.querySelector(".content .section-head");if(h&&!$(".sol-feat"))h.insertAdjacentHTML("beforebegin",`<section class="sol-feat" data-goto="solar" role="button" tabindex="0"><span class="sol-orb">🪐</span><div><h3>Live 3D Solar System <em>NEW</em></h3><p>Rotate 360°, zoom and tap planets to explore the Sun and all eight planets.</p></div><b>Explore →</b></section>`)}
+ return r};
+document.addEventListener("keydown",e=>{const f=e.target.closest&&e.target.closest(".sol-feat");if(f&&(e.key==="Enter"||e.key===" ")){e.preventDefault();render("solar")}});
 })();
 </script>
 <script id="ab-js">
@@ -2243,7 +2495,7 @@ async function localAuth(v,f){
  const users=auUsers();
  if(v==="signup"){if(users[f.email])throw Error("An account with this email already exists. Please log in.");
   if(Object.values(users).some(u=>u.username&&u.username.toLowerCase()===f.user.toLowerCase()))throw Error("That username is already taken.");
-  const salt=crypto.getRandomValues(new Uint8Array(16));users[f.email]={name:f.name,username:f.user,salt:auB64(salt),hash:await auHash(f.pw,salt),created:Date.now()};auPutUsers(users);return{email:f.email,name:f.name,remember:true,provider:"local"}}
+  const salt=crypto.getRandomValues(new Uint8Array(16));const hh=await auHash(f.pw,salt),cur=auUsers();if(cur[f.email])throw Error("An account with this email already exists. Please log in.");if(Object.values(cur).some(u=>u.username&&u.username.toLowerCase()===f.user.toLowerCase()))throw Error("That username is already taken.");cur[f.email]={name:f.name,username:f.user,salt:auB64(salt),hash:hh,created:Date.now()};auPutUsers(cur);return{email:f.email,name:f.name,remember:true,provider:"local"}}
  let email=f.id.toLowerCase();if(!email.includes("@")){email=Object.keys(users).find(k=>users[k].username&&users[k].username.toLowerCase()===email)||""}
  const u=users[email];let ok=false;if(u){try{ok=(await auHash(f.pw,auUn(u.salt)))===u.hash}catch{ok=false}}
  if(!ok)throw Error("Incorrect email, username or password.");return{email,name:u.name,remember:f.remember,provider:"local"}}
@@ -2262,7 +2514,7 @@ async function sbAuth(v,f){
  if(v==="login"){if(!f.id.includes("@"))throw Error("Please log in with your email address.");const j=await sbReq("/auth/v1/token?grant_type=password",{body:{email:f.id.toLowerCase(),password:f.pw}});return sbSession(j,f.remember)}
  const j=await sbReq("/auth/v1/signup",{body:{email:f.email,password:f.pw,data:{full_name:f.name,username:f.user}}});
  if(j.access_token)return sbSession(j,true);return{pending:"Account created! Check your email to confirm it, then log in."}}
-function storeSession(r){sessionStorage.removeItem(SESS);localStorage.removeItem(SESS);(r.remember?localStorage:sessionStorage).setItem(SESS,JSON.stringify({email:r.email,name:r.name,provider:r.provider}))}
+function storeSession(r){sessionStorage.removeItem(SESS);localStorage.removeItem(SESS);(r.remember?localStorage:sessionStorage).setItem(SESS,JSON.stringify({email:r.email,name:r.name,provider:r.provider,exp:Date.now()+(r.remember?30:1)*864e5}))}
 function googleSignIn(){if(!SB){setMsg("Google Sign-In is not connected yet. The site owner can switch it on by adding the Supabase details in MT_AUTH.");if(eng)think();return}
  setMsg("Opening Google…",true);location.href=SBU+"/auth/v1/authorize?provider=google&redirect_to="+encodeURIComponent(CFG.redirectTo||location.origin+location.pathname)}
 async function success(r){celeb=true;storeSession(r);if(typeof authRender==="function")authRender();const first=(r.name||"Friend").split(" ")[0];
@@ -2270,7 +2522,7 @@ async function success(r){celeb=true;storeSession(r);if(typeof authRender==="fun
  if(eng){token++;flowRunning=true;const P=eng.P,T=eng.T,tw=eng.tween;T.walkW=0;eng.look.tx=0;eng.look.ty=0;Object.assign(T,{aSh:2.8,aRl:.5,bSh:2.8,bRl:.5,aEl:.2,bEl:.2,mouth:.7,smile:1,brow:.6,headYaw:0,cover:0});tw(P,"yaw",0,.35);eng.burst();say("Welcome, "+first+"! 🎉",2600);
   for(let i=0;i<3;i++){await hop(true)}}
  else await new Promise(r=>setTimeout(r,900));
- await new Promise(r=>setTimeout(r,RM.matches?400:350));closeStage(true);if(typeof toast==="function")toast("Welcome, "+first+"!")}
+ await new Promise(r=>setTimeout(r,RM.matches?400:350));closeStage(true);try{window.render("home")}catch{}if(typeof toast==="function")toast("Welcome, "+first+"!")}
 /* ---- restore / OAuth return / logout ---- */
 function clearSb(){try{localStorage.removeItem(SBK);sessionStorage.removeItem(SBK)}catch{}}
 async function sbInit(){if(!SB)return;const h=location.hash||"";
@@ -2287,9 +2539,35 @@ document.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)r
 /* ---- hook into the existing Login / Sign up buttons ---- */
 const oldOpen=window.auOpen;
 if(typeof oldOpen==="function"){window.auOpen=function(tab){try{const s=typeof auSession==="function"?auSession():null;if(!s&&openStage(tab))return}catch(e){console.error(e)}return oldOpen.apply(this,arguments)}}
-sbInit();
+window.mtAuthReady=Promise.resolve().then(sbInit).catch(()=>{});
 window.mtLogin3D={open:openStage,close:closeStage,get engine(){return eng}};
 
+})();
+</script>
+<script id="auth-gate-js">
+(()=>{"use strict";
+/* ===== Mohsin Tools: session restore, one-time login, protected tools ===== */
+const SESS="mt_session",SBK="mt_sb";
+const PUBLIC=new Set(["home","alltools","about","settings","school","student","teacher"]); // every other page needs a login
+const clearSess=()=>{try{sessionStorage.removeItem(SESS);localStorage.removeItem(SESS)}catch{}};
+const _as=window.auSession;
+window.auSession=function(){const s=_as();if(!s)return null;
+ const sb=s.provider==="supabase",gone=sb?!(localStorage.getItem(SBK)||sessionStorage.getItem(SBK)):!(auUsers()[s.email]);
+ if((s.exp&&Date.now()>s.exp)||gone){clearSess();return null}return s};
+const signed=()=>!!window.auSession();
+function needLogin(){if(typeof toast==="function")toast("Please log in to use this tool.");setTimeout(()=>{if(!signed())window.auOpen("login")},60)}
+const _open=window.auOpen;
+window.auOpen=function(tab){if(signed()&&tab!=="account"){closeStage();window.render("home");return}return _open.apply(this,arguments)};
+function closeStage(){const m=document.getElementById("lgStage");if(m&&!m.hidden){const x=document.getElementById("lgClose");if(x)x.click()}}
+const _rd=window.render;
+window.render=function(p){p=p||"home";if(!PUBLIC.has(p)&&!signed()){const r=_rd.call(this,"home");needLogin();return r}return _rd.apply(this,arguments)};
+const _lo=window.auLogout;
+window.auLogout=function(){_lo.apply(this,arguments);window.render("home");setTimeout(()=>window.auOpen("login"),200)};
+window.addEventListener("storage",e=>{if(e.key!==SESS&&e.key!==SBK)return;authRender();if(!signed()&&!PUBLIC.has(window.currentPage||"home")){window.render("home");needLogin()}else if(signed())closeStage()});
+(async()=>{try{await Promise.race([window.mtAuthReady||0,new Promise(r=>setTimeout(r,5000))])}catch{}
+ const s=signed(),h=location.hash;authRender();
+ if(h==="#login"||h==="#signup"){history.replaceState(null,"",location.pathname+location.search);if(s)window.render("home");else window.auOpen(h.slice(1))}
+ const b=document.getElementById("authBoot");if(b){b.classList.add("done");setTimeout(()=>b.remove(),350)}})();
 })();
 </script>
 </body></html>
